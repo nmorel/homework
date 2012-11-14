@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.nmorel.homework</groupId>
+    <artifactId>homework</artifactId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>homework-client</artifactId>
+  <packaging>war</packaging>
+
+  <prerequisites>
+    <maven>${maven.version}</maven>
+  </prerequisites>
+
+  <properties>
+    <gwt.module>com.github.nmorel.homework.Homework</gwt.module>
+    <gwt.draftCompile>false</gwt.draftCompile>
+    <gwt.style>OBF</gwt.style>
+    <gwt.genParam>false</gwt.genParam>
+    <!-- keep in sync with homework-server -->
+    <runTarget>http://localhost:8080/</runTarget>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <configuration>
+          <module>${gwt.module}</module>
+          <strict>true</strict>
+          <draftCompile>${gwt.draftCompile}</draftCompile>
+          <style>${gwt.style}</style>
+          <genParam>${gwt.genParam}</genParam>
+          <noserver>true</noserver>
+          <runTarget>${runTarget}</runTarget>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <packagingExcludes>WEB-INF/**</packagingExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>draft</id>
+      <activation>
+        <property>
+          <name>draft</name>
+        </property>
+      </activation>
+      <properties>
+        <gwt.module>com.github.nmorel.homework.HomeworkDev</gwt.module>
+        <gwt.draftCompile>true</gwt.draftCompile>
+        <gwt.style>PRETTY</gwt.style>
+      </properties>
+    </profile>
+  </profiles>
+</project>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.github.nmorel.homework</groupId>
+  <artifactId>homework</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <prerequisites>
+    <maven>${maven.version}</maven>
+  </prerequisites>
+  
+  <modules>
+    <module>homework-api</module>
+    <module>homework-client</module>
+  </modules>
+
+  <properties>
+    <maven.version>3.0.4</maven.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jdk.version>1.7</jdk.version>
+
+    <!-- Plugins version -->
+    <maven-compiler.version>2.5.1</maven-compiler.version>
+    <gwt-maven.version>2.5.0</gwt-maven.version>
+    <tomcat7-maven.version>2.0</tomcat7-maven.version>
+    <maven-war.version>2.3</maven-war.version>
+    
+    <!-- Dependencies version -->
+    <gwt.version>2.5.0</gwt.version>
+    <servlet-api.version>2.5</servlet-api.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-user</artifactId>
+        <version>${gwt.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>${servlet-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler.version}</version>
+          <configuration>
+            <source>${jdk.version}</source>
+            <target>${jdk.version}</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
+          </configuration>
+        </plugin>
+        
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>gwt-maven-plugin</artifactId>
+          <version>${gwt-maven.version}</version>
+          <configuration>
+            <deploy>${project.build.directory}/gwtc/extra</deploy>
+            <extra>${project.build.directory}/gwtc/extra</extra>
+            <gen>${project.build.directory}/gwtc/gen</gen>
+            <!-- There's an issue on Mac: see http://code.google.com/p/google-web-toolkit/issues/detail?id=7474
+            <workDir>${project.build.directory}/gwtc/work</workDir>
+            -->
+          </configuration>
+          <executions>
+            <execution>
+              <id>gwt-compile</id>
+              <phase>prepare-package</phase>
+              <goals>
+                <goal>compile</goal>
+              </goals>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>com.google.gwt</groupId>
+              <artifactId>gwt-user</artifactId>
+              <version>${gwt.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>com.google.gwt</groupId>
+              <artifactId>gwt-dev</artifactId>
+              <version>${gwt.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>com.google.gwt</groupId>
+              <artifactId>gwt-servlet</artifactId>
+              <version>${gwt.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>com.google.gwt</groupId>
+              <artifactId>gwt-codeserver</artifactId>
+              <version>${gwt.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>${tomcat7-maven.version}</version>
+        </plugin>
+        
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>${maven-war.version}</version>
+          <configuration>
+            <archive>
+              <addMavenDescriptor>false</addMavenDescriptor>
+            </archive>
+          </configuration>
+        </plugin>
+        
+      </plugins>
+    </pluginManagement>
+  </build>
+  
+</project>
