@@ -4,6 +4,18 @@
   <inherits name="com.google.gwt.user.User" />
   <inherits name="com.google.gwt.user.theme.clean.Clean" />
 
+  <inherits name="com.google.common.collect.Collect" />
+
+  <inherits name="com.google.gwt.logging.Logging" />
+  <set-property name="gwt.logging.logLevel" value="INFO" />
+  <set-property name="gwt.logging.enabled" value="TRUE" />
+  <set-property name="gwt.logging.consoleHandler" value="ENABLED" />
+  <set-property name="gwt.logging.developmentModeHandler" value="DISABLED" />
+  <set-property name="gwt.logging.popupHandler" value="DISABLED" />
+  <set-property name="gwt.logging.systemHandler" value="ENABLED" />
+  <set-property name="gwt.logging.firebugHandler" value="ENABLED" />
+  <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />
+
   <source path="client" />
 
   <entry-point class="com.github.nmorel.homework.client.Homework" />

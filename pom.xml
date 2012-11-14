@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.nmorel.homework</groupId>
@@ -10,7 +11,7 @@
   <prerequisites>
     <maven>${maven.version}</maven>
   </prerequisites>
-  
+
   <modules>
     <module>homework-api</module>
     <module>homework-client</module>
@@ -26,25 +27,123 @@
     <gwt-maven.version>2.5.0</gwt-maven.version>
     <tomcat7-maven.version>2.0</tomcat7-maven.version>
     <maven-war.version>2.3</maven-war.version>
-    
+
     <!-- Dependencies version -->
     <gwt.version>2.5.0</gwt.version>
     <servlet-api.version>2.5</servlet-api.version>
+    <spring.version>3.1.2.RELEASE</spring.version>
+    <jersey.version>1.14</jersey.version>
+    <guava.version>13.0.1</guava.version>
+    <slf4j.version>1.7.2</slf4j.version>
+    <logback.version>1.0.7</logback.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- GWT dependencies -->
       <dependency>
         <groupId>com.google.gwt</groupId>
         <artifactId>gwt-user</artifactId>
         <version>${gwt.version}</version>
         <scope>provided</scope>
       </dependency>
+
+      <!-- Servlet dependencies -->
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>
         <version>${servlet-api.version}</version>
         <scope>provided</scope>
+      </dependency>
+
+      <!-- Guava -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava-gwt</artifactId>
+        <version>${guava.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <!-- Spring dependencies -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-logging</artifactId>
+            <groupId>commons-logging</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <!-- Jersey dependencies -->
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-core</artifactId>
+        <version>${jersey.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-server</artifactId>
+        <version>${jersey.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.jersey.contribs</groupId>
+        <artifactId>jersey-spring</artifactId>
+        <version>${jersey.version}</version>
+      </dependency>
+
+      <!-- Dependencies for logs -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jul-to-slf4j</artifactId>
+        <version>${slf4j.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -61,7 +160,7 @@
             <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
         </plugin>
-        
+
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>gwt-maven-plugin</artifactId>
@@ -70,9 +169,7 @@
             <deploy>${project.build.directory}/gwtc/extra</deploy>
             <extra>${project.build.directory}/gwtc/extra</extra>
             <gen>${project.build.directory}/gwtc/gen</gen>
-            <!-- There's an issue on Mac: see http://code.google.com/p/google-web-toolkit/issues/detail?id=7474
-            <workDir>${project.build.directory}/gwtc/work</workDir>
-            -->
+            <!-- There's an issue on Mac: see http://code.google.com/p/google-web-toolkit/issues/detail?id=7474 <workDir>${project.build.directory}/gwtc/work</workDir> -->
           </configuration>
           <executions>
             <execution>
@@ -106,13 +203,13 @@
             </dependency>
           </dependencies>
         </plugin>
-        
+
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>
           <version>${tomcat7-maven.version}</version>
         </plugin>
-        
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
@@ -123,9 +220,9 @@
             </archive>
           </configuration>
         </plugin>
-        
+
       </plugins>
     </pluginManagement>
   </build>
-  
+
 </project>
