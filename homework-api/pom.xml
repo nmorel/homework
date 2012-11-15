@@ -31,10 +31,20 @@
       <artifactId>servlet-api</artifactId>
     </dependency>
 
-    <!-- Guava -->
+    <!-- Guava dependencies -->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
+    </dependency>
+
+    <!-- Guice dependencies -->
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-servlet</artifactId>
     </dependency>
 
     <!-- Jersey dependencies -->
@@ -48,7 +58,7 @@
     </dependency>
     <dependency>
       <groupId>com.sun.jersey.contribs</groupId>
-      <artifactId>jersey-spring</artifactId>
+      <artifactId>jersey-guice</artifactId>
     </dependency>
 
     <!-- Dependencies for logs -->
@@ -63,10 +73,6 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>

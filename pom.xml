@@ -31,7 +31,7 @@
     <!-- Dependencies version -->
     <gwt.version>2.5.0</gwt.version>
     <servlet-api.version>2.5</servlet-api.version>
-    <spring.version>3.1.2.RELEASE</spring.version>
+    <guice.version>3.0</guice.version>
     <jersey.version>1.14</jersey.version>
     <guava.version>13.0.1</guava.version>
     <slf4j.version>1.7.2</slf4j.version>
@@ -56,7 +56,7 @@
         <scope>provided</scope>
       </dependency>
 
-      <!-- Guava -->
+      <!-- Guava dependencies -->
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
@@ -69,37 +69,16 @@
         <scope>provided</scope>
       </dependency>
 
-      <!-- Spring dependencies -->
+      <!-- Guice dependencies -->
       <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
-        <version>${spring.version}</version>
-        <exclusions>
-          <exclusion>
-            <artifactId>commons-logging</artifactId>
-            <groupId>commons-logging</groupId>
-          </exclusion>
-        </exclusions>
+        <groupId>com.google.inject</groupId>
+        <artifactId>guice</artifactId>
+        <version>${guice.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-aop</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-beans</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
-        <version>${spring.version}</version>
+        <groupId>com.google.inject.extensions</groupId>
+        <artifactId>guice-servlet</artifactId>
+        <version>${guice.version}</version>
       </dependency>
 
       <!-- Jersey dependencies -->
@@ -115,7 +94,7 @@
       </dependency>
       <dependency>
         <groupId>com.sun.jersey.contribs</groupId>
-        <artifactId>jersey-spring</artifactId>
+        <artifactId>jersey-guice</artifactId>
         <version>${jersey.version}</version>
       </dependency>
 
@@ -134,11 +113,6 @@
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
         <version>${logback.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-        <version>${slf4j.version}</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
