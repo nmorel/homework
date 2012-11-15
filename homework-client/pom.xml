@@ -17,6 +17,9 @@
   </prerequisites>
 
   <properties>
+    <!-- we use 1.6 so IDE don't suggest 1.7 stuff that won't compile in GWT -->
+    <jdk.version>1.6</jdk.version>
+
     <gwt.module>com.github.nmorel.homework.Homework</gwt.module>
     <gwt.draftCompile>false</gwt.draftCompile>
     <gwt.style>OBF</gwt.style>
@@ -31,8 +34,12 @@
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.google.gwt.inject</groupId>
+      <artifactId>gin</artifactId>
+    </dependency>
 
-    <!-- Guava -->
+    <!-- Guava dependencies -->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>
@@ -52,8 +59,17 @@
           <genParam>${gwt.genParam}</genParam>
           <noserver>true</noserver>
           <runTarget>${runTarget}</runTarget>
+          <i18nMessagesBundle>com.github.nmorel.homework.client.resources.messages.Messages</i18nMessagesBundle>
         </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>i18n</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
+
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
@@ -61,7 +77,28 @@
           <packagingExcludes>WEB-INF/**</packagingExcludes>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/gwt</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
+
     <pluginManagement>
       <plugins>
         <plugin>

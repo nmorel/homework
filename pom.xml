@@ -24,6 +24,7 @@
 
     <!-- Plugins version -->
     <maven-compiler.version>2.5.1</maven-compiler.version>
+    <build-helper-maven.version>1.7</build-helper-maven.version>
     <gwt-maven.version>2.5.0</gwt-maven.version>
     <tomcat7-maven.version>2.0</tomcat7-maven.version>
     <maven-war.version>2.3</maven-war.version>
@@ -31,6 +32,7 @@
     <!-- Dependencies version -->
     <gwt.version>2.5.0</gwt.version>
     <servlet-api.version>2.5</servlet-api.version>
+    <gin.version>2.0.0</gin.version>
     <guice.version>3.0</guice.version>
     <jersey.version>1.14</jersey.version>
     <guava.version>13.0.1</guava.version>
@@ -45,6 +47,12 @@
         <groupId>com.google.gwt</groupId>
         <artifactId>gwt-user</artifactId>
         <version>${gwt.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt.inject</groupId>
+        <artifactId>gin</artifactId>
+        <version>${gin.version}</version>
         <scope>provided</scope>
       </dependency>
 
@@ -134,6 +142,12 @@
             <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
         </plugin>
+        
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>${build-helper-maven.version}</version>
+        </plugin>
 
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -195,6 +209,32 @@
           </configuration>
         </plugin>
 
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build 
+          itself. -->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>gwt-maven-plugin</artifactId>
+                    <versionRange>[2.5.0,)</versionRange>
+                    <goals>
+                      <goal>i18n</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>

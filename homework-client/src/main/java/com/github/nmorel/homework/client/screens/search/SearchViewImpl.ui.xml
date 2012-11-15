@@ -1,0 +1,16 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:c="urn:import:com.google.gwt.user.cellview.client">
+  <ui:style>
+    
+  </ui:style>
+
+  <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
+  <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
+
+  <g:HTMLPanel ui:field='panel'>
+    <h2>Search repositories :</h2>
+    <g:TextBox ui:field='query' debugId='query' />
+    <g:Button ui:field='search' debugId='searchBtn' text="{mess.search_searchButton}" />
+  </g:HTMLPanel>
+</ui:UiBinder>
