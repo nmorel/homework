@@ -12,5 +12,6 @@
     <h2>Search repositories :</h2>
     <g:TextBox ui:field='query' debugId='query' />
     <g:Button ui:field='search' debugId='searchBtn' text="{mess.search_searchButton}" />
+    <g:VerticalPanel ui:field='resultPanel' debugId='resultPanel' />
   </g:HTMLPanel>
 </ui:UiBinder>

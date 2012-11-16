@@ -36,6 +36,7 @@
     <guice.version>3.0</guice.version>
     <jersey.version>1.14</jersey.version>
     <guava.version>13.0.1</guava.version>
+    <httpclient.version>4.2.1</httpclient.version>
     <slf4j.version>1.7.2</slf4j.version>
     <logback.version>1.0.7</logback.version>
   </properties>
@@ -106,6 +107,19 @@
         <version>${jersey.version}</version>
       </dependency>
 
+      <!-- HttpClient dependencies -->
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${httpclient.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
       <!-- Dependencies for logs -->
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -127,6 +141,11 @@
         <artifactId>jul-to-slf4j</artifactId>
         <version>${slf4j.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -142,7 +161,7 @@
             <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
         </plugin>
-        
+
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>

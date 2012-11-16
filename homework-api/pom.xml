@@ -61,6 +61,12 @@
       <artifactId>jersey-guice</artifactId>
     </dependency>
 
+    <!-- HttpClient dependencies -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+    </dependency>
+
     <!-- Dependencies for logs -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -77,6 +83,10 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
     </dependency>
   </dependencies>
 

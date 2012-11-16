@@ -33,7 +33,7 @@ public class GuiceServletConfig
     public void contextDestroyed( ServletContextEvent servletContextEvent )
     {
         super.contextDestroyed( servletContextEvent );
-        
+
         // remove SLF4JBridgeHandler
         SLF4JBridgeHandler.uninstall();
     }
@@ -41,12 +41,12 @@ public class GuiceServletConfig
     @Override
     protected Injector getInjector()
     {
-        return Guice.createInjector( new JerseyServletModule() {
+        return Guice.createInjector( new HomeworkModule(), new JerseyServletModule() {
             protected void configureServlets()
             {
                 bind( TestResources.class );
                 bind( RepositoriesResources.class );
-                
+
                 serve( "/api/*" ).with( GuiceContainer.class );
             };
         } );

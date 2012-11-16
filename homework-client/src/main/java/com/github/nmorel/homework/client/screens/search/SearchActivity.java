@@ -1,12 +1,15 @@
 package com.github.nmorel.homework.client.screens.search;
 
+import com.github.nmorel.homework.client.model.Repositories;
+import com.github.nmorel.homework.client.model.Repository;
 import com.github.nmorel.homework.client.mvp.ActivityWithPlace;
 import com.github.nmorel.homework.client.request.SearchRequest;
 import com.github.nmorel.homework.client.screens.search.SearchView.Presenter;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -38,7 +41,8 @@ public class SearchActivity
             @Override
             public void onResponseReceived( Request request, Response response )
             {
-                Window.alert( response.getText() );
+                Repositories repos = JsonUtils.safeEval( response.getText() );
+                view.showResults( repos.getRepositories() );
             }
 
             @Override
