@@ -10,12 +10,18 @@ public interface SearchView
     interface Presenter
     {
 
-        void onSearch( String query );
+        void onSearch( String keyword );
+
+        void onSelectionRepository( Repository repo );
 
     }
 
     void setPresenter( Presenter presenter );
 
     void showResults( JsArray<Repository> repos );
+
+    void setKeyword( String keyword );
+
+    void setFocusOnKeyword();
 
 }

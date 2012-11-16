@@ -1,8 +1,10 @@
 package com.github.nmorel.homework.client.mvp;
 
 import com.github.nmorel.homework.client.place.ErrorPlace;
+import com.github.nmorel.homework.client.place.RepoPlace;
 import com.github.nmorel.homework.client.place.SearchPlace;
 import com.github.nmorel.homework.client.screens.error.ErrorActivity;
+import com.github.nmorel.homework.client.screens.repo.RepoActivity;
 import com.github.nmorel.homework.client.screens.search.SearchActivity;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
@@ -39,13 +41,22 @@ public class AppActivityMapper
             this.activity = searchActivityProvider.get().withPlace( place );
         }
 
+        @Override
+        public void visitPlace( RepoPlace place )
+        {
+            this.activity = repoActivityProvider.get().withPlace( place );
+        }
+
     }
-    
+
     @Inject
     private Provider<ErrorActivity> errorActivityProvider;
-    
+
     @Inject
     private Provider<SearchActivity> searchActivityProvider;
+
+    @Inject
+    private Provider<RepoActivity> repoActivityProvider;
 
     @Override
     public Activity getActivity( Place place )

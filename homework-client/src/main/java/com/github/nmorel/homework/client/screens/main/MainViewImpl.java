@@ -1,16 +1,20 @@
 package com.github.nmorel.homework.client.screens.main;
 
+import com.github.nmorel.homework.client.ui.AbstractView;
+import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.SimpleLayoutPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
 
 public class MainViewImpl
-    extends Composite
+    extends AbstractView
     implements MainView
 {
 
@@ -24,12 +28,27 @@ public class MainViewImpl
     private MainPresenter presenter;
 
     @UiField
-    SimplePanel container;
+    TextBox keyword;
 
-    @Inject
-    public MainViewImpl()
+    @UiField
+    SimpleLayoutPanel container;
+
+    @Override
+    protected Widget initWidget()
     {
-        initWidget( uiBinder.createAndBindUi( this ) );
+        Widget widget = uiBinder.createAndBindUi( this );
+        keyword.getElement().setAttribute( "placeholder", getMessages().headerSearchPlaceholder() );
+        return widget;
+    }
+
+    @UiHandler( "keyword" )
+    void onEnterKeyword( KeyUpEvent event )
+    {
+        if ( event.getNativeKeyCode() == KeyCodes.KEY_ENTER && !Strings.isNullOrEmpty( keyword.getValue() ) )
+        {
+            presenter.onSearch( keyword.getText() );
+            keyword.setValue( null );
+        }
     }
 
     @Override

@@ -9,6 +9,14 @@ public interface ResourcesBundle
     public interface Style
         extends CssResource
     {
+        String headerPanel();
+        
+        String headerTitle();
+
+        String westPanel();
+
+        String contentPanel();
+
         String errorLabel();
     }
 

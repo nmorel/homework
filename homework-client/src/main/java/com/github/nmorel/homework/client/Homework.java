@@ -8,7 +8,7 @@ import com.github.nmorel.homework.client.gin.HomeworkGinjector;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.web.bindery.event.shared.UmbrellaException;
 
 /**
@@ -30,7 +30,7 @@ public class Homework
         
         initLog();
 
-        RootPanel.get().add( ginjector.getMainPresenter().getView() );
+        RootLayoutPanel.get().add( ginjector.getMainPresenter().getView() );
 
         // Goes to place represented on URL or default place
         ginjector.getPlaceHistoryHandler().handleCurrentHistory();

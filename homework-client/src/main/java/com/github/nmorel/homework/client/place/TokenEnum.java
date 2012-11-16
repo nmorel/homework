@@ -17,6 +17,14 @@ public enum TokenEnum
             return new SearchPlace();
         }
     },
+    REPO( "repo" )
+    {
+        @Override
+        public BasePlace createNewPlace()
+        {
+            return new RepoPlace();
+        }
+    },
     ERROR( "error" )
     {
         @Override

@@ -8,10 +8,21 @@
   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
-  <g:HTMLPanel ui:field='panel'>
-    <h2>Search repositories :</h2>
-    <g:TextBox ui:field='query' debugId='query' />
-    <g:Button ui:field='search' debugId='searchBtn' text="{mess.search_searchButton}" />
-    <g:VerticalPanel ui:field='resultPanel' debugId='resultPanel' />
-  </g:HTMLPanel>
+  <g:DockLayoutPanel unit='PX'>
+    <g:north size='100'>
+      <g:HTMLPanel ui:field='searchPanel'>
+        <h2>
+          <ui:text from='{mess.searchTitle}' />
+        </h2>
+        <g:TextBox ui:field='keyword' debugId='searchKeyword' />
+        <g:Button ui:field='search' debugId='searchButton' text="{mess.searchButton}" />
+      </g:HTMLPanel>
+    </g:north>
+    <g:center>
+      <g:CustomScrollPanel>
+        <c:CellList ui:field='resultList' debugId='searchResultList' />
+      </g:CustomScrollPanel>
+    </g:center>
+  </g:DockLayoutPanel>
+
 </ui:UiBinder>

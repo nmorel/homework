@@ -1,5 +1,6 @@
 package com.github.nmorel.homework.client.mvp;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,18 +15,23 @@ public interface PlaceWithParameters
     {
         private static final long serialVersionUID = -4258407607343953704L;
 
-        private String[] missingParameters;
+        private List<String> missingParameters;
 
-        public MissingParametersException( String... missingParameters )
+        public MissingParametersException( List<String> missingParameters )
         {
             this.missingParameters = missingParameters;
         }
 
-        public String[] getMissingParameters()
+        public List<String> getMissingParameters()
         {
             return missingParameters;
         }
     }
+    
+    /**
+     * @return this place
+     */
+    PlaceWithParameters hasParameters();
 
     /**
      * Return the place's parameters in their string representation

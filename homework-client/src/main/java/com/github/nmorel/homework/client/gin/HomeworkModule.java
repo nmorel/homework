@@ -10,6 +10,8 @@ import com.github.nmorel.homework.client.screens.main.MainPresenter;
 import com.github.nmorel.homework.client.screens.main.MainPresenterImpl;
 import com.github.nmorel.homework.client.screens.main.MainView;
 import com.github.nmorel.homework.client.screens.main.MainViewImpl;
+import com.github.nmorel.homework.client.screens.repo.RepoView;
+import com.github.nmorel.homework.client.screens.repo.RepoViewImpl;
 import com.github.nmorel.homework.client.screens.search.SearchView;
 import com.github.nmorel.homework.client.screens.search.SearchViewImpl;
 import com.google.gwt.activity.shared.ActivityManager;
@@ -50,6 +52,7 @@ public class HomeworkModule
 
         // Views are singleton
         bind( SearchView.class ).to( SearchViewImpl.class ).in( Singleton.class );
+        bind( RepoView.class ).to( RepoViewImpl.class ).in( Singleton.class );
     }
 
     @Provides

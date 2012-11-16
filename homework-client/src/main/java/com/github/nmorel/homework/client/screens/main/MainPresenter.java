@@ -5,4 +5,6 @@ public interface MainPresenter
 
     MainView getView();
 
+    void onSearch( String keyword );
+
 }

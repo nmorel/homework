@@ -5,9 +5,36 @@
     
   </ui:style>
 
-  <g:HTMLPanel>
-    <g:SimplePanel ui:field='container' />
+  <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
+  <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
-  </g:HTMLPanel>
+  <g:DockLayoutPanel unit="PX">
+    <g:north size="35">
+      <g:HTMLPanel addStyleNames='{res.style.headerPanel}'>
+        <table height='100%'>
+          <tbody>
+            <tr>
+              <td valign='middle'>
+                <span class='{res.style.headerTitle}'>
+                  <ui:text from='{mess.headerTitle}' />
+                </span>
+              </td>
+              <td valign='middle'>
+                <g:TextBox ui:field='keyword' debugId='headerSearchKeyword' />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </g:HTMLPanel>
+    </g:north>
 
+    <g:west size="150">
+      <g:HTMLPanel addStyleNames='{res.style.westPanel}'></g:HTMLPanel>
+    </g:west>
+
+    <g:center>
+      <g:SimpleLayoutPanel addStyleNames='{res.style.contentPanel}' ui:field='container' />
+    </g:center>
+
+  </g:DockLayoutPanel>
 </ui:UiBinder>

@@ -4,29 +4,37 @@ import java.util.Map;
 
 import com.github.nmorel.homework.client.mvp.BasePlace;
 import com.github.nmorel.homework.client.mvp.PlaceWithParameters;
-import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
-public class SearchPlace
+public class RepoPlace
     extends BasePlace
     implements PlaceWithParameters
 {
-    private static final String PARAM_KEYWORD = "keyword";
+    private static final String PARAM_NAME = "name";
+    private static final String PARAM_OWNER = "owner";
     
-    private String keyword;
+    private String owner;
+    private String name;
 
-    public SearchPlace()
+    RepoPlace()
     {
     }
 
-    public SearchPlace( String keyword )
+    public RepoPlace( String owner, String name )
     {
-        this.keyword = keyword;
+        assert null != owner && null != name : "owner and name can't be null";
+        this.owner = owner;
+        this.name = name;
     }
 
-    public String getKeyword()
+    public String getOwner()
     {
-        return keyword;
+        return owner;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     @Override
@@ -38,7 +46,7 @@ public class SearchPlace
     @Override
     public TokenEnum getToken()
     {
-        return TokenEnum.SEARCH;
+        return TokenEnum.REPO;
     }
 
     @Override
@@ -50,21 +58,15 @@ public class SearchPlace
     @Override
     public Map<String, String> getParameters()
     {
-        if ( Strings.isNullOrEmpty( keyword ) )
-        {
-            return null;
-        }
-        else
-        {
-            return ImmutableMap.of( PARAM_KEYWORD, keyword );
-        }
+        return ImmutableMap.of( PARAM_OWNER, owner, PARAM_NAME, name );
     }
 
     @Override
     public void setParameters( Map<String, String> parameters )
         throws MissingParametersException
     {
-        keyword = parameters.get( PARAM_KEYWORD );
+        checkMissingParameters( parameters, PARAM_OWNER, PARAM_NAME );
+        owner = parameters.get( PARAM_OWNER );
+        name = parameters.get( PARAM_NAME );
     }
-
 }
