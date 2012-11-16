@@ -4,6 +4,7 @@ import javax.servlet.ServletContextEvent;
 
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
+import com.github.nmorel.homework.api.resources.RepositoriesResources;
 import com.github.nmorel.homework.api.resources.TestResources;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -44,6 +45,8 @@ public class GuiceServletConfig
             protected void configureServlets()
             {
                 bind( TestResources.class );
+                bind( RepositoriesResources.class );
+                
                 serve( "/api/*" ).with( GuiceContainer.class );
             };
         } );

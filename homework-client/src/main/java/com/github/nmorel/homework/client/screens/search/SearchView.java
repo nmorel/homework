@@ -8,6 +8,8 @@ public interface SearchView
     interface Presenter
     {
 
+        void onSearch( String query );
+
     }
 
     void setPresenter( Presenter presenter );
