@@ -1,10 +1,11 @@
 package com.github.nmorel.homework.client.screens.main;
 
+import com.github.nmorel.homework.client.model.User;
+import com.github.nmorel.homework.client.ui.View;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.IsWidget;
 
 public interface MainView
-    extends IsWidget
+    extends View
 {
 
     public interface Presenter
@@ -14,4 +15,6 @@ public interface MainView
     void setPresenter( MainPresenter presenter );
 
     AcceptsOneWidget getContainer();
+
+    void setUser( User user );
 }

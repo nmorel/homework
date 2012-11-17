@@ -9,7 +9,7 @@ public class SearchRequest
     public SearchRequest()
     {
         setMethod( RequestBuilder.GET );
-        setPath( "repo" );
+        setPath( "repos" );
     }
 
     public void fire( String query, RequestCallback callback )

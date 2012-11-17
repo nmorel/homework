@@ -42,7 +42,10 @@ public abstract class AbstractView
     @Override
     public void init()
     {
-        widget = initWidget();
+        if ( null == widget )
+        {
+            widget = initWidget();
+        }
     }
 
     protected abstract Widget initWidget();

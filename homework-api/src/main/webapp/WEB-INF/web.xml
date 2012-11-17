@@ -18,6 +18,16 @@
   <listener>
     <listener-class>com.github.nmorel.homework.api.config.GuiceServletConfig</listener-class>
   </listener>
+  
+  <servlet>
+    <servlet-name>EntryPoint</servlet-name>
+    <servlet-class>com.github.nmorel.homework.api.servlets.EntryPointServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>EntryPoint</servlet-name>
+    <url-pattern>/index.html</url-pattern>
+  </servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>

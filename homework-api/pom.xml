@@ -72,10 +72,6 @@
       <groupId>com.google.http-client</groupId>
       <artifactId>google-http-client</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.google.oauth-client</groupId>
-      <artifactId>google-oauth-client</artifactId>
-    </dependency>
 
     <!-- Dependencies for logs -->
     <dependency>
@@ -117,6 +113,8 @@
                 <uriEncoding>UTF-8</uriEncoding>
                 <systemProperties>
                   <homework.config>dev.config</homework.config>
+                  <github.client.id>${github.client.id}</github.client.id>
+                  <github.client.secret>${github.client.secret}</github.client.secret>
                 </systemProperties>
               </configuration>
             </plugin>

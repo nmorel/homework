@@ -1,5 +1,6 @@
 package com.github.nmorel.homework.client.gin;
 
+import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.mvp.AppActivityMapper;
 import com.github.nmorel.homework.client.mvp.AppPlaceHistoryMapper;
 import com.github.nmorel.homework.client.place.SearchPlace;
@@ -90,5 +91,12 @@ public class HomeworkModule
         ResourcesBundle bundle = GWT.create( ResourcesBundle.class );
         bundle.style().ensureInjected();
         return bundle;
+    }
+
+    @Provides
+    @Singleton
+    public User provideUser()
+    {
+        return User.getUser();
     }
 }

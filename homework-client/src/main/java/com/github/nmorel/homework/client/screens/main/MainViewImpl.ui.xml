@@ -11,7 +11,7 @@
   <g:DockLayoutPanel unit="PX">
     <g:north size="35">
       <g:HTMLPanel addStyleNames='{res.style.headerPanel}'>
-        <table height='100%'>
+        <table style='width: 100%; height: 100%; padding: 0px 20px;'>
           <tbody>
             <tr>
               <td valign='middle'>
@@ -21,6 +21,9 @@
               </td>
               <td valign='middle'>
                 <g:TextBox ui:field='keyword' debugId='headerSearchKeyword' />
+              </td>
+              <td align='right' style='width: 100%;'>
+                <g:SimplePanel ui:field='loginPanel' />
               </td>
             </tr>
           </tbody>

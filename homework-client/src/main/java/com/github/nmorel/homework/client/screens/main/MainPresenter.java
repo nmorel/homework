@@ -7,4 +7,6 @@ public interface MainPresenter
 
     void onSearch( String keyword );
 
+    void onLogin();
+
 }

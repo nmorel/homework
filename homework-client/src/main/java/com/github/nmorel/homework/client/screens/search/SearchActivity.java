@@ -44,7 +44,6 @@ public class SearchActivity
     {
         view.init();
         view.setPresenter( this );
-        panel.setWidget( view );
 
         view.setKeyword( currentPlace.getKeyword() );
         if ( Strings.isNullOrEmpty( currentPlace.getKeyword() ) )
@@ -71,6 +70,7 @@ public class SearchActivity
                 }
             } );
         }
+        panel.setWidget( view );
     }
 
     @Override
