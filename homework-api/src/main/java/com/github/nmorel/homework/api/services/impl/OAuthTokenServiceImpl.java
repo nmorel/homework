@@ -3,10 +3,13 @@ package com.github.nmorel.homework.api.services.impl;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nullable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.nmorel.homework.api.config.Config;
+import com.github.nmorel.homework.api.config.UserId;
 import com.github.nmorel.homework.api.model.AccessToken;
 import com.github.nmorel.homework.api.services.OAuthTokenService;
 import com.google.api.client.http.EmptyContent;
@@ -20,6 +23,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
@@ -34,18 +38,29 @@ public class OAuthTokenServiceImpl
     private Cache<String, String> tokenCache = CacheBuilder.newBuilder().expireAfterWrite( 1, TimeUnit.DAYS ).build();
 
     @Inject
+    @UserId
+    private Provider<Optional<String>> userIdProvider;
+
+    @Inject
     private Config config;
 
     @Inject
     private HttpTransport httpTransport;
 
     @Override
-    public void retrieveAndStoreToken( String userId, String code )
+    public void retrieveAndStoreToken( String code )
     {
-        Preconditions.checkNotNull( userId, "userId can't be null" );
         Preconditions.checkNotNull( code, "code can't be null" );
 
-        logger.debug( "Retrieving token from github with code {}", code );
+        Optional<String> userId = userIdProvider.get();
+        if ( !userId.isPresent() )
+        {
+            logger.warn( "We asked to retrieve a token but the userId is null" );
+            // we can't associate the token to a user, no need to pursue
+            return;
+        }
+
+        logger.debug( "Retrieving token from github with code {} and user {}", code, userId.get() );
 
         GenericUrl url = new GenericUrl( config.getGithubTokenUrl() );
         url.set( "client_id", config.getGithubClientId() );
@@ -69,14 +84,24 @@ public class OAuthTokenServiceImpl
             return;
         }
 
-        tokenCache.put( userId, token );
+        tokenCache.put( userId.get(), token );
 
-        logger.debug( "Token associated to user {}", userId );
+        logger.debug( "Token associated to user {}", userId.get() );
     }
 
     @Override
-    public Optional<String> getToken( String userId )
+    public Optional<String> getToken()
     {
+        return getToken( userIdProvider.get().orNull() );
+    }
+
+    @Override
+    public Optional<String> getToken( @Nullable String userId )
+    {
+        if ( null == userId )
+        {
+            return Optional.absent();
+        }
         logger.debug( "Looking token for user {}", userId );
         String token = tokenCache.getIfPresent( userId );
         logger.trace( "Token : {}", token );
@@ -84,9 +109,12 @@ public class OAuthTokenServiceImpl
     }
 
     @Override
-    public void deleteToken( String userId )
+    public void deleteToken( @Nullable String userId )
     {
-        logger.debug( "Deleting token if it exists for user {}", userId );
-        tokenCache.invalidate( userId );
+        if ( null != userId )
+        {
+            logger.debug( "Deleting token if it exists for user {}", userId );
+            tokenCache.invalidate( userId );
+        }
     }
 }

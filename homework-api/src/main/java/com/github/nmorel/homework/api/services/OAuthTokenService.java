@@ -1,5 +1,7 @@
 package com.github.nmorel.homework.api.services;
 
+import javax.annotation.Nullable;
+
 import com.google.common.base.Optional;
 
 /**
@@ -10,23 +12,27 @@ import com.google.common.base.Optional;
 public interface OAuthTokenService
 {
     /**
-     * Retrieve the token from the code given by github and associated to the given user
+     * Retrieve the token from the code given by github and associated to the current user
      * 
-     * @param userId id of the user
      * @param code code gave by github
      */
-    void retrieveAndStoreToken( String userId, String code );
+    void retrieveAndStoreToken( String code );
+
+    /**
+     * @return the token associated to the current user, null if none exists
+     */
+    Optional<String> getToken();
 
     /**
      * @param userId id of the user
      * @return the token associated to the user, null if none exists
      */
-    Optional<String> getToken( String userId );
+    Optional<String> getToken( @Nullable String userId );
 
     /**
      * Delete the token associated to the user
      * 
      * @param userId id of the user
      */
-    void deleteToken( String userId );
+    void deleteToken( @Nullable String userId );
 }

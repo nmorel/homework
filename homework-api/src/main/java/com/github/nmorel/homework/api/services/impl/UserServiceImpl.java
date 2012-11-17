@@ -28,7 +28,7 @@ public class UserServiceImpl
 
     @Inject
     @UserId
-    private Provider<String> userIdProvider;
+    private Provider<Optional<String>> userIdProvider;
 
     @Inject
     private HttpTransport httpTransport;
@@ -37,9 +37,9 @@ public class UserServiceImpl
     private OAuthTokenService tokenService;
 
     @Override
-    public Optional<User> getAuthenticatedUser()
+    public Optional<User> getAuthenticatedUserInformations()
     {
-        String userId = userIdProvider.get();
+        String userId = userIdProvider.get().orNull();
         Optional<String> token = tokenService.getToken( userId );
         if ( token.isPresent() )
         {

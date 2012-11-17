@@ -40,17 +40,15 @@ public class AuthorizationRedirectionServlet
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
         throws ServletException, IOException
     {
-        String userId = CookieUtil.getFirstCookieValue( request.getCookies(), CookieUtil.USER_ID );
-
         String code = request.getParameter( "code" );
 
-        if ( !Strings.isNullOrEmpty( userId ) && !Strings.isNullOrEmpty( code ) )
+        if ( !Strings.isNullOrEmpty( code ) )
         {
             logger
                 .debug(
-                    "Redirected to this servlet after a successful github authorization. Retrieving the token from code {} and associating it to user {}",
-                    code, userId );
-            tokenService.retrieveAndStoreToken( userId, code );
+                    "Redirected to this servlet after a successful github authorization. Retrieving the token from code {}",
+                    code );
+            tokenService.retrieveAndStoreToken( code );
         }
 
         // Redirect url

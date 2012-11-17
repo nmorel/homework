@@ -12,6 +12,7 @@ import com.github.nmorel.homework.api.services.impl.UserServiceImpl;
 import com.github.nmorel.homework.api.servlets.CookieUtil;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.common.base.Optional;
 import com.google.gson.Gson;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
@@ -45,9 +46,10 @@ public class HomeworkModule
 
     @Provides
     @UserId
-    public String providesUserId( Provider<HttpServletRequest> httpServletRequest )
+    public Optional<String> providesUserId( Provider<HttpServletRequest> httpServletRequest )
     {
-        return CookieUtil.getFirstCookieValue( httpServletRequest.get().getCookies(), CookieUtil.USER_ID );
+        return Optional.fromNullable( CookieUtil.getFirstCookieValue( httpServletRequest.get().getCookies(),
+            CookieUtil.USER_ID ) );
     }
 
 }

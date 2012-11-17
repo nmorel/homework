@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.nmorel.homework.api.config.Config;
-import com.github.nmorel.homework.api.config.UserId;
 import com.github.nmorel.homework.api.services.OAuthTokenService;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpResponse;
@@ -40,15 +39,11 @@ public class RepositoriesResources
     @Inject
     private OAuthTokenService tokenService;
 
-    @Inject
-    @UserId
-    private Provider<String> userId;
-
     @GET
     public StreamingOutput search( @QueryParam( "query" ) String query )
         throws IOException
     {
-        Optional<String> token = tokenService.getToken( userId.get() );
+        Optional<String> token = tokenService.getToken();
 
         logger.info( "Looking for repositories with the keyword '{}'", query );
 

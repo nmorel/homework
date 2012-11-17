@@ -150,7 +150,7 @@ public class EntryPointServlet
         // we write the user infos into a javascript variable
         Injector inj = (Injector) getServletContext().getAttribute( Injector.class.getName() );
         UserService userService = inj.getInstance( UserService.class );
-        Optional<User> user = userService.getAuthenticatedUser();
+        Optional<User> user = userService.getAuthenticatedUserInformations();
         if ( user.isPresent() )
         {
             writer.println( "<script type=\"text/javascript\" language=\"javascript\">" );

@@ -6,7 +6,7 @@ import com.google.common.base.Optional;
 public interface UserService
 {
     /**
-     * @return information about the authenticated user
+     * @return informations about the authenticated user
      */
-    Optional<User> getAuthenticatedUser();
+    Optional<User> getAuthenticatedUserInformations();
 }
