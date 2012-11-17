@@ -61,10 +61,20 @@
       <artifactId>jersey-guice</artifactId>
     </dependency>
 
+    <!-- Gson dependencies -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+    </dependency>
+
     <!-- HttpClient dependencies -->
     <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.oauth-client</groupId>
+      <artifactId>google-oauth-client</artifactId>
     </dependency>
 
     <!-- Dependencies for logs -->
@@ -83,10 +93,6 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
     </dependency>
   </dependencies>
 
@@ -109,6 +115,9 @@
                 <contextFile>${basedir}/src/main/tomcatconf/context.xml</contextFile>
                 <path>/</path>
                 <uriEncoding>UTF-8</uriEncoding>
+                <systemProperties>
+                  <homework.config>dev.config</homework.config>
+                </systemProperties>
               </configuration>
             </plugin>
           </plugins>

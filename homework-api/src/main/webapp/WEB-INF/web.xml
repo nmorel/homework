@@ -16,7 +16,7 @@
   </filter-mapping>
 
   <listener>
-    <listener-class>com.github.nmorel.homework.api.GuiceServletConfig</listener-class>
+    <listener-class>com.github.nmorel.homework.api.config.GuiceServletConfig</listener-class>
   </listener>
 
   <!-- Default page to serve -->

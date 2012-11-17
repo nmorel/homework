@@ -1,4 +1,4 @@
-package com.github.nmorel.homework.api;
+package com.github.nmorel.homework.api.config;
 
 import javax.servlet.ServletContextEvent;
 
