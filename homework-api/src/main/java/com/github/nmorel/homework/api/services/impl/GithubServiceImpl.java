@@ -2,6 +2,7 @@ package com.github.nmorel.homework.api.services.impl;
 
 import java.io.IOException;
 
+import javax.ws.rs.WebApplicationException;
 import javax.xml.ws.http.HTTPException;
 
 import org.slf4j.Logger;
@@ -90,8 +91,7 @@ public class GithubServiceImpl
         {
             // no idea how we could fall into this exception, probably when we give a request body.
             logger.error( "Error while writing the request {} {}", method, url, e );
-            // TODO handle exception
-            throw new HTTPException( HttpStatusCodes.STATUS_CODE_SERVER_ERROR );
+            throw new WebApplicationException( e, HttpStatusCodes.STATUS_CODE_SERVER_ERROR );
         }
 
         // we handle the status code ourselves
@@ -161,7 +161,7 @@ public class GithubServiceImpl
             }
 
             // TODO handle error
-            throw new HTTPException( response.getStatusCode() );
+            throw new WebApplicationException( response.getStatusCode() );
         }
         finally
         {
