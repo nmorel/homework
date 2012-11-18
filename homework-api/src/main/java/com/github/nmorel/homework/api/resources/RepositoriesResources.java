@@ -5,7 +5,9 @@ import java.io.IOException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.StreamingOutput;
 import javax.xml.ws.http.HTTPException;
 
@@ -22,6 +24,7 @@ import com.google.common.base.Strings;
 import com.google.inject.Inject;
 
 @Path( "repos" )
+@Produces( MediaType.APPLICATION_JSON )
 public class RepositoriesResources
 {
     private static final Logger logger = LoggerFactory.getLogger( RepositoriesResources.class );

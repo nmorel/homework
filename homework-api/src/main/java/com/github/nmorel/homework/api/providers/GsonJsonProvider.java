@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -14,11 +15,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableSet;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
 
@@ -28,15 +32,34 @@ import com.google.gson.stream.JsonWriter;
  * @author Nicolas Morel
  */
 @Provider
-@Consumes( { MediaType.APPLICATION_JSON, "text/json" } )
-@Produces( { MediaType.APPLICATION_JSON, "text/json" } )
+@Consumes( MediaType.APPLICATION_JSON )
+@Produces( MediaType.APPLICATION_JSON )
 public class GsonJsonProvider
     implements MessageBodyReader<Object>, MessageBodyWriter<Object>
 {
 
+    /**
+     * These are classes that we never use for reading (never try to deserialize instances of these types).
+     */
+    private final static ImmutableSet<Class<?>> unreadableClasses = ImmutableSet.<Class<?>> of( InputStream.class,
+        Reader.class );
+
+    /**
+     * These are classes that we never use for writing (never try to serialize instances of these types).
+     */
+    private final static ImmutableSet<Class<?>> unwritableClasses = ImmutableSet.<Class<?>> of( OutputStream.class,
+        Writer.class, StreamingOutput.class, Response.class );
+
     @Override
     public boolean isReadable( Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType )
     {
+        for ( Class<?> cls : unreadableClasses )
+        {
+            if ( cls.isAssignableFrom( type ) )
+            {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -51,6 +74,13 @@ public class GsonJsonProvider
     @Override
     public boolean isWriteable( Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType )
     {
+        for ( Class<?> cls : unwritableClasses )
+        {
+            if ( cls.isAssignableFrom( type ) )
+            {
+                return false;
+            }
+        }
         return true;
     }
 
