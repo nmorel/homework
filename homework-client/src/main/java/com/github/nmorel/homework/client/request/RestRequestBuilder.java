@@ -14,6 +14,7 @@ import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
+import com.google.web.bindery.requestfactory.shared.RequestFactory;
 
 public class RestRequestBuilder
 {
@@ -26,6 +27,7 @@ public class RestRequestBuilder
     public RestRequestBuilder build( Method method, String path, List<String> args, Map<String, String> queryParams )
     {
         builder = new RequestBuilder( method, buildRequestUrl( path, args, queryParams ) );
+        builder.setHeader( "Content-Type", RequestFactory.JSON_CONTENT_TYPE_UTF8 );
         return this;
     }
 

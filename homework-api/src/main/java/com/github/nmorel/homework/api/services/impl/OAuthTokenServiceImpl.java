@@ -100,7 +100,7 @@ public class OAuthTokenServiceImpl
         {
             return Optional.absent();
         }
-        logger.debug( "Looking token for user {}", userId );
+        logger.debug( "Looking for token associated to user {}", userId );
         String token = tokenCache.getIfPresent( userId );
         logger.trace( "Token : {}", token );
         return Optional.fromNullable( token );
