@@ -1,26 +1,25 @@
 package com.github.nmorel.homework.api.resources;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.StreamingOutput;
+import javax.xml.ws.http.HTTPException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.nmorel.homework.api.config.Config;
-import com.github.nmorel.homework.api.services.OAuthTokenService;
+import com.github.nmorel.homework.api.model.Commit;
+import com.github.nmorel.homework.api.model.parser.GsonHttpResponseParser;
+import com.github.nmorel.homework.api.model.parser.StreamingHttpResponseParser;
+import com.github.nmorel.homework.api.services.GithubService;
 import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpResponse;
-import com.google.api.client.http.HttpTransport;
-import com.google.common.base.Optional;
+import com.google.api.client.http.HttpMethods;
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 @Path( "repos" )
 public class RepositoriesResources
@@ -28,44 +27,48 @@ public class RepositoriesResources
     private static final Logger logger = LoggerFactory.getLogger( RepositoriesResources.class );
 
     @Inject
-    private HttpTransport httpTransport;
-
-    @Inject
-    private Config config;
-
-    @Inject
-    private Provider<HttpServletRequest> httpServletRequest;
-
-    @Inject
-    private OAuthTokenService tokenService;
+    private GithubService githubService;
 
     @GET
-    public StreamingOutput search( @QueryParam( "query" ) String query )
+    @Path( "search" )
+    public StreamingOutput search( @QueryParam( "keyword" ) String keyword )
         throws IOException
     {
-        Optional<String> token = tokenService.getToken();
-
-        logger.info( "Looking for repositories with the keyword '{}'", query );
-
-        GenericUrl url = new GenericUrl( config.getGithubApiBaseUrl() + "/legacy/repos/search/" + query );
-        if ( token.isPresent() )
+        if ( Strings.isNullOrEmpty( keyword ) )
         {
-            url.set( "access_token", token.get() );
+            // TODO handle exception
+            throw new HTTPException( 400 );
         }
 
-        final HttpResponse response = httpTransport.createRequestFactory().buildGetRequest( url ).execute();
+        logger.info( "Looking for repositories with the keyword '{}'", keyword );
 
-        logger.info( "limit : {}", response.getHeaders().get( "X-RateLimit-Remaining" ) );
+        GenericUrl url = githubService.newGithubUrl();
+        url.appendRawPath( "/legacy/repos/search/" );
+        url.appendRawPath( keyword );
 
-        return new StreamingOutput() {
+        return githubService.execute( HttpMethods.GET, url, new StreamingHttpResponseParser(), false );
+    }
 
-            @Override
-            public void write( OutputStream output )
-                throws IOException, WebApplicationException
-            {
-                response.download( output );
-            }
-        };
+    @GET
+    @Path( "{owner}/{repo}" )
+    public Commit[] getRepository( @PathParam( "owner" ) String owner, @PathParam( "repo" ) String repo )
+        throws IOException
+    {
+        logger.info( "Retrieving the informations for the repository : {}/{}", owner, repo );
+
+        GenericUrl url = githubService.newGithubUrl();
+        url.appendRawPath( "/repos/" );
+        url.appendRawPath( owner );
+        url.appendRawPath( "/" );
+        url.appendRawPath( repo );
+        url.appendRawPath( "/commits" );
+        url.set( "per_page", 100 );
+
+        Commit[] commits =
+            githubService.execute( HttpMethods.GET, url, new GsonHttpResponseParser<>( Commit[].class ), true );
+
+        logger.info( "{} commits found", commits.length );
+        return commits;
     }
 
 }

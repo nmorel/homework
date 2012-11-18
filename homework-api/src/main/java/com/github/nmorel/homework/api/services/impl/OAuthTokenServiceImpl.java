@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.nmorel.homework.api.config.Config;
-import com.github.nmorel.homework.api.config.UserId;
 import com.github.nmorel.homework.api.model.AccessToken;
+import com.github.nmorel.homework.api.providers.UserIdProvider;
 import com.github.nmorel.homework.api.services.OAuthTokenService;
 import com.google.api.client.http.EmptyContent;
 import com.google.api.client.http.GenericUrl;
@@ -23,7 +23,6 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
@@ -38,8 +37,7 @@ public class OAuthTokenServiceImpl
     private Cache<String, String> tokenCache = CacheBuilder.newBuilder().expireAfterWrite( 1, TimeUnit.DAYS ).build();
 
     @Inject
-    @UserId
-    private Provider<Optional<String>> userIdProvider;
+    private UserIdProvider userIdProvider;
 
     @Inject
     private Config config;

@@ -9,12 +9,12 @@ public class SearchRequest
     public SearchRequest()
     {
         setMethod( RequestBuilder.GET );
-        setPath( "repos" );
+        setPath( "repos/search" );
     }
 
     public void fire( String query, RequestCallback callback )
     {
-        addQueryParameter( "query", query );
+        addQueryParameter( "keyword", query );
         setCallback( callback );
         fire();
     }

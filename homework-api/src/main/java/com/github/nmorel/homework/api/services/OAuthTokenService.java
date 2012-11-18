@@ -19,13 +19,13 @@ public interface OAuthTokenService
     void retrieveAndStoreToken( String code );
 
     /**
-     * @return the token associated to the current user, null if none exists
+     * @return the token associated to the current user, never return null.
      */
     Optional<String> getToken();
 
     /**
      * @param userId id of the user
-     * @return the token associated to the user, null if none exists
+     * @return the token associated to the user, never return null.
      */
     Optional<String> getToken( @Nullable String userId );
 

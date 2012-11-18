@@ -147,7 +147,7 @@ public class EntryPointServlet
      */
     private void writeVariables( HttpServletRequest request, HttpServletResponse response, PrintWriter writer )
     {
-        // we write the user infos into a javascript variable
+        // we write the user infos into a javascript variable to save a roundtrip
         Injector inj = (Injector) getServletContext().getAttribute( Injector.class.getName() );
         UserService userService = inj.getInstance( UserService.class );
         Optional<User> user = userService.getAuthenticatedUserInformations();
