@@ -25,7 +25,7 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!-- Servlet dependencies --> 
+    <!-- Servlet dependencies -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
