@@ -1,11 +1,19 @@
 package com.github.nmorel.homework.client.screens.repo;
 
+import com.github.nmorel.homework.client.model.FullCommit;
 import com.github.nmorel.homework.client.mvp.ActivityWithPlace;
 import com.github.nmorel.homework.client.place.RepoPlace;
+import com.github.nmorel.homework.client.request.RepoRequest;
 import com.github.nmorel.homework.client.screens.repo.RepoView.Presenter;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsonUtils;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 
 public class RepoActivity
@@ -17,6 +25,9 @@ public class RepoActivity
 
     @Inject
     private PlaceController placeController;
+
+    @Inject
+    private Provider<RepoRequest> repoRequest;
 
     private RepoPlace currentPlace;
 
@@ -31,6 +42,24 @@ public class RepoActivity
     {
         view.init();
         view.setPresenter( this );
+
+        repoRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
+
+            @Override
+            public void onResponseReceived( Request request, Response response )
+            {
+                JsArray<FullCommit> commits = JsonUtils.safeEval( response.getText() );
+                view.showResults( commits );
+            }
+
+            @Override
+            public void onError( Request request, Throwable exception )
+            {
+                // TODO Auto-generated method stub
+
+            }
+        } );
+
         panel.setWidget( view );
     }
 

@@ -14,7 +14,7 @@ import javax.xml.ws.http.HTTPException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.nmorel.homework.api.model.Commit;
+import com.github.nmorel.homework.api.model.FullCommit;
 import com.github.nmorel.homework.api.model.parser.GsonHttpResponseParser;
 import com.github.nmorel.homework.api.model.parser.StreamingHttpResponseParser;
 import com.github.nmorel.homework.api.services.GithubService;
@@ -54,7 +54,7 @@ public class RepositoriesResources
 
     @GET
     @Path( "{owner}/{repo}" )
-    public Commit[] getRepository( @PathParam( "owner" ) String owner, @PathParam( "repo" ) String repo )
+    public FullCommit[] getRepository( @PathParam( "owner" ) String owner, @PathParam( "repo" ) String repo )
         throws IOException
     {
         logger.info( "Retrieving the informations for the repository : {}/{}", owner, repo );
@@ -67,8 +67,8 @@ public class RepositoriesResources
         url.appendRawPath( "/commits" );
         url.set( "per_page", 100 );
 
-        Commit[] commits =
-            githubService.execute( HttpMethods.GET, url, new GsonHttpResponseParser<>( Commit[].class ), true );
+        FullCommit[] commits =
+            githubService.execute( HttpMethods.GET, url, new GsonHttpResponseParser<>( FullCommit[].class ), true );
 
         logger.info( "{} commits found", commits.length );
         return commits;

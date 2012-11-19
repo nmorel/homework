@@ -34,13 +34,27 @@
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
     </dependency>
+
+    <!-- GIN dependencies -->
     <dependency>
       <groupId>com.google.gwt.inject</groupId>
       <artifactId>gin</artifactId>
     </dependency>
+
+    <!-- GWT Bootstrap dependencies -->
     <dependency>
       <groupId>com.github.gwtbootstrap</groupId>
       <artifactId>gwt-bootstrap</artifactId>
+    </dependency>
+
+    <!-- GWT Visualisation and Timeline dependencies -->
+    <dependency>
+      <groupId>com.google.gwt.google-apis</groupId>
+      <artifactId>gwt-visualization</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.chap.links</groupId>
+      <artifactId>gwt-links-timeline</artifactId>
     </dependency>
 
     <!-- Guava dependencies -->

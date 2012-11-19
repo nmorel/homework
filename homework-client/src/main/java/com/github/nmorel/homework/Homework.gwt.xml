@@ -6,8 +6,7 @@
   <inherits name="com.google.gwt.activity.Activity" />
   <inherits name="com.google.gwt.place.Place" />
 
-  <!-- GWT theme -->
-  <!-- <inherits name="com.google.gwt.user.theme.clean.Clean" /> -->
+  <!-- GWT Bootstrap -->
   <inherits name="com.github.gwtbootstrap.Bootstrap" />
 
   <!-- Guava -->
@@ -15,6 +14,10 @@
 
   <!-- Gin -->
   <inherits name="com.google.gwt.inject.Inject" />
+
+  <!-- gwt-visualization -->
+  <inherits name="com.google.gwt.visualization.Visualization" />
+  <inherits name='com.chap.links.Timeline'/>
 
   <!-- Logging -->
   <inherits name="com.google.gwt.logging.Logging" />
@@ -35,7 +38,7 @@
 
   <set-property name="user.agent" value="safari,ie9,gecko1_8,opera" />
 
-  <!-- Ajoute la locale fr -->
+  <!-- Add the french locale -->
   <extend-property name='locale' values='fr' />
 
 </module>

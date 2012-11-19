@@ -9,10 +9,22 @@ import com.google.gson.annotations.SerializedName;
  */
 public class User
 {
+    private String login;
+
     private String name;
 
     @SerializedName( "avatar_url" )
     private String avatarUrl;
+
+    /**
+     * Date of a commit
+     */
+    private String date;
+
+    public String getLogin()
+    {
+        return login;
+    }
 
     public String getName()
     {
@@ -22,5 +34,10 @@ public class User
     public String getAvatarUrl()
     {
         return avatarUrl;
+    }
+
+    public String getDate()
+    {
+        return date;
     }
 }

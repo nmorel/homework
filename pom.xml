@@ -17,6 +17,14 @@
     <module>homework-client</module>
   </modules>
 
+  <repositories>
+    <repository>
+      <id>cloudbees</id>
+      <name>Cloudbees repository</name>
+      <url>http://repository-nmorel.forge.cloudbees.com/release/</url>
+    </repository>
+  </repositories>
+
   <properties>
     <maven.version>3.0.4</maven.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,6 +40,8 @@
     <!-- Dependencies version -->
     <gwt.version>2.5.0</gwt.version>
     <gwt-bootstrap.version>2.0.4.0</gwt-bootstrap.version>
+    <gwt-visualization.version>1.1.2</gwt-visualization.version>
+    <gwt-links-timeline.version>2.3.2</gwt-links-timeline.version>
     <servlet-api.version>2.5</servlet-api.version>
     <gin.version>2.0.0</gin.version>
     <guice.version>3.0</guice.version>
@@ -54,16 +64,34 @@
         <version>${gwt.version}</version>
         <scope>provided</scope>
       </dependency>
+
+      <!-- GIN dependencies -->
       <dependency>
         <groupId>com.google.gwt.inject</groupId>
         <artifactId>gin</artifactId>
         <version>${gin.version}</version>
         <scope>provided</scope>
       </dependency>
+
+      <!-- GWT Bootstrap dependencies -->
       <dependency>
         <groupId>com.github.gwtbootstrap</groupId>
         <artifactId>gwt-bootstrap</artifactId>
         <version>${gwt-bootstrap.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <!-- GWT Visualisation and Timeline dependencies -->
+      <dependency>
+        <groupId>com.google.gwt.google-apis</groupId>
+        <artifactId>gwt-visualization</artifactId>
+        <version>${gwt-visualization.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.chap.links</groupId>
+        <artifactId>gwt-links-timeline</artifactId>
+        <version>${gwt-links-timeline.version}</version>
         <scope>provided</scope>
       </dependency>
 

@@ -8,8 +8,6 @@
   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
-  <g:HTMLPanel>
-    <div>Repository view</div>
-  </g:HTMLPanel>
+  <g:SimplePanel></g:SimplePanel>
 
 </ui:UiBinder>
