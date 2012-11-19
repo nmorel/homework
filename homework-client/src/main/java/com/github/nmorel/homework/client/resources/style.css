@@ -1,21 +1,24 @@
-.headerPanel {
+.headerContainer {
 	width: 100%;
 	height: 100%;
 	background-color: #2D2D2D;
 	color: white;
 }
 
-.headerTitle {
-	font-size: 24px;
-	font-weight: bold;
-	margin: 0px 20px 0px 10px;
+.headerInnerContainer {
+	height: 100%;
+	padding: 0px 20px;
 }
 
-.westPanel {
+.headerTitle {
 	
 }
 
-.contentPanel {
+.westContainer {
+	
+}
+
+.contentContainer {
 	
 }
 

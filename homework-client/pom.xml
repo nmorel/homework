@@ -38,6 +38,10 @@
       <groupId>com.google.gwt.inject</groupId>
       <artifactId>gin</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.github.gwtbootstrap</groupId>
+      <artifactId>gwt-bootstrap</artifactId>
+    </dependency>
 
     <!-- Guava dependencies -->
     <dependency>
