@@ -103,7 +103,6 @@ public class EntryPointServlet
      */
     private void writeHead( HttpServletRequest request, HttpServletResponse response, PrintWriter writer )
     {
-        writer.println( "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" >" );
         writeEncodage( request, response, writer );
         writeTitle( request, response, writer );
         writeGWTJavascript( request, response, writer );

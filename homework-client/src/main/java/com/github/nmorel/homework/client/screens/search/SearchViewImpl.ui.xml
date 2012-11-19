@@ -1,6 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
-  xmlns:c="urn:import:com.google.gwt.user.cellview.client">
+  xmlns:c="urn:import:com.google.gwt.user.cellview.client" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
   <ui:style>
     
   </ui:style>
@@ -14,8 +14,10 @@
         <h2>
           <ui:text from='{mess.searchTitle}' />
         </h2>
-        <g:TextBox ui:field='keyword' debugId='searchKeyword' />
-        <g:Button ui:field='search' debugId='searchButton' text="{mess.searchButton}" />
+        <b:InputAddOn addStyleNames='input-append'>
+          <b:TextBox ui:field='keyword' debugId='searchKeyword' />
+          <b:Button ui:field='search' debugId='searchButton' icon='SEARCH' />
+        </b:InputAddOn>
       </g:HTMLPanel>
     </g:north>
     <g:center>

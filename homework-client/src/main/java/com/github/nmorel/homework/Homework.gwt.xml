@@ -7,7 +7,8 @@
   <inherits name="com.google.gwt.place.Place" />
 
   <!-- GWT theme -->
-  <inherits name="com.google.gwt.user.theme.clean.Clean" />
+  <!-- <inherits name="com.google.gwt.user.theme.clean.Clean" /> -->
+  <inherits name="com.github.gwtbootstrap.Bootstrap" />
 
   <!-- Guava -->
   <inherits name="com.google.common.collect.Collect" />
@@ -31,10 +32,10 @@
 
   <!-- Entry Point -->
   <entry-point class="com.github.nmorel.homework.client.Homework" />
-  
+
   <set-property name="user.agent" value="safari,ie9,gecko1_8,opera" />
 
   <!-- Ajoute la locale fr -->
   <extend-property name='locale' values='fr' />
-  
+
 </module>

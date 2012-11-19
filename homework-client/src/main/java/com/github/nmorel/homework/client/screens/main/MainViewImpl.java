@@ -1,5 +1,10 @@
 package com.github.nmorel.homework.client.screens.main;
 
+import com.github.gwtbootstrap.client.ui.Button;
+import com.github.gwtbootstrap.client.ui.TextBox;
+import com.github.gwtbootstrap.client.ui.Tooltip;
+import com.github.gwtbootstrap.client.ui.constants.ButtonType;
+import com.github.gwtbootstrap.client.ui.constants.Placement;
 import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.ui.AbstractView;
 import com.google.common.base.Strings;
@@ -13,14 +18,12 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MainViewImpl
@@ -50,7 +53,7 @@ public class MainViewImpl
     protected Widget initWidget()
     {
         Widget widget = uiBinder.createAndBindUi( this );
-        keyword.getElement().setAttribute( "placeholder", getMessages().headerSearchPlaceholder() );
+        keyword.setPlaceholder( getMessages().headerSearchPlaceholder() );
 
         return widget;
     }
@@ -59,6 +62,16 @@ public class MainViewImpl
     void onEnterKeyword( KeyUpEvent event )
     {
         if ( event.getNativeKeyCode() == KeyCodes.KEY_ENTER && !Strings.isNullOrEmpty( keyword.getValue() ) )
+        {
+            presenter.onSearch( keyword.getText() );
+            keyword.setValue( null );
+        }
+    }
+
+    @UiHandler( "search" )
+    void onClickSearch( ClickEvent event )
+    {
+        if ( !Strings.isNullOrEmpty( keyword.getValue() ) )
         {
             presenter.onSearch( keyword.getText() );
             keyword.setValue( null );
@@ -82,7 +95,11 @@ public class MainViewImpl
     {
         if ( null == user )
         {
-            Button loginButton = new Button( "Login with your github account" );
+            Tooltip tooltip = new Tooltip( getMessages().headerLoginButtonTooltip() );
+            tooltip.setPlacement( Placement.BOTTOM );
+
+            Button loginButton = new Button( getMessages().headerLoginButton() );
+            loginButton.setType( ButtonType.PRIMARY );
             loginButton.addClickHandler( new ClickHandler() {
 
                 @Override
@@ -91,7 +108,8 @@ public class MainViewImpl
                     presenter.onLogin();
                 }
             } );
-            loginPanel.setWidget( loginButton );
+            tooltip.add( loginButton );
+            loginPanel.setWidget( tooltip );
         }
         else
         {

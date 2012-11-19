@@ -1,5 +1,6 @@
 package com.github.nmorel.homework.client.screens.search;
 
+import com.github.gwtbootstrap.client.ui.TextBox;
 import com.github.nmorel.homework.client.model.Repository;
 import com.github.nmorel.homework.client.ui.AbstractView;
 import com.github.nmorel.homework.client.ui.cell.RepositoryCell;
@@ -12,7 +13,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
