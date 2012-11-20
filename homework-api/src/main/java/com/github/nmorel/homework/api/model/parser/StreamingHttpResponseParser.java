@@ -27,8 +27,14 @@ public class StreamingHttpResponseParser
             public void write( OutputStream output )
                 throws IOException, WebApplicationException
             {
-                response.download( output );
-                closeResponse( response );
+                try
+                {
+                    response.download( output );
+                }
+                finally
+                {
+                    closeResponse( response );
+                }
             }
         };
     }

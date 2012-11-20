@@ -1,6 +1,7 @@
 package com.github.nmorel.homework.api.resources;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,8 +15,9 @@ import javax.ws.rs.core.StreamingOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.nmorel.homework.api.model.FullCommit;
+import com.github.nmorel.homework.api.model.Commit;
 import com.github.nmorel.homework.api.model.User;
+import com.github.nmorel.homework.api.model.parser.CommitsParser;
 import com.github.nmorel.homework.api.model.parser.GsonHttpResponseParser;
 import com.github.nmorel.homework.api.model.parser.StreamingHttpResponseParser;
 import com.github.nmorel.homework.api.services.GithubService;
@@ -76,7 +78,7 @@ public class RepositoriesResources
 
     @GET
     @Path( "{owner}/{repo}/commits" )
-    public FullCommit[] listCommits( @PathParam( "owner" ) String owner, @PathParam( "repo" ) String repo )
+    public List<Commit> listCommits( @PathParam( "owner" ) String owner, @PathParam( "repo" ) String repo )
         throws IOException
     {
         logger.info( "Retrieving the informations for the repository : {}/{}", owner, repo );
@@ -89,10 +91,9 @@ public class RepositoriesResources
         url.appendRawPath( "/commits" );
         url.set( "per_page", 100 );
 
-        FullCommit[] commits =
-            githubService.execute( HttpMethods.GET, url, new GsonHttpResponseParser<>( FullCommit[].class ), true );
+        List<Commit> commits = githubService.execute( HttpMethods.GET, url, new CommitsParser(), true );
 
-        logger.info( "{} commits found", commits.length );
+        logger.info( "{} commits found", commits.size() );
         return commits;
     }
 

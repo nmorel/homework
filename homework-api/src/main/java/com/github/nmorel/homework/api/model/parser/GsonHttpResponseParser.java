@@ -37,20 +37,24 @@ public class GsonHttpResponseParser<T>
     public T parseResponse( final HttpResponse response )
         throws IOException
     {
-        T result;
-        Gson gson = new Gson();
-        if ( null != clazz )
+        try
         {
-            result = gson.fromJson( new InputStreamReader( response.getContent(), Charsets.UTF_8 ), clazz );
+            T result;
+            Gson gson = new Gson();
+            if ( null != clazz )
+            {
+                result = gson.fromJson( new InputStreamReader( response.getContent(), Charsets.UTF_8 ), clazz );
+            }
+            else
+            {
+                result = gson.fromJson( new InputStreamReader( response.getContent(), Charsets.UTF_8 ), type );
+            }
+            return result;
         }
-        else
+        finally
         {
-            result = gson.fromJson( new InputStreamReader( response.getContent(), Charsets.UTF_8 ), type );
+            closeResponse( response );
         }
-
-        closeResponse( response );
-
-        return result;
     }
 
 }

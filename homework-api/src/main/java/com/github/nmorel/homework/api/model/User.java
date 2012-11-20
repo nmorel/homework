@@ -13,17 +13,19 @@ public class User
 
     private String name;
 
+    private String email;
+
     @SerializedName( "avatar_url" )
     private String avatarUrl;
-
-    /**
-     * Date of a commit
-     */
-    private String date;
 
     public String getLogin()
     {
         return login;
+    }
+
+    public void setLogin( String login )
+    {
+        this.login = login;
     }
 
     public String getName()
@@ -31,13 +33,29 @@ public class User
         return name;
     }
 
+    public void setName( String name )
+    {
+        this.name = name;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail( String email )
+    {
+        this.email = email;
+    }
+
     public String getAvatarUrl()
     {
         return avatarUrl;
     }
 
-    public String getDate()
+    public void setAvatarUrl( String avatarUrl )
     {
-        return date;
+        this.avatarUrl = avatarUrl;
     }
+
 }

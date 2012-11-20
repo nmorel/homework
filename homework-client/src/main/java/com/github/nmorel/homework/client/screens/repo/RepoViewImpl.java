@@ -1,13 +1,14 @@
 package com.github.nmorel.homework.client.screens.repo;
 
 import com.chap.links.client.Timeline;
-import com.github.gwtbootstrap.client.ui.Label;
-import com.github.nmorel.homework.client.model.FullCommit;
+import com.github.nmorel.homework.client.model.Commit;
 import com.github.nmorel.homework.client.model.User;
+import com.github.nmorel.homework.client.resources.Constants;
 import com.github.nmorel.homework.client.ui.AbstractView;
 import com.github.nmorel.homework.client.ui.cell.CollaboratorCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellList;
@@ -56,7 +57,7 @@ public class RepoViewImpl
     }
 
     @Override
-    public void showResults( final JsArray<FullCommit> commits )
+    public void showResults( final JsArray<Commit> commits )
     {
         // Create a callback to be called when the visualization API
         // has been loaded.
@@ -69,16 +70,22 @@ public class RepoViewImpl
                 data.addColumn( DataTable.ColumnType.DATETIME, "enddate" );
                 data.addColumn( DataTable.ColumnType.STRING, "content" );
 
+                DateTimeFormat dtf = Constants.GITHUB_DATE_FORMAT;
+
                 for ( int i = 0; i < commits.length(); i++ )
                 {
-                    FullCommit commit = commits.get( i );
+                    Commit commit = commits.get( i );
                     // fill the table with some data
                     data.addRow();
-                    data.setValue( i, 0, commit.getCommit().getCommitter().getCommitDate() );
+                    data.setValue( i, 0, dtf.parse( commit.getAuthor().getDate() ) );
                     StringBuilder render = new StringBuilder();
-                    render.append( "<div><img src=\"" ).append( commit.getCommitter().getAvatarUrl() )
-                        .append( "\" style=\"width:20px; height:20px\"/>" );
-                    render.append( "<span>" ).append( commit.getCommit().getMessage() ).append( "</span></div>" );
+                    render.append( "<div>" );
+                    if ( null != commit.getAuthor().getAvatarUrl() )
+                    {
+                        render.append( "<img src=\"" ).append( commit.getCommitter().getAvatarUrl() )
+                            .append( "\" style=\"width:20px; height:20px; margin-right: 5px;\"/>" );
+                    }
+                    render.append( "<span>" ).append( commit.getMessage() ).append( "</span></div>" );
                     data.setValue( i, 2, render.toString() );
                 }
 

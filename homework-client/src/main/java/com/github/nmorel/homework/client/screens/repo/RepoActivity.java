@@ -1,6 +1,6 @@
 package com.github.nmorel.homework.client.screens.repo;
 
-import com.github.nmorel.homework.client.model.FullCommit;
+import com.github.nmorel.homework.client.model.Commit;
 import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.mvp.ActivityWithPlace;
 import com.github.nmorel.homework.client.place.RepoPlace;
@@ -53,7 +53,7 @@ public class RepoActivity
             @Override
             public void onResponseReceived( Request request, Response response )
             {
-                JsArray<FullCommit> commits = JsonUtils.safeEval( response.getText() );
+                JsArray<Commit> commits = JsonUtils.safeEval( response.getText() );
                 view.showResults( commits );
             }
 

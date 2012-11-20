@@ -3,7 +3,7 @@ package com.github.nmorel.homework.client.model;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * Represents a Github user
+ * Represents a commit
  * 
  * @author Nicolas Morel
  */
@@ -14,15 +14,15 @@ public class Commit
     {
     }
 
-    public final native User getCommitter()/*-{
-        return this.committer;
-    }-*/;
-
     public final native String getMessage()/*-{
         return this.message;
     }-*/;
 
-    public final native String getUrl()/*-{
-        return this.url;
+    public final native Committer getAuthor()/*-{
+        return this.author;
+    }-*/;
+
+    public final native Committer getCommitter()/*-{
+        return this.committer;
     }-*/;
 }

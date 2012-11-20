@@ -1,16 +1,28 @@
 package com.github.nmorel.homework.api.model;
 
+/**
+ * Represents a commit
+ * 
+ * @author Nicolas Morel
+ */
 public class Commit
 {
-    private User committer;
+    private String sha;
 
     private String message;
 
-    private String url;
+    private Committer author;
 
-    public User getCommitter()
+    private Committer committer;
+
+    public String getSha()
     {
-        return committer;
+        return sha;
+    }
+
+    public void setSha( String sha )
+    {
+        this.sha = sha;
     }
 
     public String getMessage()
@@ -18,9 +30,29 @@ public class Commit
         return message;
     }
 
-    public String getUrl()
+    public void setMessage( String message )
     {
-        return url;
+        this.message = message;
+    }
+
+    public Committer getAuthor()
+    {
+        return author;
+    }
+
+    public void setAuthor( Committer author )
+    {
+        this.author = author;
+    }
+
+    public Committer getCommitter()
+    {
+        return committer;
+    }
+
+    public void setCommitter( Committer committer )
+    {
+        this.committer = committer;
     }
 
 }
