@@ -1,9 +1,11 @@
 package com.github.nmorel.homework.client.screens.repo;
 
 import com.github.nmorel.homework.client.model.FullCommit;
+import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.mvp.ActivityWithPlace;
 import com.github.nmorel.homework.client.place.RepoPlace;
-import com.github.nmorel.homework.client.request.RepoRequest;
+import com.github.nmorel.homework.client.request.CollaboratorsRequest;
+import com.github.nmorel.homework.client.request.CommitsRequest;
 import com.github.nmorel.homework.client.screens.repo.RepoView.Presenter;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsonUtils;
@@ -27,7 +29,10 @@ public class RepoActivity
     private PlaceController placeController;
 
     @Inject
-    private Provider<RepoRequest> repoRequest;
+    private Provider<CommitsRequest> commitsRequest;
+    
+    @Inject
+    private Provider<CollaboratorsRequest> collaboratorsRequest;
 
     private RepoPlace currentPlace;
 
@@ -43,13 +48,29 @@ public class RepoActivity
         view.init();
         view.setPresenter( this );
 
-        repoRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
+        commitsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
 
             @Override
             public void onResponseReceived( Request request, Response response )
             {
                 JsArray<FullCommit> commits = JsonUtils.safeEval( response.getText() );
                 view.showResults( commits );
+            }
+
+            @Override
+            public void onError( Request request, Throwable exception )
+            {
+                // TODO Auto-generated method stub
+
+            }
+        } );
+        collaboratorsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
+
+            @Override
+            public void onResponseReceived( Request request, Response response )
+            {
+                JsArray<User> commits = JsonUtils.safeEval( response.getText() );
+                view.showCollaborators( commits );
             }
 
             @Override

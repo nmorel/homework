@@ -17,6 +17,10 @@ public class User
     {
     }
 
+    public final native String getLogin()/*-{
+        return this.login;
+    }-*/;
+
     public final native String getName()/*-{
         return this.name;
     }-*/;

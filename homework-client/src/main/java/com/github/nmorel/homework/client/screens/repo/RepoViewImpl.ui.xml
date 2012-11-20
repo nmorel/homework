@@ -8,6 +8,18 @@
   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
-  <g:SimplePanel></g:SimplePanel>
+  <g:DockLayoutPanel unit='PX'>
+
+    <g:east size="200">
+      <g:ScrollPanel>
+        <c:CellList ui:field='collaboratorsList' />
+      </g:ScrollPanel>
+    </g:east>
+
+    <g:center>
+      <g:SimplePanel ui:field='graphContainer' />
+    </g:center>
+
+  </g:DockLayoutPanel>
 
 </ui:UiBinder>

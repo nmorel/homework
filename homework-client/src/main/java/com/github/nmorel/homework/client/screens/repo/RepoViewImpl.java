@@ -1,16 +1,20 @@
 package com.github.nmorel.homework.client.screens.repo;
 
 import com.chap.links.client.Timeline;
-import com.github.nmorel.homework.client.model.Commit;
 import com.github.nmorel.homework.client.model.FullCommit;
+import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.ui.AbstractView;
+import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.visualization.client.AbstractDataTable;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
 
@@ -25,6 +29,13 @@ public class RepoViewImpl
     {
     }
 
+    @UiField( provided = true )
+    CellList<User> collaboratorsList;
+    ListDataProvider<User> collaboratorsListProvider;
+
+    @UiField
+    SimplePanel graphContainer;
+
     private Presenter presenter;
 
     @Override
@@ -36,6 +47,17 @@ public class RepoViewImpl
     @Override
     protected Widget initWidget()
     {
+        collaboratorsList = new CellList<User>( new AbstractCell<User>() {
+
+            @Override
+            public void render( com.google.gwt.cell.client.Cell.Context context, User value, SafeHtmlBuilder sb )
+            {
+                sb.append( SafeHtmlUtils.fromString( value.getLogin() ) );
+            }
+        } );
+        collaboratorsList.setPageSize( Integer.MAX_VALUE );
+        collaboratorsListProvider = new ListDataProvider<User>();
+        collaboratorsListProvider.addDataDisplay( collaboratorsList );
         return uiBinder.createAndBindUi( this );
     }
 
@@ -60,8 +82,9 @@ public class RepoViewImpl
                     data.addRow();
                     data.setValue( i, 0, commit.getCommit().getCommitter().getCommitDate() );
                     StringBuilder render = new StringBuilder();
-                    render.append( "<div><img src=\"" ).append(commit.getCommitter().getAvatarUrl()).append("\" style=\"width:20px; height:20px\"/>");
-                    render.append("<span>").append(commit.getCommit().getMessage()).append( "</span></div>" );
+                    render.append( "<div><img src=\"" ).append( commit.getCommitter().getAvatarUrl() )
+                        .append( "\" style=\"width:20px; height:20px\"/>" );
+                    render.append( "<span>" ).append( commit.getCommit().getMessage() ).append( "</span></div>" );
                     data.setValue( i, 2, render.toString() );
                 }
 
@@ -79,12 +102,22 @@ public class RepoViewImpl
                 // create the timeline, with data and options
                 Timeline timeline = new Timeline( data, options );
 
-                ( (SimplePanel) asWidget() ).add( timeline );
+                graphContainer.setWidget( timeline );
             }
         };
 
         // Load the visualization api, passing the onLoadCallback to be called
         // when loading is done.
         VisualizationUtils.loadVisualizationApi( onLoadCallback );
+    }
+
+    @Override
+    public void showCollaborators( JsArray<User> collaborators )
+    {
+        collaboratorsListProvider.getList().clear();
+        for ( int i = 0; i < collaborators.length(); i++ )
+        {
+            collaboratorsListProvider.getList().add( collaborators.get( i ) );
+        }
     }
 }

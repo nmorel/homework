@@ -4,13 +4,13 @@ import com.google.common.base.Preconditions;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 
-public class RepoRequest
+public class CommitsRequest
     extends BaseRequest
 {
-    public RepoRequest()
+    public CommitsRequest()
     {
         setMethod( RequestBuilder.GET );
-        setPath( "repos/{owner}/{repo}" );
+        setPath( "repos/{owner}/{repo}/commits" );
     }
 
     public void fire( String owner, String repo, RequestCallback callback )
