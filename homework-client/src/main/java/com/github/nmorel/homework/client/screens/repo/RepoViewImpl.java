@@ -1,14 +1,13 @@
 package com.github.nmorel.homework.client.screens.repo;
 
 import com.chap.links.client.Timeline;
+import com.github.gwtbootstrap.client.ui.Label;
 import com.github.nmorel.homework.client.model.FullCommit;
 import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.ui.AbstractView;
-import com.google.gwt.cell.client.AbstractCell;
+import com.github.nmorel.homework.client.ui.cell.CollaboratorCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellList;
@@ -31,7 +30,8 @@ public class RepoViewImpl
 
     @UiField( provided = true )
     CellList<User> collaboratorsList;
-    ListDataProvider<User> collaboratorsListProvider;
+
+    private ListDataProvider<User> collaboratorsListProvider;
 
     @UiField
     SimplePanel graphContainer;
@@ -47,14 +47,8 @@ public class RepoViewImpl
     @Override
     protected Widget initWidget()
     {
-        collaboratorsList = new CellList<User>( new AbstractCell<User>() {
-
-            @Override
-            public void render( com.google.gwt.cell.client.Cell.Context context, User value, SafeHtmlBuilder sb )
-            {
-                sb.append( SafeHtmlUtils.fromString( value.getLogin() ) );
-            }
-        } );
+        collaboratorsList = new CellList<User>( new CollaboratorCell() );
+        // doesn't need pagination
         collaboratorsList.setPageSize( Integer.MAX_VALUE );
         collaboratorsListProvider = new ListDataProvider<User>();
         collaboratorsListProvider.addDataDisplay( collaboratorsList );
@@ -112,7 +106,7 @@ public class RepoViewImpl
     }
 
     @Override
-    public void showCollaborators( JsArray<User> collaborators )
+    public void showCollaborators( final JsArray<User> collaborators )
     {
         collaboratorsListProvider.getList().clear();
         for ( int i = 0; i < collaborators.length(); i++ )

@@ -3,9 +3,6 @@
 
   <ui:with field='repo' type='com.github.nmorel.homework.client.model.Repository'/>
 
-<!--   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" /> -->
-<!--   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" /> -->
-
   <div>
     <div>
       <ui:text from='{repo.getOwner}'/> / <ui:text from='{repo.getName}'/> 

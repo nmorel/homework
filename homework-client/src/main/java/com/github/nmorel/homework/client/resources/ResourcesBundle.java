@@ -10,14 +10,26 @@ public interface ResourcesBundle
         extends CssResource
     {
         String headerContainer();
-        
+
         String headerInnerContainer();
-        
+
         String headerTitle();
 
         String westContainer();
 
         String contentContainer();
+
+        String repoCollaboratorsContainer();
+
+        String repoCollaboratorsTitleContainer();
+
+        String repoCollaboratorsTitle();
+
+        String repoCollaboratorsScroll();
+
+        String repoCollaboratorCell();
+        
+        String repoCollaboratorAvatar();
 
         String errorLabel();
     }
