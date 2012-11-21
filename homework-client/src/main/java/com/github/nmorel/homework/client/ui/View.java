@@ -6,4 +6,6 @@ public interface View
     extends IsWidget
 {
     void init();
+    
+    void clear();
 }

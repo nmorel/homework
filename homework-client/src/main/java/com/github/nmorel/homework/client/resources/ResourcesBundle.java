@@ -28,7 +28,7 @@ public interface ResourcesBundle
         String repoCollaboratorsScroll();
 
         String repoCollaboratorCell();
-        
+
         String repoCollaboratorAvatar();
 
         String errorLabel();

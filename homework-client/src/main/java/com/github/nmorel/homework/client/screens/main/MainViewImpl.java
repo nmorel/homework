@@ -128,7 +128,7 @@ public class MainViewImpl
     }
 
     @Override
-    protected void clear()
+    public void clear()
     {
         // nothing to do
     }

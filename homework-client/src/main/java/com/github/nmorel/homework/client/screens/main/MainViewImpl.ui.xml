@@ -13,9 +13,9 @@
             <tbody>
               <tr>
                 <td valign='middle' style='width: 150px'>
-                  <h2 class='{res.style.headerTitle}'>
+                  <h3 class='{res.style.headerTitle}'>
                     <ui:text from='{mess.headerTitle}' />
-                  </h2>
+                  </h3>
                 </td>
                 <td valign='middle' style='width: 300px'>
                   <div class='input-append' style='margin-bottom:0px;'>

@@ -39,7 +39,7 @@
 
     <!-- Dependencies version -->
     <gwt.version>2.5.0</gwt.version>
-    <gwt-bootstrap.version>2.0.4.0</gwt-bootstrap.version>
+    <gwt-bootstrap.version>2.1.1.0-SNAPSHOT</gwt-bootstrap.version>
     <gwt-visualization.version>1.1.2</gwt-visualization.version>
     <gwt-links-timeline.version>2.3.2</gwt-links-timeline.version>
     <servlet-api.version>2.5</servlet-api.version>

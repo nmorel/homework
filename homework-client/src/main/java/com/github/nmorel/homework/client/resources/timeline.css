@@ -1,0 +1,206 @@
+@external timeline-frame;
+div.timeline-frame {
+	border: 1px solid #BEBEBE;
+	overflow: hidden;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+@external timeline-axis;
+div.timeline-axis {
+	border-color: #BEBEBE;
+	border-width: 1px;
+	border-top-style: solid;
+}
+
+@external timeline-axis-grid;
+div.timeline-axis-grid {
+	border-left-style: solid;
+	border-width: 1px;
+}
+
+@external timeline-axis-grid-minor;
+div.timeline-axis-grid-minor {
+	border-color: #e5e5e5;
+}
+
+@external timeline-axis-grid-major;
+div.timeline-axis-grid-major {
+	border-color: #bfbfbf;
+}
+
+@external timeline-axis-text;
+div.timeline-axis-text {
+	color: #4D4D4D;
+	padding: 3px;
+	white-space: nowrap;
+}
+
+@external timeline-axis-text-minor;
+div.timeline-axis-text-minor {
+	
+}
+
+@external timeline-axis-text-major;
+div.timeline-axis-text-major {
+	
+}
+
+@external timeline-event;
+div.timeline-event {
+	color: #1A1A1A;
+	border-color: #97B0F8;
+	background-color: #D5DDF6;
+	display: inline-block;
+}
+
+@external timeline-event-selected;
+div.timeline-event-selected {
+	border-color: #FFC200;
+	background-color: #FFF785;
+	z-index: 999;
+}
+
+@external timeline-event-box;
+div.timeline-event-box {
+	text-align: center;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+	border-bottom-left-radius: 0px;
+}
+
+@external timeline-event-dot;
+div.timeline-event-dot {
+	border-style: solid;
+	border-width: 5px;
+	border-radius: 5px;
+}
+
+@external timeline-event-range;
+div.timeline-event-range {
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 2px;
+}
+/*
+@external timeline-event-range-drag-left;
+div.timeline-event-range-drag-left {
+	cursor: w-resize;
+	z-index: 1000;
+}
+
+@external timeline-event-range-drag-right;
+div.timeline-event-range-drag-right {
+	cursor: e-resize;
+	z-index: 1000;
+}
+*/
+@external timeline-event-line;
+div.timeline-event-line {
+	border-left-width: 1px;
+	border-left-style: solid;
+}
+
+@external timeline-event-content;
+div.timeline-event-content {
+	margin: 2px 5px 2px 2px;
+	font-size: 11px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/*
+@external timeline-groups-axis;
+div.timeline-groups-axis {
+	border-color: #BEBEBE;
+	border-width: 1px;
+}
+
+@external timeline-groups-text;
+div.timeline-groups-text {
+	color: #4D4D4D;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+@external timeline-currenttime;
+div.timeline-currenttime {
+	background-color: #FF7F6E;
+	width: 2px;
+}
+
+@external timeline-customtime;
+div.timeline-customtime {
+	background-color: #6E94FF;
+	width: 2px;
+	cursor: move;
+}
+
+
+@external timeline-navigation;
+div.timeline-navigation {
+	font-family: arial;
+	font-size: 20px;
+	font-weight: bold;
+	color: gray;
+	border: 1px solid #BEBEBE;
+	background-color: #F5F5F5;
+	border-radius: 2px;
+}
+
+div.timeline-navigation-new,
+div.timeline-navigation-delete,
+div.timeline-navigation-zoom-in,
+div.timeline-navigation-zoom-out,
+div.timeline-navigation-move-left,
+div.timeline-navigation-move-right
+{
+	cursor: pointer;
+	padding: 10px 10px;
+	float: left;
+	text-decoration: none;
+	border-color: #BEBEBE;
+	width: 16px;
+	height: 16px;
+}
+
+@external timeline-navigation-new;
+@sprite div.timeline-navigation-new {
+	gwt-image: 'create';
+	background-position: center;
+}
+
+@external timeline-navigation-delete;
+@sprite div.timeline-navigation-delete {
+	gwt-image: 'delete';
+	background-position: center;
+	padding: 0px;
+	padding-left: 5px;
+}
+
+@external timeline-navigation-zoom-in;
+@sprite div.timeline-navigation-zoom-in {
+	gwt-image: 'zoomIn';
+	background-position: center;
+}
+
+@external timeline-navigation-zoom-out;
+@sprite div.timeline-navigation-zoom-out {
+	gwt-image: 'zoomOut';
+	background-position: center;
+}
+
+@external timeline-navigation-move-left;
+@sprite div.timeline-navigation-move-left {
+	gwt-image: 'moveLeft';
+	background-position: center;
+}
+
+@external timeline-navigation-move-right;
+@sprite div.timeline-navigation-move-right {
+	gwt-image: 'moveRight';
+	background-position: center;
+}
+*/

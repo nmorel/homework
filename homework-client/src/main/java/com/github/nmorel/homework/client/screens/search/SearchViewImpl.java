@@ -126,7 +126,7 @@ public class SearchViewImpl
     }
 
     @Override
-    protected void clear()
+    public void clear()
     {
         keyword.setValue( null );
         resultDataProvider.getList().clear();

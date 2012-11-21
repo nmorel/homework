@@ -1,22 +1,18 @@
 package com.github.nmorel.homework.client.screens.repo;
 
-import com.chap.links.client.Timeline;
 import com.github.nmorel.homework.client.model.Commit;
 import com.github.nmorel.homework.client.model.User;
-import com.github.nmorel.homework.client.resources.Constants;
 import com.github.nmorel.homework.client.ui.AbstractView;
 import com.github.nmorel.homework.client.ui.cell.CollaboratorCell;
+import com.github.nmorel.homework.client.ui.timeline.CommitsTimeline;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
-import com.google.gwt.visualization.client.DataTable;
-import com.google.gwt.visualization.client.VisualizationUtils;
+import com.google.inject.Inject;
 
 public class RepoViewImpl
     extends AbstractView
@@ -34,10 +30,16 @@ public class RepoViewImpl
 
     private ListDataProvider<User> collaboratorsListProvider;
 
-    @UiField
-    SimplePanel graphContainer;
+    @UiField( provided = true )
+    CommitsTimeline commitsTimeline;
 
     private Presenter presenter;
+
+    @Inject
+    public RepoViewImpl( CommitsTimeline commitsTimeline )
+    {
+        this.commitsTimeline = commitsTimeline;
+    }
 
     @Override
     public void setPresenter( Presenter presenter )
@@ -53,63 +55,16 @@ public class RepoViewImpl
         collaboratorsList.setPageSize( Integer.MAX_VALUE );
         collaboratorsListProvider = new ListDataProvider<User>();
         collaboratorsListProvider.addDataDisplay( collaboratorsList );
+
+        commitsTimeline.init();
+
         return uiBinder.createAndBindUi( this );
     }
 
     @Override
     public void showResults( final JsArray<Commit> commits )
     {
-        // Create a callback to be called when the visualization API
-        // has been loaded.
-        Runnable onLoadCallback = new Runnable() {
-            public void run()
-            {
-                // create a data table
-                DataTable data = DataTable.create();
-                data.addColumn( DataTable.ColumnType.DATETIME, "startdate" );
-                data.addColumn( DataTable.ColumnType.DATETIME, "enddate" );
-                data.addColumn( DataTable.ColumnType.STRING, "content" );
-
-                DateTimeFormat dtf = Constants.GITHUB_DATE_FORMAT;
-
-                for ( int i = 0; i < commits.length(); i++ )
-                {
-                    Commit commit = commits.get( i );
-                    // fill the table with some data
-                    data.addRow();
-                    data.setValue( i, 0, dtf.parse( commit.getAuthor().getDate() ) );
-                    StringBuilder render = new StringBuilder();
-                    render.append( "<div>" );
-                    if ( null != commit.getAuthor().getAvatarUrl() )
-                    {
-                        render.append( "<img src=\"" ).append( commit.getCommitter().getAvatarUrl() )
-                            .append( "\" style=\"width:20px; height:20px; margin-right: 5px;\"/>" );
-                    }
-                    render.append( "<span>" ).append( commit.getMessage() ).append( "</span></div>" );
-                    data.setValue( i, 2, render.toString() );
-                }
-
-                // DateTimeFormat dtf = DateTimeFormat.getFormat( PredefinedFormat.ISO_8601 );
-                // create options
-                Timeline.Options options = Timeline.Options.create();
-                options.setShowNavigation( true );
-                options.setWidth( "100%" );
-                options.setHeight( "500px" );
-                options.setStyle( Timeline.Options.STYLE.BOX );
-                // options.setMin( dtf.parse( "2010-08-20" ) );
-                // options.setMax( dtf.parse( "2010-09-10" ) );
-                options.setEditable( false );
-
-                // create the timeline, with data and options
-                Timeline timeline = new Timeline( data, options );
-
-                graphContainer.setWidget( timeline );
-            }
-        };
-
-        // Load the visualization api, passing the onLoadCallback to be called
-        // when loading is done.
-        VisualizationUtils.loadVisualizationApi( onLoadCallback );
+        commitsTimeline.setData( commits );
     }
 
     @Override
@@ -123,8 +78,9 @@ public class RepoViewImpl
     }
 
     @Override
-    protected void clear()
+    public void clear()
     {
         collaboratorsListProvider.getList().clear();
+        commitsTimeline.clear();
     }
 }

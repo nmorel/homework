@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.github.nmorel.homework.client.gin.HomeworkGinjector;
+import com.github.nmorel.homework.client.ui.VisualizationLoader;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -29,8 +30,11 @@ public class Homework
     public void onModuleLoad()
     {
         GWT.setUncaughtExceptionHandler( this );
-        
+
         initLog();
+
+        // We directly load the visualization api to gain a few ms
+        VisualizationLoader.load();
 
         RootLayoutPanel.get().add( ginjector.getMainPresenter().getView() );
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -45,6 +46,15 @@ public class CommitsParser
             }
 
             List<Commit> result = parseResponse( reader );
+            // we sort the list by date
+            Collections.sort( result, new Comparator<Commit>() {
+
+                @Override
+                public int compare( Commit o1, Commit o2 )
+                {
+                    return o1.getAuthor().getDate().compareTo( o2.getAuthor().getDate() );
+                }
+            } );
 
             logger.debug( "Response parsed : {} commits", result.size() );
             return result;

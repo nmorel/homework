@@ -53,6 +53,4 @@ public abstract class AbstractView
     }
 
     protected abstract Widget initWidget();
-
-    protected abstract void clear();
 }

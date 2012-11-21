@@ -17,7 +17,7 @@
 
   <!-- gwt-visualization -->
   <inherits name="com.google.gwt.visualization.Visualization" />
-  <inherits name='com.chap.links.Timeline'/>
+  <inherits name='com.chap.links.TimelineOverload'/>
 
   <!-- Logging -->
   <inherits name="com.google.gwt.logging.Logging" />
