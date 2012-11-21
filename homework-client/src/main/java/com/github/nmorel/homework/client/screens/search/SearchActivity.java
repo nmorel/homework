@@ -48,6 +48,7 @@ public class SearchActivity
         view.setKeyword( currentPlace.getKeyword() );
         if ( Strings.isNullOrEmpty( currentPlace.getKeyword() ) )
         {
+            panel.setWidget( view );
             // if there is no keyword, we put the focus on the keyword box
             view.setFocusOnKeyword();
         }
@@ -69,8 +70,8 @@ public class SearchActivity
 
                 }
             } );
+            panel.setWidget( view );
         }
-        panel.setWidget( view );
     }
 
     @Override

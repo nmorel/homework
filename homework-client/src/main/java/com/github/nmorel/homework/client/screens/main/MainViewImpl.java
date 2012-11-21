@@ -126,4 +126,10 @@ public class MainViewImpl
             loginPanel.setWidget( panel );
         }
     }
+
+    @Override
+    protected void clear()
+    {
+        // nothing to do
+    }
 }

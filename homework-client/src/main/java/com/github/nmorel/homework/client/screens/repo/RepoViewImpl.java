@@ -121,4 +121,10 @@ public class RepoViewImpl
             collaboratorsListProvider.getList().add( collaborators.get( i ) );
         }
     }
+
+    @Override
+    protected void clear()
+    {
+        collaboratorsListProvider.getList().clear();
+    }
 }

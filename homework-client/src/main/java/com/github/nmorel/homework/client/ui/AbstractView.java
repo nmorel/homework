@@ -46,8 +46,13 @@ public abstract class AbstractView
         {
             widget = initWidget();
         }
+        else
+        {
+            clear();
+        }
     }
 
     protected abstract Widget initWidget();
 
+    protected abstract void clear();
 }
