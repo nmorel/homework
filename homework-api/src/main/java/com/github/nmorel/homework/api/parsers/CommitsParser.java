@@ -1,4 +1,4 @@
-package com.github.nmorel.homework.api.model.parser;
+package com.github.nmorel.homework.api.parsers;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,7 +33,7 @@ public class CommitsParser
         JsonReader reader = null;
         try
         {
-            logger.debug( "Starting parse of the response" );
+            logger.debug( "Parsing the response" );
 
             reader = new JsonReader( new InputStreamReader( response.getContent() ) );
             reader.setLenient( true );
@@ -46,7 +46,8 @@ public class CommitsParser
             }
 
             List<Commit> result = parseResponse( reader );
-            // we sort the list by date
+            
+            // We sort the list by author date. Github sorts it by sha.
             Collections.sort( result, new Comparator<Commit>() {
 
                 @Override

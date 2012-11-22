@@ -1,4 +1,4 @@
-package com.github.nmorel.homework.api.providers;
+package com.github.nmorel.homework.api.config.providers;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.github.nmorel.homework.api.config.providers.UserIdProvider;
 import com.google.inject.Provider;
 
 @RunWith( MockitoJUnitRunner.class )

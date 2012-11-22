@@ -1,4 +1,4 @@
-package com.github.nmorel.homework.api.providers;
+package com.github.nmorel.homework.api.config.providers;
 
 import javax.servlet.http.HttpServletRequest;
 

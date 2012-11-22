@@ -1,4 +1,4 @@
-package com.github.nmorel.homework.api.model.parser;
+package com.github.nmorel.homework.api.parsers;
 
 import java.io.IOException;
 
@@ -13,6 +13,13 @@ import com.google.api.client.http.HttpResponse;
  */
 public interface HttpResponseParser<T>
 {
+    /**
+     * Parse a response to the github api
+     * 
+     * @param response response from github api
+     * @return the parsed result
+     * @throws IOException
+     */
     T parseResponse( final HttpResponse response )
         throws IOException;
 }

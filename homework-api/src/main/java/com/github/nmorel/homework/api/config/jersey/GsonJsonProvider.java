@@ -1,4 +1,4 @@
-package com.github.nmorel.homework.api.providers;
+package com.github.nmorel.homework.api.config.jersey;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,6 +1,6 @@
 package com.github.nmorel.homework.api.services;
 
-import com.github.nmorel.homework.api.model.parser.HttpResponseParser;
+import com.github.nmorel.homework.api.parsers.HttpResponseParser;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpMethods;
 import com.google.common.base.Optional;

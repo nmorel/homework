@@ -1,0 +1,50 @@
+[
+  {
+    "received_events_url": "https://api.github.com/users/Warry/received_events",
+    "followers_url": "https://api.github.com/users/Warry/followers",
+    "url": "https://api.github.com/users/Warry",
+    "gists_url": "https://api.github.com/users/Warry/gists{/gist_id}",
+    "following_url": "https://api.github.com/users/Warry/following",
+    "subscriptions_url": "https://api.github.com/users/Warry/subscriptions",
+    "avatar_url": "https://secure.gravatar.com/avatar/12fda944ce03f21eb4f7f9fdd7512a8e?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+    "starred_url": "https://api.github.com/users/Warry/starred{/owner}{/repo}",
+    "gravatar_id": "12fda944ce03f21eb4f7f9fdd7512a8e",
+    "login": "Warry",
+    "repos_url": "https://api.github.com/users/Warry/repos",
+    "events_url": "https://api.github.com/users/Warry/events{/privacy}",
+    "id": 197573,
+    "organizations_url": "https://api.github.com/users/Warry/orgs"
+  },
+  {
+    "received_events_url": "https://api.github.com/users/erwan/received_events",
+    "followers_url": "https://api.github.com/users/erwan/followers",
+    "url": "https://api.github.com/users/erwan",
+    "gists_url": "https://api.github.com/users/erwan/gists{/gist_id}",
+    "following_url": "https://api.github.com/users/erwan/following",
+    "subscriptions_url": "https://api.github.com/users/erwan/subscriptions",
+    "avatar_url": "https://secure.gravatar.com/avatar/df2d6f1d39a958e46c75e61d4ebb43af?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+    "starred_url": "https://api.github.com/users/erwan/starred{/owner}{/repo}",
+    "gravatar_id": "df2d6f1d39a958e46c75e61d4ebb43af",
+    "login": "erwan",
+    "repos_url": "https://api.github.com/users/erwan/repos",
+    "events_url": "https://api.github.com/users/erwan/events{/privacy}",
+    "id": 16061,
+    "organizations_url": "https://api.github.com/users/erwan/orgs"
+  },
+  {
+    "received_events_url": "https://api.github.com/users/guillaumebort/received_events",
+    "followers_url": "https://api.github.com/users/guillaumebort/followers",
+    "url": "https://api.github.com/users/guillaumebort",
+    "gists_url": "https://api.github.com/users/guillaumebort/gists{/gist_id}",
+    "following_url": "https://api.github.com/users/guillaumebort/following",
+    "subscriptions_url": "https://api.github.com/users/guillaumebort/subscriptions",
+    "avatar_url": "https://secure.gravatar.com/avatar/adcd749d588278dbd255068c1d4b20d3?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+    "starred_url": "https://api.github.com/users/guillaumebort/starred{/owner}{/repo}",
+    "gravatar_id": "adcd749d588278dbd255068c1d4b20d3",
+    "login": "guillaumebort",
+    "repos_url": "https://api.github.com/users/guillaumebort/repos",
+    "events_url": "https://api.github.com/users/guillaumebort/events{/privacy}",
+    "id": 94658,
+    "organizations_url": "https://api.github.com/users/guillaumebort/orgs"
+  }
+]

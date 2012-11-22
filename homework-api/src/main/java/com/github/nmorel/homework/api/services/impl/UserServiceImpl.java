@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.nmorel.homework.api.model.User;
-import com.github.nmorel.homework.api.model.parser.GsonHttpResponseParser;
+import com.github.nmorel.homework.api.parsers.GsonHttpResponseParser;
 import com.github.nmorel.homework.api.services.GithubService;
 import com.github.nmorel.homework.api.services.UserService;
 import com.google.api.client.http.GenericUrl;

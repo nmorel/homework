@@ -1,4 +1,4 @@
-package com.github.nmorel.homework.api.model.parser;
+package com.github.nmorel.homework.api.parsers;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

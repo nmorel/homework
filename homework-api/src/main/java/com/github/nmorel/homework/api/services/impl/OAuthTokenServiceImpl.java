@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.nmorel.homework.api.config.Config;
+import com.github.nmorel.homework.api.config.providers.UserIdProvider;
 import com.github.nmorel.homework.api.model.AccessToken;
-import com.github.nmorel.homework.api.providers.UserIdProvider;
 import com.github.nmorel.homework.api.services.OAuthTokenService;
 import com.google.api.client.http.EmptyContent;
 import com.google.api.client.http.GenericUrl;

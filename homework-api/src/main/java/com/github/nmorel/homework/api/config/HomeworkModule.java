@@ -1,5 +1,7 @@
 package com.github.nmorel.homework.api.config;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -16,6 +18,11 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
+/**
+ * Guice application module
+ * 
+ * @author Nicolas Morel
+ */
 public class HomeworkModule
     extends AbstractModule
 {
@@ -36,8 +43,23 @@ public class HomeworkModule
     @Singleton
     public Config providesConfig()
     {
+        // this property allow to switch easily the config file used for development or test
         String configFile = System.getProperty( "homework.config", "default.config" );
+
+        // reading the config file
         InputStream inputStream = this.getClass().getResourceAsStream( configFile );
+        if ( null == inputStream )
+        {
+            // config file not found in classpath. We try to read it via File if we gave a path
+            try
+            {
+                inputStream = new FileInputStream( configFile );
+            }
+            catch ( FileNotFoundException e )
+            {
+                throw new RuntimeException( "Couldn't find the config file " + configFile );
+            }
+        }
         InputStreamReader inputStreamReader = new InputStreamReader( inputStream );
         return new Gson().fromJson( inputStreamReader, Config.class );
     }

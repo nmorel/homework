@@ -1,0 +1,158 @@
+[
+  {
+    "url": "https://api.github.com/repos/playframework/play/commits/9c5bf9f48fe18a07008819229ce59c0238893511",
+    "commit": {
+      "url": "https://api.github.com/repos/playframework/play/git/commits/9c5bf9f48fe18a07008819229ce59c0238893511",
+      "comment_count": 0,
+      "tree": {
+        "url": "https://api.github.com/repos/playframework/play/git/trees/98af26d242639eaf93b93e2f2d9f1443fc9b3520",
+        "sha": "98af26d242639eaf93b93e2f2d9f1443fc9b3520"
+      },
+      "message": "[#1162] Session is lost when application.session.maxAge is set to 30d",
+      "committer": {
+        "date": "2012-05-10T14:21:27Z",
+        "email": "leroux.nicolas@gmail.com",
+        "name": "Nicolas Leroux"
+      },
+      "author": {
+        "date": "2012-05-10T14:21:09Z",
+        "email": "leroux.nicolas@gmail.com",
+        "name": "Nicolas Leroux"
+      }
+    },
+    "sha": "9c5bf9f48fe18a07008819229ce59c0238893511",
+    "committer": {
+      "url": "https://api.github.com/users/pepite",
+      "received_events_url": "https://api.github.com/users/pepite/received_events",
+      "login": "pepite",
+      "organizations_url": "https://api.github.com/users/pepite/orgs",
+      "starred_url": "https://api.github.com/users/pepite/starred{/owner}{/repo}",
+      "followers_url": "https://api.github.com/users/pepite/followers",
+      "avatar_url": "https://secure.gravatar.com/avatar/34fe9578c98748263731073b5013cb07?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+      "repos_url": "https://api.github.com/users/pepite/repos",
+      "gists_url": "https://api.github.com/users/pepite/gists{/gist_id}",
+      "following_url": "https://api.github.com/users/pepite/following",
+      "gravatar_id": "34fe9578c98748263731073b5013cb07",
+      "id": 180989,
+      "events_url": "https://api.github.com/users/pepite/events{/privacy}",
+      "subscriptions_url": "https://api.github.com/users/pepite/subscriptions"
+    },
+    "parents": [
+      {
+        "url": "https://api.github.com/repos/playframework/play/commits/c95fe6986fa881ee346b6b18740c79fbada9fc76",
+        "sha": "c95fe6986fa881ee346b6b18740c79fbada9fc76"
+      }
+    ],
+    "author": {
+      "url": "https://api.github.com/users/pepite",
+      "received_events_url": "https://api.github.com/users/pepite/received_events",
+      "login": "pepite",
+      "organizations_url": "https://api.github.com/users/pepite/orgs",
+      "starred_url": "https://api.github.com/users/pepite/starred{/owner}{/repo}",
+      "followers_url": "https://api.github.com/users/pepite/followers",
+      "avatar_url": "https://secure.gravatar.com/avatar/34fe9578c98748263731073b5013cb07?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+      "repos_url": "https://api.github.com/users/pepite/repos",
+      "gists_url": "https://api.github.com/users/pepite/gists{/gist_id}",
+      "following_url": "https://api.github.com/users/pepite/following",
+      "gravatar_id": "34fe9578c98748263731073b5013cb07",
+      "id": 180989,
+      "events_url": "https://api.github.com/users/pepite/events{/privacy}",
+      "subscriptions_url": "https://api.github.com/users/pepite/subscriptions"
+    },
+    "comments_url": "https://api.github.com/repos/playframework/play/commits/9c5bf9f48fe18a07008819229ce59c0238893511/comments"
+  },
+  {
+    "url": "https://api.github.com/repos/playframework/play/commits/8492a0b904605bfad6110fe2efaadebea9ce6497",
+    "commit": {
+      "url": "https://api.github.com/repos/playframework/play/git/commits/8492a0b904605bfad6110fe2efaadebea9ce6497",
+      "comment_count": 0,
+      "tree": {
+        "url": "https://api.github.com/repos/playframework/play/git/trees/1e59ff7f4d73484c72d466f5dea4be6c188db7fa",
+        "sha": "1e59ff7f4d73484c72d466f5dea4be6c188db7fa"
+      },
+      "message": "[#1309] Include explicit query paramters that are also in routeArgs",
+      "committer": {
+        "date": "2012-03-14T10:23:42Z",
+        "email": "mbk@kjetland.com",
+        "name": "Morten Kjetland"
+      },
+      "author": {
+        "date": "2011-12-12T18:31:45Z",
+        "email": "colesbury@gmail.com",
+        "name": "Sam Gross"
+      }
+    },
+    "sha": "8492a0b904605bfad6110fe2efaadebea9ce6497",
+    "committer": {
+      "url": "https://api.github.com/users/mbknor",
+      "received_events_url": "https://api.github.com/users/mbknor/received_events",
+      "login": "mbknor",
+      "organizations_url": "https://api.github.com/users/mbknor/orgs",
+      "starred_url": "https://api.github.com/users/mbknor/starred{/owner}{/repo}",
+      "followers_url": "https://api.github.com/users/mbknor/followers",
+      "avatar_url": "https://secure.gravatar.com/avatar/c6ca9f2d6facabf69800e3e37c7e06d1?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+      "repos_url": "https://api.github.com/users/mbknor/repos",
+      "gists_url": "https://api.github.com/users/mbknor/gists{/gist_id}",
+      "following_url": "https://api.github.com/users/mbknor/following",
+      "gravatar_id": "c6ca9f2d6facabf69800e3e37c7e06d1",
+      "id": 203254,
+      "events_url": "https://api.github.com/users/mbknor/events{/privacy}",
+      "subscriptions_url": "https://api.github.com/users/mbknor/subscriptions"
+    },
+    "parents": [
+      {
+        "url": "https://api.github.com/repos/playframework/play/commits/1e7606189c2048d1a00d210eecb1739c0681da95",
+        "sha": "1e7606189c2048d1a00d210eecb1739c0681da95"
+      }
+    ],
+    "author": {
+      "url": "https://api.github.com/users/colesbury",
+      "received_events_url": "https://api.github.com/users/colesbury/received_events",
+      "login": "colesbury",
+      "organizations_url": "https://api.github.com/users/colesbury/orgs",
+      "starred_url": "https://api.github.com/users/colesbury/starred{/owner}{/repo}",
+      "followers_url": "https://api.github.com/users/colesbury/followers",
+      "avatar_url": "https://secure.gravatar.com/avatar/c2b2e8ba6cda232e02e1f337f7b9ae52?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+      "repos_url": "https://api.github.com/users/colesbury/repos",
+      "gists_url": "https://api.github.com/users/colesbury/gists{/gist_id}",
+      "following_url": "https://api.github.com/users/colesbury/following",
+      "gravatar_id": "c2b2e8ba6cda232e02e1f337f7b9ae52",
+      "id": 655866,
+      "events_url": "https://api.github.com/users/colesbury/events{/privacy}",
+      "subscriptions_url": "https://api.github.com/users/colesbury/subscriptions"
+    },
+    "comments_url": "https://api.github.com/repos/playframework/play/commits/8492a0b904605bfad6110fe2efaadebea9ce6497/comments"
+  },
+  {
+    "url": "https://api.github.com/repos/playframework/play/commits/c949cfce4c693e8b1a7b69721d7098993213e925",
+    "commit": {
+      "url": "https://api.github.com/repos/playframework/play/git/commits/c949cfce4c693e8b1a7b69721d7098993213e925",
+      "comment_count": 0,
+      "tree": {
+        "url": "https://api.github.com/repos/playframework/play/git/trees/e1170d8e164fe83bc913c9c48ca61cc0fbb55cec",
+        "sha": "e1170d8e164fe83bc913c9c48ca61cc0fbb55cec"
+      },
+      "message": "should not compare locale string to language string",
+      "committer": {
+        "date": "2012-05-10T13:44:01Z",
+        "email": "neeme@apache.org",
+        "name": "Neeme Praks"
+      },
+      "author": {
+        "date": "2012-05-10T13:44:01Z",
+        "email": "neeme@apache.org",
+        "name": "Neeme Praks"
+      }
+    },
+    "sha": "c949cfce4c693e8b1a7b69721d7098993213e925",
+    "committer": null,
+    "parents": [
+      {
+        "url": "https://api.github.com/repos/playframework/play/commits/763b0177af0ef0773d68018d4a929ccc28b8092a",
+        "sha": "763b0177af0ef0773d68018d4a929ccc28b8092a"
+      }
+    ],
+    "author": null,
+    "comments_url": "https://api.github.com/repos/playframework/play/commits/c949cfce4c693e8b1a7b69721d7098993213e925/comments"
+  }
+]

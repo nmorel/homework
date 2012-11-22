@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.github.nmorel.homework.api.config.CachedGithubRequest;
 import com.github.nmorel.homework.api.config.Config;
-import com.github.nmorel.homework.api.model.parser.HttpResponseParser;
-import com.github.nmorel.homework.api.providers.UserTokenProvider;
+import com.github.nmorel.homework.api.config.providers.UserTokenProvider;
+import com.github.nmorel.homework.api.parsers.HttpResponseParser;
 import com.github.nmorel.homework.api.services.GithubService;
 import com.google.api.client.http.EmptyContent;
 import com.google.api.client.http.GenericUrl;

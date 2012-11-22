@@ -15,11 +15,17 @@ public class AccessToken
     @SerializedName( "token_type" )
     private String tokenType;
 
+    /**
+     * @return the access token
+     */
     public String getAccessToken()
     {
         return accessToken;
     }
 
+    /**
+     * @return the token type
+     */
     public String getTokenType()
     {
         return tokenType;
