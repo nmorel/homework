@@ -1,6 +1,8 @@
 package com.github.nmorel.homework.api.servlets;
 
 import java.io.IOException;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +33,7 @@ public class AuthorizationServlet
     @Inject
     private Config config;
 
+    @SuppressWarnings( "unchecked" )
     protected void doGet( HttpServletRequest req, HttpServletResponse resp )
         throws ServletException, IOException
     {
@@ -38,15 +41,17 @@ public class AuthorizationServlet
         String servletUrl = req.getRequestURL().toString();
         GenericUrl redirectUrl =
             new GenericUrl( servletUrl.substring( 0, servletUrl.lastIndexOf( req.getServletPath() ) ) + "/redirect" );
-        Object gwtDev = req.getParameter( "gwt.codesvr" );
-        if ( null != gwtDev )
+
+        for ( Entry<String, String[]> parameter : (Set<Entry<String, String[]>>) req.getParameterMap().entrySet() )
         {
-            redirectUrl.set( "gwt.codesvr", "127.0.0.1:9997" );
-        }
-        Object hash = req.getParameter( "hash" );
-        if ( null != hash )
-        {
-            redirectUrl.setFragment( hash.toString() );
+            if ( "hash".equals( parameter.getKey() ) && parameter.getValue().length > 0 )
+            {
+                redirectUrl.setFragment( parameter.getValue()[0] );
+            }
+            else if ( parameter.getValue().length > 0 )
+            {
+                redirectUrl.set( parameter.getKey().toString(), parameter.getValue()[0] );
+            }
         }
 
         GenericUrl url = new GenericUrl( config.getGithubAuthorizeUrl() );

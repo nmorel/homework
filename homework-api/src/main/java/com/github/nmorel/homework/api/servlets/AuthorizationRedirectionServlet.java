@@ -1,6 +1,8 @@
 package com.github.nmorel.homework.api.servlets;
 
 import java.io.IOException;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +39,7 @@ public class AuthorizationRedirectionServlet
     @Inject
     private OAuthTokenService tokenService;
 
+    @SuppressWarnings( "unchecked" )
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
         throws ServletException, IOException
     {
@@ -55,10 +58,12 @@ public class AuthorizationRedirectionServlet
         String servletUrl = request.getRequestURL().toString();
         GenericUrl url = new GenericUrl( servletUrl.substring( 0, servletUrl.lastIndexOf( request.getServletPath() ) ) );
 
-        Object gwtDev = request.getParameter( "gwt.codesvr" );
-        if ( null != gwtDev )
+        for ( Entry<String, String[]> parameter : (Set<Entry<String, String[]>>) request.getParameterMap().entrySet() )
         {
-            url.set( "gwt.codesvr", "127.0.0.1:9997" );
+            if ( !"code".equals( parameter.getKey() ) && parameter.getValue().length > 0 )
+            {
+                url.set( parameter.getKey().toString(), parameter.getValue()[0] );
+            }
         }
 
         response.sendRedirect( url.build() );
