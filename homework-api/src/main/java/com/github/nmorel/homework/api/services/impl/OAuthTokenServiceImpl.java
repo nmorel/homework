@@ -33,7 +33,7 @@ public class OAuthTokenServiceImpl
     private static final Logger logger = LoggerFactory.getLogger( OAuthTokenServiceImpl.class );
 
     // Saving tokens in memory. Not the best solution but the easiest one. For a more robust solution, look to add a
-    // database.
+    // database or a cache saving to file.
     private Cache<String, String> tokenCache = CacheBuilder.newBuilder().expireAfterWrite( 1, TimeUnit.DAYS ).build();
 
     @Inject
@@ -104,6 +104,12 @@ public class OAuthTokenServiceImpl
         String token = tokenCache.getIfPresent( userId );
         logger.trace( "Token : {}", token );
         return Optional.fromNullable( token );
+    }
+
+    @Override
+    public void deleteToken()
+    {
+        deleteToken( userIdProvider.get().orNull() );
     }
 
     @Override

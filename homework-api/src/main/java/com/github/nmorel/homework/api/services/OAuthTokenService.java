@@ -30,6 +30,11 @@ public interface OAuthTokenService
     Optional<String> getToken( @Nullable String userId );
 
     /**
+     * Delete the token associated to the current user if he exists
+     */
+    void deleteToken();
+
+    /**
      * Delete the token associated to the user
      * 
      * @param userId id of the user

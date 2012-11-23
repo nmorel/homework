@@ -60,6 +60,9 @@ public abstract class BaseRequest
 
     protected void fire()
     {
+        // TODO need a default callback to read status code. For a 401, we can show a popup to the user explaining his
+        // token is revoked with the possibilty to login again or continue. For the others, an alert or a redirection to
+        // error page is needed.
         RestRequestBuilder builder =
             requestBuilder.get().build( method, path, args, queryParams ).withData( data ).withCallback( callback );
         completeRequest( builder ).fire();

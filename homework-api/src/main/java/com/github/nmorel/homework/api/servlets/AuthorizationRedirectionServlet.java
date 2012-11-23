@@ -66,6 +66,8 @@ public class AuthorizationRedirectionServlet
             }
         }
 
-        response.sendRedirect( url.build() );
+        String urlS = url.build();
+        logger.info( "Redirecting to the url {}", urlS );
+        response.sendRedirect( urlS );
     }
 }

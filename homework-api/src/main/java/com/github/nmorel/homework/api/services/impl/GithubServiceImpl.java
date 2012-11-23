@@ -3,6 +3,7 @@ package com.github.nmorel.homework.api.services.impl;
 import java.io.IOException;
 
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response.Status;
 import javax.xml.ws.http.HTTPException;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import com.github.nmorel.homework.api.config.Config;
 import com.github.nmorel.homework.api.config.providers.UserTokenProvider;
 import com.github.nmorel.homework.api.parsers.HttpResponseParser;
 import com.github.nmorel.homework.api.services.GithubService;
+import com.github.nmorel.homework.api.services.OAuthTokenService;
 import com.google.api.client.http.EmptyContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
@@ -51,6 +53,9 @@ public class GithubServiceImpl
 
     @Inject
     private HttpTransport httpTransport;
+
+    @Inject
+    private OAuthTokenService tokenService;
 
     @Override
     @SuppressWarnings( "unchecked" )
@@ -159,8 +164,17 @@ public class GithubServiceImpl
                     return cachedResult.getResult();
                 }
             }
+            else if ( response.getStatusCode() == HttpStatusCodes.STATUS_CODE_UNAUTHORIZED
+                && null != url.get( ACCESS_TOKEN_PARAM ) )
+            {
+                // The token has been revoked. We delete it from the cache.
+                logger.info( "We attempted a request with a token no longer valid" );
+                tokenService.deleteToken();
+                throw new WebApplicationException( Status.UNAUTHORIZED );
+            }
 
-            // TODO handle error
+            logger.error( "Error while executing the request {} {}. Status : {} {}", method, url,
+                response.getStatusCode(), response.getStatusMessage() );
             throw new WebApplicationException( response.getStatusCode() );
         }
         finally

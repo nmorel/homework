@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.nmorel.homework.api.config.providers.UserIdProvider;
 import com.github.nmorel.homework.api.model.User;
 import com.github.nmorel.homework.api.services.UserService;
 import com.google.common.base.Charsets;
@@ -55,14 +56,14 @@ public class EntryPointServlet
      */
     private void generatesUserIdIfNeeded( HttpServletRequest request, HttpServletResponse response )
     {
-        // Entry point of the application, we generate here a id for the user taht we store in a cookie. This id will
+        // Entry point of the application, we generate here an id for the user that we store in a cookie. This id will
         // allow us to associate a github access token to a user
         boolean alreadyDefined = false;
         if ( null != request.getCookies() )
         {
             for ( Cookie cookie : request.getCookies() )
             {
-                if ( CookieUtil.USER_ID.equals( cookie.getName() ) )
+                if ( UserIdProvider.USER_ID.equals( cookie.getName() ) )
                 {
                     alreadyDefined = true;
                     break;
@@ -71,7 +72,7 @@ public class EntryPointServlet
         }
         if ( !alreadyDefined )
         {
-            Cookie userId = new Cookie( CookieUtil.USER_ID, UUID.randomUUID().toString() );
+            Cookie userId = new Cookie( UserIdProvider.USER_ID, UUID.randomUUID().toString() );
             logger.info( "The user_id wasn't define yet for this user, we set it to {}", userId.getValue() );
             response.addCookie( userId );
         }
