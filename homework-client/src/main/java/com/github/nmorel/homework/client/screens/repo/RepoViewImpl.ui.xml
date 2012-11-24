@@ -35,7 +35,7 @@
     </g:north>
 
     <g:center>
-      <g:TabLayoutPanel barUnit='PX' barHeight='30' ui:field='tabPanel'>
+      <g:TabLayoutPanel barUnit='PX' barHeight='38' ui:field='tabPanel'>
         <g:tab>
           <g:header>Commits</g:header>
           <t:CommitsTimeline ui:field='commitsTimeline' />

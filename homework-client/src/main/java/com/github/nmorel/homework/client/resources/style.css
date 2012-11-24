@@ -85,6 +85,45 @@ h3 {
 	color: red;
 }
 
+/* TabLayoutPanel style */
+@external gwt-TabLayoutPanel, gwt-TabLayoutPanelTabs, gwt-TabLayoutPanelTab, gwt-TabLayoutPanelTab-selected, gwt-TabLayoutPanelTabInner;
+.gwt-TabLayoutPanelTabs {
+	border-bottom: 1px solid #DDD;
+}
+
+.gwt-TabLayoutPanelTab {
+	margin-bottom: -1px;
+}
+
+.gwt-TabLayoutPanelTabInner {
+	font-size: 14px;
+	color: #08C;
+	padding: 8px 12px;
+	margin-right: 4px;
+	line-height: 20px;
+	border: 1px solid transparent;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+}
+
+.gwt-TabLayoutPanelTabInner:hover {
+	color: #555;
+	background-color:#eeeeee;
+	border-color:#eeeeee #eeeeee #dddddd;
+	cursor: pointer;
+}
+
+.gwt-TabLayoutPanelTab-selected > .gwt-TabLayoutPanelTabInner {
+	color: #555;
+	background-color: white;
+	border: 1px solid #DDD;
+	border-bottom-color: transparent;
+	cursor: default;
+}
+
+/* End TabLayoutPanel style */
+
 /* Webkit custom scrollbar style */
 body ::-webkit-scrollbar {
 	width: 16px;
@@ -114,3 +153,4 @@ body ::-webkit-scrollbar-track {
 	border-right: 1px solid transparent;
 	background-clip: padding-box;
 }
+/* End Webkit custom scrollbar style */
