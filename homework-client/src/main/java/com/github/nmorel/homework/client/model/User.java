@@ -1,6 +1,8 @@
 package com.github.nmorel.homework.client.model;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.safehtml.shared.SafeUri;
+import com.google.gwt.safehtml.shared.UriUtils;
 
 /**
  * Represents a Github user
@@ -25,6 +27,11 @@ public class User
     public final native String getAvatarUrl()/*-{
         return this.avatar_url;
     }-*/;
+
+    public final SafeUri getAvatarSafeUri()
+    {
+        return UriUtils.fromTrustedString( getAvatarUrl() );
+    }
 
     public static final native User getUser()/*-{
         if (typeof ($wnd["userInfos"]) != "object") {

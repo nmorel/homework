@@ -6,7 +6,7 @@
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
   <div title='{collaborator.getLogin}' class='{res.style.repoCollaboratorCell}'>
-    <img src='{collaborator.getAvatarUrl}' class='{res.style.repoCollaboratorAvatar}' />
+    <img src='{collaborator.getAvatarSafeUri}' class='{res.style.repoCollaboratorAvatar}' />
     <ui:text from='{collaborator.getLogin}' />
   </div>
 
