@@ -17,6 +17,7 @@ import com.github.nmorel.homework.api.model.User;
 import com.github.nmorel.homework.api.parsers.GsonHttpResponseParser;
 import com.github.nmorel.homework.api.parsers.HttpResponseParser;
 import com.github.nmorel.homework.api.services.GithubService;
+import com.github.nmorel.homework.api.services.UserService;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpMethods;
 import com.google.common.base.Optional;
@@ -27,7 +28,7 @@ public class UserServiceImplTest
     @Mock
     private GithubService githubService;
 
-    private UserServiceImpl service;
+    private UserService service;
 
     @Before
     public void init()

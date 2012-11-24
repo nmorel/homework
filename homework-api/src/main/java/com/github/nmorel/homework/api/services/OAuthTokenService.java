@@ -15,6 +15,7 @@ public interface OAuthTokenService
      * Retrieve the token from the code given by github and associated to the current user
      * 
      * @param code code gave by github
+     * @throws IllegalArgumentException thrown if the code is null or empty
      */
     void retrieveAndStoreToken( String code );
 

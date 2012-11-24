@@ -19,12 +19,18 @@ import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+/**
+ * Default implementation of the {@link OAuthTokenService}. It uses an in-memory cache to store the tokens.
+ * 
+ * @author Nicolas Morel
+ */
 @Singleton
 public class OAuthTokenServiceImpl
     implements OAuthTokenService
@@ -36,19 +42,24 @@ public class OAuthTokenServiceImpl
     // database or a cache saving to file.
     private Cache<String, String> tokenCache = CacheBuilder.newBuilder().expireAfterWrite( 1, TimeUnit.DAYS ).build();
 
-    @Inject
-    private UserIdProvider userIdProvider;
+    private final UserIdProvider userIdProvider;
+
+    private final Config config;
+
+    private final HttpTransport httpTransport;
 
     @Inject
-    private Config config;
-
-    @Inject
-    private HttpTransport httpTransport;
+    public OAuthTokenServiceImpl( UserIdProvider userIdProvider, Config config, HttpTransport httpTransport )
+    {
+        this.userIdProvider = userIdProvider;
+        this.config = config;
+        this.httpTransport = httpTransport;
+    }
 
     @Override
     public void retrieveAndStoreToken( String code )
     {
-        Preconditions.checkNotNull( code, "code can't be null" );
+        Preconditions.checkArgument( !Strings.isNullOrEmpty( code ), "code can't be null" );
 
         Optional<String> userId = userIdProvider.get();
         if ( !userId.isPresent() )
