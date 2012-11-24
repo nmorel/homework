@@ -30,6 +30,12 @@ public interface ResourcesBundle
         String repoCollaboratorCell();
 
         String repoCollaboratorAvatar();
+        
+        String repoCommitTimelineDivAvatar();
+        
+        String repoCommitTimelineDivNoAvatar();
+        
+        String repoCommitTimelineAvatar();
 
         String errorLabel();
     }

@@ -12,9 +12,12 @@ public class RepoPlace
 {
     private static final String PARAM_NAME = "name";
     private static final String PARAM_OWNER = "owner";
-    
+    private static final String PARAM_TAB = "tab";
+
     private String owner;
     private String name;
+    private int tab;
+    private boolean reload = true;
 
     RepoPlace()
     {
@@ -22,9 +25,21 @@ public class RepoPlace
 
     public RepoPlace( String owner, String name )
     {
+        this( owner, name, 0 );
+    }
+
+    public RepoPlace( String owner, String name, int tab )
+    {
+        this( owner, name, tab, true );
+    }
+
+    public RepoPlace( String owner, String name, int tab, boolean reload )
+    {
         assert null != owner && null != name : "owner and name can't be null";
         this.owner = owner;
         this.name = name;
+        this.tab = tab;
+        this.reload = reload;
     }
 
     public String getOwner()
@@ -35,6 +50,16 @@ public class RepoPlace
     public String getName()
     {
         return name;
+    }
+
+    public int getTab()
+    {
+        return tab;
+    }
+
+    public boolean isReload()
+    {
+        return reload;
     }
 
     @Override
@@ -58,7 +83,7 @@ public class RepoPlace
     @Override
     public Map<String, String> getParameters()
     {
-        return ImmutableMap.of( PARAM_OWNER, owner, PARAM_NAME, name );
+        return ImmutableMap.of( PARAM_OWNER, owner, PARAM_NAME, name, PARAM_TAB, Integer.toString( tab ) );
     }
 
     @Override
@@ -68,5 +93,15 @@ public class RepoPlace
         checkMissingParameters( parameters, PARAM_OWNER, PARAM_NAME );
         owner = parameters.get( PARAM_OWNER );
         name = parameters.get( PARAM_NAME );
+        if ( parameters.containsKey( PARAM_TAB ) )
+        {
+            try
+            {
+                tab = Integer.parseInt( parameters.get( PARAM_TAB ) );
+            }
+            catch ( NumberFormatException e )
+            {
+            }
+        }
     }
 }

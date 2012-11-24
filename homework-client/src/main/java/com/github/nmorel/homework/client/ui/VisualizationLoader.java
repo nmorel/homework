@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.visualization.client.VisualizationUtils;
+import com.google.gwt.visualization.client.visualizations.corechart.CoreChart;
 
 /**
  * Utility class to handle the loading of google visualization api.
@@ -50,7 +51,7 @@ public class VisualizationLoader
                         pendingCommands = null;
                     }
                 }
-            } );
+            }, CoreChart.PACKAGE );
         }
     }
 

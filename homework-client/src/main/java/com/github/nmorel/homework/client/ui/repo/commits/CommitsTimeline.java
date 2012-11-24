@@ -1,4 +1,4 @@
-package com.github.nmorel.homework.client.ui.timeline;
+package com.github.nmorel.homework.client.ui.repo.commits;
 
 import java.util.Date;
 import java.util.logging.Logger;
@@ -10,22 +10,22 @@ import com.github.nmorel.homework.client.model.Commit;
 import com.github.nmorel.homework.client.model.Committer;
 import com.github.nmorel.homework.client.resources.Constants;
 import com.github.nmorel.homework.client.resources.TimelineBundle;
-import com.github.nmorel.homework.client.ui.View;
-import com.github.nmorel.homework.client.ui.VisualizationLoader;
+import com.github.nmorel.homework.client.ui.repo.AbstractTab;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.core.client.JsArrayUtils;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.visualization.client.DataTable;
@@ -37,8 +37,7 @@ import com.google.gwt.visualization.client.Selection;
  * @author Nicolas Morel
  */
 public class CommitsTimeline
-    extends SimpleLayoutPanel
-    implements View
+    extends AbstractTab
 {
     private class CommitSelectHandler
         extends SelectHandler
@@ -59,11 +58,11 @@ public class CommitsTimeline
     interface CommitTemplate
         extends SafeHtmlTemplates
     {
-        @SafeHtmlTemplates.Template( "<div><img src=\"{0}\" style=\"width:20px; height:20px; margin-right: 5px;\"/>{1}</div>" )
-        SafeHtml commit( String avatarUrl, String message );
+        @SafeHtmlTemplates.Template( "<div class=\"{2}\"><img src=\"{0}\" class=\"{3}\"/>{1}</div>" )
+        SafeHtml commit( SafeUri avatarUrl, String message, String classNameDiv, String classNameAvatar );
 
-        @SafeHtmlTemplates.Template( "<div>{0}</div>" )
-        SafeHtml commit( String message );
+        @SafeHtmlTemplates.Template( "<div class=\"{1}\">{0}</div>" )
+        SafeHtml commit( String message, String className );
     }
 
     private static final Logger logger = Logger.getLogger( CommitsTimeline.class.getName() );
@@ -92,9 +91,12 @@ public class CommitsTimeline
     @UiField
     Button last;
 
-    private Timeline currentTimeline;
+    /**
+     * We keep track of the selected row because we lost it when we switch tabs
+     */
+    private Integer lastSelectedRow;
 
-    private JsArray<Commit> commits;
+    private Timeline timeline;
 
     @Override
     public void init()
@@ -103,56 +105,43 @@ public class CommitsTimeline
         timelineBundle.style().ensureInjected();
 
         // little trick to redraw automatically the timeline when the browser is resizing
-        root = new DockLayoutPanel( Unit.PX ) {
-            @Override
-            public void onResize()
-            {
-                super.onResize();
-                if ( null != currentTimeline )
-                {
-                    currentTimeline.redraw();
-                }
-            }
-        };
+        root = new DockLayoutPanel( Unit.PX );
         setWidget( uiBinder.createAndBindUi( this ) );
     }
 
     @Override
-    public void clear()
+    protected void clearChart()
     {
-        currentTimeline = null;
-        commits = null;
-        timelineContainer.clear();
+        lastSelectedRow = null;
+        if ( null != timeline )
+        {
+            timeline.deleteAllItems();
+        }
     }
 
-    /**
-     * Sets timeline data
-     * 
-     * @param commits
-     */
-    public void setData( final JsArray<Commit> commits )
+    @Override
+    public void onShow()
     {
-        this.commits = commits;
-        if ( VisualizationLoader.isLoaded() )
+        if ( null != timeline && null != commits )
         {
-            makeTimeline();
-        }
-        else
-        {
-            logger.fine( "Visualization api isn't loaded yet, we wait before creating the timeline" );
-            VisualizationLoader.addPendingCommand( new Command() {
+            Scheduler.get().scheduleDeferred( new ScheduledCommand() {
 
                 @Override
                 public void execute()
                 {
-                    makeTimeline();
+                    timeline.redraw();
+                    if ( null != lastSelectedRow )
+                    {
+                        selectRow( lastSelectedRow );
+                    }
                 }
             } );
         }
     }
 
     @SuppressWarnings( "deprecation" )
-    private void makeTimeline()
+    @Override
+    protected void makeChart()
     {
         logger.fine( "Initializing Timeline" );
 
@@ -189,11 +178,13 @@ public class CommitsTimeline
             SafeHtml sh;
             if ( null == committer.getAvatarUrl() )
             {
-                sh = template.commit( commit.getMessage() );
+                sh = template.commit( commit.getMessage(), getResources().style().repoCommitTimelineDivNoAvatar() );
             }
             else
             {
-                sh = template.commit( committer.getAvatarUrl(), commit.getMessage() );
+                sh =
+                    template.commit( committer.getAvatarSafeUri(), commit.getMessage(), getResources().style()
+                        .repoCommitTimelineDivAvatar(), getResources().style().repoCommitTimelineAvatar() );
             }
             data.setValue( i, 2, sh.asString() );
         }
@@ -204,7 +195,6 @@ public class CommitsTimeline
         options.setWidth( "100%" );
         options.setHeight( "500px" );
         options.setStyle( Timeline.Options.STYLE.BOX );
-        options.setBoxAlign( "left" );
 
         if ( null != minCommitDate )
         {
@@ -226,12 +216,20 @@ public class CommitsTimeline
         options.setEditable( false );
 
         // create the timeline, with data and options
-        currentTimeline = new Timeline( data, options );
-        currentTimeline.addSelectHandler( new CommitSelectHandler() );
+        if ( null == timeline )
+        {
+            timeline = new Timeline( data, options );
+            timeline.addSelectHandler( new CommitSelectHandler() );
+            timelineContainer.setWidget( timeline );
+        }
+        else
+        {
+            timeline.draw( data, options );
+        }
 
-        timelineContainer.setWidget( currentTimeline );
+        timeline.setVisibleChartRangeAuto();
 
-        currentTimeline.setVisibleChartRangeAuto();
+        onChangeSelection();
 
         logger.fine( "Timeline initialized" );
     }
@@ -244,7 +242,7 @@ public class CommitsTimeline
     @UiHandler( "auto" )
     void onClickAuto( ClickEvent e )
     {
-        currentTimeline.setVisibleChartRangeAuto();
+        timeline.setVisibleChartRangeAuto();
     }
 
     /**
@@ -314,8 +312,9 @@ public class CommitsTimeline
      */
     private void selectRow( int row )
     {
-        currentTimeline.setSelections( JsArrayUtils.readOnlyJsArray( new Selection[] { Selection
-            .createRowSelection( row ) } ) );
+        JsArray<Selection> selection = JavaScriptObject.createArray().cast();
+        selection.set( 0, Selection.createRowSelection( row ) );
+        timeline.setSelections( selection );
         onChangeSelection();
     }
 
@@ -324,13 +323,13 @@ public class CommitsTimeline
      */
     private Integer getSelectedRow()
     {
-        if ( currentTimeline.getSelections().length() == 0 )
+        if ( timeline.getSelections().length() == 0 )
         {
             return null;
         }
         else
         {
-            return currentTimeline.getSelections().get( 0 ).getRow();
+            return timeline.getSelections().get( 0 ).getRow();
         }
     }
 
@@ -342,13 +341,13 @@ public class CommitsTimeline
         Integer selectedRow = getSelectedRow();
         logger.fine( "Commit selected : " + selectedRow );
 
+        lastSelectedRow = selectedRow;
+
         // Enable/disable toolbar buttons
-        boolean firstSelected = null != selectedRow && selectedRow == 0;
-        boolean lastSelected = null != selectedRow && selectedRow == commits.length() - 1;
-        first.setEnabled( !firstSelected );
-        prev.setEnabled( !firstSelected );
-        next.setEnabled( !lastSelected );
-        last.setEnabled( !lastSelected );
+        first.setEnabled( null == selectedRow || selectedRow != 0 );
+        prev.setEnabled( null != selectedRow && selectedRow != 0 );
+        next.setEnabled( null != selectedRow && selectedRow != commits.length() - 1 );
+        last.setEnabled( null == selectedRow || selectedRow != commits.length() - 1 );
 
         // TODO show a commit detail
     }

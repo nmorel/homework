@@ -80,6 +80,31 @@ h3 {
 	left: 0px;
 }
 
+.repoCommitTimelineDivAvatar, .repoCommitTimelineDivNoAvatar {
+	max-width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	position: relative;
+}
+
+.repoCommitTimelineDivAvatar {
+	padding-left: 25px;
+}
+
+@external timeline-event-selected;
+.timeline-event-selected .repoCommitTimelineDivAvatar, .timeline-event-selected .repoCommitTimelineDivNoAvatar {
+	max-width: none;
+}
+
+.repoCommitTimelineAvatar {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
 .errorLabel {
 	font-weight: bold;
 	color: red;

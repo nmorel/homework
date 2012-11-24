@@ -30,7 +30,7 @@ public class RepoActivity
 
     @Inject
     private Provider<CommitsRequest> commitsRequest;
-    
+
     @Inject
     private Provider<CollaboratorsRequest> collaboratorsRequest;
 
@@ -45,43 +45,57 @@ public class RepoActivity
     @Override
     protected void start( AcceptsOneWidget panel, EventBus eventBus )
     {
-        view.init();
+        if ( currentPlace.isReload() )
+        {
+            view.init();
+        }
         view.setPresenter( this );
 
-        commitsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
+        if ( currentPlace.isReload() )
+        {
+            commitsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
 
-            @Override
-            public void onResponseReceived( Request request, Response response )
-            {
-                JsArray<Commit> commits = JsonUtils.safeEval( response.getText() );
-                view.showResults( commits );
-            }
+                @Override
+                public void onResponseReceived( Request request, Response response )
+                {
+                    JsArray<Commit> commits = JsonUtils.safeEval( response.getText() );
+                    view.showResults( commits );
+                }
 
-            @Override
-            public void onError( Request request, Throwable exception )
-            {
-                // TODO Auto-generated method stub
+                @Override
+                public void onError( Request request, Throwable exception )
+                {
+                    // TODO Auto-generated method stub
 
-            }
-        } );
-        collaboratorsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
+                }
+            } );
+            collaboratorsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
 
-            @Override
-            public void onResponseReceived( Request request, Response response )
-            {
-                JsArray<User> commits = JsonUtils.safeEval( response.getText() );
-                view.showCollaborators( commits );
-            }
+                @Override
+                public void onResponseReceived( Request request, Response response )
+                {
+                    JsArray<User> commits = JsonUtils.safeEval( response.getText() );
+                    view.showCollaborators( commits );
+                }
 
-            @Override
-            public void onError( Request request, Throwable exception )
-            {
-                // TODO Auto-generated method stub
+                @Override
+                public void onError( Request request, Throwable exception )
+                {
+                    // TODO Auto-generated method stub
 
-            }
-        } );
+                }
+            } );
+        }
+
+        view.selectTab( currentPlace.getTab() );
 
         panel.setWidget( view );
+    }
+
+    @Override
+    public void onTabChange( int tab )
+    {
+        placeController.goTo( new RepoPlace( currentPlace.getOwner(), currentPlace.getName(), tab, false ) );
     }
 
 }

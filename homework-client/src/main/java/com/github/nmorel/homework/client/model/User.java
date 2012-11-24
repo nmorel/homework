@@ -24,6 +24,10 @@ public class User
         return this.name;
     }-*/;
 
+    public final native String getEmail()/*-{
+        return this.email;
+    }-*/;
+
     public final native String getAvatarUrl()/*-{
         return this.avatar_url;
     }-*/;

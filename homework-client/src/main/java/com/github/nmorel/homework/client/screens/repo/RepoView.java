@@ -10,6 +10,7 @@ public interface RepoView
 {
     interface Presenter
     {
+        void onTabChange( int tab );
     }
 
     void setPresenter( Presenter presenter );
@@ -17,5 +18,7 @@ public interface RepoView
     void showResults( JsArray<Commit> commits );
 
     void showCollaborators( JsArray<User> collaborators );
+
+    void selectTab( int tab );
 
 }

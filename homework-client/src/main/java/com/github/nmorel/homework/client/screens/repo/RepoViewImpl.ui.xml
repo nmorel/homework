@@ -1,7 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
   xmlns:c="urn:import:com.google.gwt.user.cellview.client" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
-  xmlns:t="urn:import:com.github.nmorel.homework.client.ui.timeline">
+  xmlns:t="urn:import:com.github.nmorel.homework.client.ui.repo.commits" xmlns:collaborators="urn:import:com.github.nmorel.homework.client.ui.repo.collaborators">
 
   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
@@ -37,12 +37,12 @@
     <g:center>
       <g:TabLayoutPanel barUnit='PX' barHeight='38' ui:field='tabPanel'>
         <g:tab>
-          <g:header>Commits</g:header>
+          <g:header><ui:text from='{mess.repoCommitsTab}'/></g:header>
           <t:CommitsTimeline ui:field='commitsTimeline' />
         </g:tab>
         <g:tab>
-          <g:header>Collaborator's impact</g:header>
-          <g:Label>TODO</g:Label>
+          <g:header><ui:text from='{mess.repoCollabImpactTab}'/></g:header>
+          <collaborators:CollaboratorsImpactChart ui:field='collaboratorsImpactChart' />
         </g:tab>
       </g:TabLayoutPanel>
     </g:center>
