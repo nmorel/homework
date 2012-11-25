@@ -2,36 +2,31 @@ package com.github.nmorel.homework.client.utils;
 
 import com.github.gwtbootstrap.client.ui.AlertBlock;
 import com.github.gwtbootstrap.client.ui.constants.AlertType;
-import com.github.gwtbootstrap.client.ui.event.CloseEvent;
-import com.github.gwtbootstrap.client.ui.event.CloseHandler;
 import com.github.nmorel.homework.client.Homework;
-import com.google.gwt.user.client.ui.PopupPanel;
+import com.github.nmorel.homework.client.ui.PopupAlertPanel;
 
 public final class Alert
 {
+    private static PopupAlertPanel alertPanel;
+
     public static void showError( String message )
     {
-        final PopupPanel popup = new PopupPanel( false, true );
-        popup.setGlassEnabled( true );
-        popup.setGlassStyleName( Homework.ginjector.getResources().style().alertGlassPanel() );
-
         AlertBlock alert = new AlertBlock();
         alert.setAnimation( true );
         alert.setClose( true );
         alert.setHeading( Homework.ginjector.getMessages().alertErrorTitle() );
         alert.setText( message );
         alert.setType( AlertType.ERROR );
-        alert.setWidth( "250px" );
-        alert.addCloseHandler( new CloseHandler() {
+        alert.setWidth( "200px" );
+        ensurePanel().addAlert( alert );
+    }
 
-            @Override
-            public void onClose( CloseEvent closeEvent )
-            {
-                popup.hide();
-            }
-        } );
-
-        popup.add( alert );
-        popup.center();
+    private static PopupAlertPanel ensurePanel()
+    {
+        if ( null == alertPanel )
+        {
+            alertPanel = new PopupAlertPanel();
+        }
+        return alertPanel;
     }
 }
