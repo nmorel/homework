@@ -1,8 +1,12 @@
 package com.github.nmorel.homework.client.request;
 
 import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
 
+/**
+ * Request that search the repository corresponding to the given keyword
+ * 
+ * @author Nicolas Morel
+ */
 public class SearchRequest
     extends BaseRequest
 {
@@ -12,7 +16,7 @@ public class SearchRequest
         setPath( "repos/search" );
     }
 
-    public void fire( String query, RequestCallback callback )
+    public void fire( String query, RestCallback<?> callback )
     {
         addQueryParameter( "keyword", query );
         setCallback( callback );

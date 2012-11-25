@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+
+  <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
+
+  <b:Modal ui:field="modal" title='{mess.unauthorizedTitle}' backdrop="STATIC" keyboard="true" animation="true"
+    dynamicSafe="true" hideOthers='true'>
+    <g:Label text='{mess.unauthorizedDescription}' />
+    <b:ModalFooter>
+      <b:ButtonToolbar>
+        <b:Button type="PRIMARY" ui:field='login' text='{mess.unauthorizedLogin}' />
+        <b:Button ui:field='skip' text='{mess.unauthorizedSkip}' />
+      </b:ButtonToolbar>
+    </b:ModalFooter>
+  </b:Modal>
+
+</ui:UiBinder> 

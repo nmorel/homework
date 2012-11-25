@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import com.github.nmorel.homework.client.gin.HomeworkGinjector;
 import com.github.nmorel.homework.client.ui.VisualizationLoader;
+import com.github.nmorel.homework.client.utils.Alert;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -71,5 +72,6 @@ public class Homework
         }
 
         logger.log( Level.SEVERE, "Uncaught exception", throwable );
+        Alert.showError( throwable.getMessage() );
     }
 }

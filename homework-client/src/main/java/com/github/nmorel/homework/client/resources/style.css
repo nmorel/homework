@@ -110,6 +110,12 @@ h3 {
 	color: red;
 }
 
+.alertGlassPanel {
+  background-color: #000;
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
 /* TabLayoutPanel style */
 @external gwt-TabLayoutPanel, gwt-TabLayoutPanelTabs, gwt-TabLayoutPanelTab, gwt-TabLayoutPanelTab-selected, gwt-TabLayoutPanelTabInner;
 .gwt-TabLayoutPanelTabs {

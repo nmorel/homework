@@ -10,6 +10,12 @@
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
   <g:DockLayoutPanel unit='PX'>
+    <g:east size="200">
+      <g:HTMLPanel>
+        <!-- Empty -->
+      </g:HTMLPanel>
+    </g:east>
+
     <g:north size='90'>
       <g:HTMLPanel ui:field='searchPanel'>
         <h2>

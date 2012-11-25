@@ -40,7 +40,7 @@ public class OAuthTokenServiceImpl
 
     // Saving tokens in memory. Not the best solution but the easiest one. For a more robust solution, look to add a
     // database or a cache saving to file.
-    private Cache<String, String> tokenCache = CacheBuilder.newBuilder().expireAfterWrite( 1, TimeUnit.DAYS ).build();
+    private Cache<String, String> tokenCache = CacheBuilder.newBuilder().expireAfterAccess( 1, TimeUnit.DAYS ).build();
 
     private final UserIdProvider userIdProvider;
 

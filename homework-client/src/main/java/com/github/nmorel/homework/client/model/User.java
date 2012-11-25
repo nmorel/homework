@@ -36,11 +36,4 @@ public class User
     {
         return UriUtils.fromTrustedString( getAvatarUrl() );
     }
-
-    public static final native User getUser()/*-{
-        if (typeof ($wnd["userInfos"]) != "object") {
-            return null;
-        }
-        return $wnd["userInfos"];
-    }-*/;
 }

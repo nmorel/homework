@@ -1,5 +1,6 @@
 package com.github.nmorel.homework.api.config;
 
+import com.github.nmorel.homework.api.config.jersey.DefaultExceptionMapper;
 import com.github.nmorel.homework.api.config.jersey.GsonJsonProvider;
 import com.github.nmorel.homework.api.resources.RepositoriesResources;
 import com.github.nmorel.homework.api.servlets.AuthorizationRedirectionServlet;
@@ -23,6 +24,7 @@ public class ServletModule
 
         // Providers
         bind( GsonJsonProvider.class ).in( Singleton.class );
+        bind( DefaultExceptionMapper.class ).in( Singleton.class );
 
         serve( "/api/*" ).with( GuiceContainer.class );
 

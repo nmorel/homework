@@ -7,14 +7,11 @@ import com.github.nmorel.homework.client.model.Repository;
 import com.github.nmorel.homework.client.mvp.ActivityWithPlace;
 import com.github.nmorel.homework.client.place.RepoPlace;
 import com.github.nmorel.homework.client.place.SearchPlace;
+import com.github.nmorel.homework.client.request.RestCallback;
 import com.github.nmorel.homework.client.request.SearchRequest;
 import com.github.nmorel.homework.client.screens.search.SearchView.Presenter;
 import com.github.nmorel.homework.client.ui.State;
 import com.google.common.base.Strings;
-import com.google.gwt.core.client.JsonUtils;
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
@@ -67,21 +64,14 @@ public class SearchActivity
         else
         {
             logger.fine( "Keyword present => looking for repos with keyword " + currentPlace.getKeyword() );
-            searchRequest.get().fire( currentPlace.getKeyword(), new RequestCallback() {
+            searchRequest.get().fire( currentPlace.getKeyword(), new RestCallback<Repositories>() {
 
                 @Override
-                public void onResponseReceived( Request request, Response response )
+                protected void onSuccess( Repositories result )
                 {
-                    Repositories repos = JsonUtils.safeEval( response.getText() );
-                    view.showResults( repos.getRepositories() );
+                    logger.fine( result.getRepositories().length() + " repositories found" );
+                    view.showResults( result.getRepositories() );
                     view.setState( State.LOADED );
-                }
-
-                @Override
-                public void onError( Request request, Throwable exception )
-                {
-                    // TODO Auto-generated method stub
-
                 }
             } );
             view.setState( State.LOADING );

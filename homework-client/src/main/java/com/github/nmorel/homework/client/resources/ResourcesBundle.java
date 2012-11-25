@@ -38,6 +38,8 @@ public interface ResourcesBundle
         String repoCommitTimelineAvatar();
 
         String errorLabel();
+        
+        String alertGlassPanel();
     }
 
     @Source( { "style.css" } )

@@ -6,12 +6,9 @@ import com.github.nmorel.homework.client.mvp.ActivityWithPlace;
 import com.github.nmorel.homework.client.place.RepoPlace;
 import com.github.nmorel.homework.client.request.CollaboratorsRequest;
 import com.github.nmorel.homework.client.request.CommitsRequest;
+import com.github.nmorel.homework.client.request.RestCallback;
 import com.github.nmorel.homework.client.screens.repo.RepoView.Presenter;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.core.client.JsonUtils;
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
@@ -53,38 +50,24 @@ public class RepoActivity
 
         if ( currentPlace.isReload() )
         {
-            commitsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
+            commitsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(),
+                new RestCallback<JsArray<Commit>>() {
 
-                @Override
-                public void onResponseReceived( Request request, Response response )
-                {
-                    JsArray<Commit> commits = JsonUtils.safeEval( response.getText() );
-                    view.showResults( commits );
-                }
+                    @Override
+                    protected void onSuccess( JsArray<Commit> result )
+                    {
+                        view.showResults( result );
+                    }
+                } );
+            collaboratorsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(),
+                new RestCallback<JsArray<User>>() {
 
-                @Override
-                public void onError( Request request, Throwable exception )
-                {
-                    // TODO Auto-generated method stub
-
-                }
-            } );
-            collaboratorsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(), new RequestCallback() {
-
-                @Override
-                public void onResponseReceived( Request request, Response response )
-                {
-                    JsArray<User> commits = JsonUtils.safeEval( response.getText() );
-                    view.showCollaborators( commits );
-                }
-
-                @Override
-                public void onError( Request request, Throwable exception )
-                {
-                    // TODO Auto-generated method stub
-
-                }
-            } );
+                    @Override
+                    protected void onSuccess( JsArray<User> result )
+                    {
+                        view.showCollaborators( result );
+                    }
+                } );
         }
 
         view.selectTab( currentPlace.getTab() );

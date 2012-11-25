@@ -15,6 +15,10 @@ import com.github.nmorel.homework.client.screens.repo.RepoView;
 import com.github.nmorel.homework.client.screens.repo.RepoViewImpl;
 import com.github.nmorel.homework.client.screens.search.SearchView;
 import com.github.nmorel.homework.client.screens.search.SearchViewImpl;
+import com.github.nmorel.homework.client.screens.unauthorized.UnauthorizedPresenter;
+import com.github.nmorel.homework.client.screens.unauthorized.UnauthorizedPresenterImpl;
+import com.github.nmorel.homework.client.screens.unauthorized.UnauthorizedView;
+import com.github.nmorel.homework.client.screens.unauthorized.UnauthorizedViewImpl;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.AbstractGinModule;
@@ -41,6 +45,9 @@ public class HomeworkModule
         bind( PlaceHistoryMapper.class ).to( AppPlaceHistoryMapper.class ).in( Singleton.class );
         bind( AppActivityMapper.class ).in( Singleton.class );
 
+        // Authenticated user
+        bind( UserContainer.class ).in( Singleton.class );
+
         // Messages
         bind( Messages.class ).in( Singleton.class );
 
@@ -50,6 +57,9 @@ public class HomeworkModule
 
         // Error view
         bind( ErrorActivity.class ).in( Singleton.class );
+
+        bind( UnauthorizedPresenter.class ).to( UnauthorizedPresenterImpl.class ).in( Singleton.class );
+        bind( UnauthorizedView.class ).to( UnauthorizedViewImpl.class );
 
         // Views are singleton
         bind( SearchView.class ).to( SearchViewImpl.class ).in( Singleton.class );
@@ -94,9 +104,8 @@ public class HomeworkModule
     }
 
     @Provides
-    @Singleton
-    public User provideUser()
+    public User provideUser( UserContainer userContainer )
     {
-        return User.getUser();
+        return userContainer.getUser();
     }
 }

@@ -3,8 +3,6 @@ package com.github.nmorel.homework.client.request;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -18,8 +16,6 @@ import com.google.web.bindery.requestfactory.shared.RequestFactory;
 
 public class RestRequestBuilder
 {
-    private static final Logger logger = Logger.getLogger( RestRequestBuilder.class.getName() );
-
     private String apiPath = "api/";
 
     private RequestBuilder builder;
@@ -52,18 +48,17 @@ public class RestRequestBuilder
         return this;
     }
 
-    public Request fire()
+    public String getUrl()
     {
         assertBuilderNotNull();
-        try
-        {
-            return builder.send();
-        }
-        catch ( RequestException e )
-        {
-            logger.log( Level.SEVERE, "Error sending the request", e );
-            return null;
-        }
+        return builder.getUrl();
+    }
+
+    public Request fire()
+        throws RequestException
+    {
+        assertBuilderNotNull();
+        return builder.send();
     }
 
     private void assertBuilderNotNull()

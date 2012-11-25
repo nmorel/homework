@@ -2,8 +2,12 @@ package com.github.nmorel.homework.client.request;
 
 import com.google.common.base.Preconditions;
 import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
 
+/**
+ * Request that list the 100 last commits on the given repository
+ * 
+ * @author Nicolas Morel
+ */
 public class CommitsRequest
     extends BaseRequest
 {
@@ -13,7 +17,7 @@ public class CommitsRequest
         setPath( "repos/{owner}/{repo}/commits" );
     }
 
-    public void fire( String owner, String repo, RequestCallback callback )
+    public void fire( String owner, String repo, RestCallback<?> callback )
     {
         Preconditions.checkNotNull( owner );
         Preconditions.checkNotNull( repo );
