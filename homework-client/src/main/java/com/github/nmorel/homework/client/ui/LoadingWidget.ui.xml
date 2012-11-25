@@ -9,11 +9,12 @@
     	height: 20px;
     	left: 12.5%;
     	width: 75%;
-    	margin: 0;
     }
   </ui:style>
 
   <g:HTMLPanel>
-    <b:ProgressBar type='ANIMATED' percent='100' addStyleNames='{style.progress}' ui:field='progressBar' />
+    <div class='{style.progress}'>
+      <b:ProgressBar type='ANIMATED' percent='100' ui:field='progressBar' />
+    </div>
   </g:HTMLPanel>
 </ui:UiBinder> 
