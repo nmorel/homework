@@ -26,35 +26,48 @@ h3 {
 	
 }
 
-.westContainer {
-	
-}
-
 .contentContainer {
 	
 }
 
-.repoCollaboratorsContainer {
-	margin: 5px 5px 5px 10px;
-	-webkit-border-top-left-radius: 10px;
-	-webkit-border-top-right-radius: 10px;
-	-moz-border-radius-topleft: 10px;
-	-moz-border-radius-topright: 10px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+.recentReposContainer {
+	
+}
+
+.recentReposTitleContainer {
+	border-bottom: 1px solid #DDD;
+	padding: 5px;
+}
+
+.recentReposTitle {
+	margin: 0px;
+	line-height: 16px;
+}
+
+.searchContainer, .repoContainer {
+	margin: 0px 5px;
 	-moz-box-shadow: 0px 0px 5px 2px #656565;
 	-webkit-box-shadow: 0px 0px 5px 2px #656565;
 	-o-box-shadow: 0px 0px 5px 2px #656565;
 	box-shadow: 0px 0px 5px 2px #656565;
 }
 
+.searchFormContainer {
+	margin-left: 10px;
+}
+
+.repoCollaboratorsContainer {
+}
+
 .repoCollaboratorsTitleContainer {
-	border-bottom: 1px solid black;
-	text-align: center;
+	border-bottom: 1px solid #DDD;
+	text-align: right;
+	padding: 5px;
 }
 
 .repoCollaboratorsTitle {
-	
+	margin: 0px;
+	line-height: 16px;
 }
 
 .repoCollaboratorsScroll {
@@ -62,7 +75,7 @@ h3 {
 }
 
 .repoCollaboratorCell {
-	width: 130px;
+	max-width: 120px;
 	height: 24px;
 	padding-left: 35px;
 	padding-top: 6px;

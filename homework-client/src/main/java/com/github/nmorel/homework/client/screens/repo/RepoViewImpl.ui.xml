@@ -8,13 +8,13 @@
 
   <g:DockLayoutPanel unit='PX'>
 
-    <g:east size="200">
+    <g:east size="180">
       <g:DockLayoutPanel unit='PX' addStyleNames='{res.style.repoCollaboratorsContainer}'>
-        <g:north size='28'>
+        <g:north size='25'>
           <g:HTMLPanel addStyleNames='{res.style.repoCollaboratorsTitleContainer}'>
-            <h3 class='{res.style.repoCollaboratorsTitle}'>
+            <h6 class='{res.style.repoCollaboratorsTitle}'>
               <ui:text from='{mess.repoCollaborators}' />
-            </h3>
+            </h6>
           </g:HTMLPanel>
         </g:north>
         <g:center>
@@ -25,26 +25,44 @@
       </g:DockLayoutPanel>
     </g:east>
 
-    <g:north size='100'>
-      <g:HorizontalPanel>
-        <g:HTMLPanel>
-          <h2 ui:field='repoTitle'>Title</h2>
-        </g:HTMLPanel>
-        <g:HTMLPanel ui:field='buttonBar' />
-      </g:HorizontalPanel>
-    </g:north>
-
     <g:center>
-      <g:TabLayoutPanel barUnit='PX' barHeight='38' ui:field='tabPanel'>
-        <g:tab>
-          <g:header><ui:text from='{mess.repoCommitsTab}'/></g:header>
-          <t:CommitsTimeline ui:field='commitsTimeline' />
-        </g:tab>
-        <g:tab>
-          <g:header><ui:text from='{mess.repoCollabImpactTab}'/></g:header>
-          <collaborators:CollaboratorsImpactChart ui:field='collaboratorsImpactChart' />
-        </g:tab>
-      </g:TabLayoutPanel>
+
+      <g:LayoutPanel addStyleNames='{res.style.repoContainer}'>
+
+        <g:layer left='5px' right='5px' top='0' bottom='0'>
+
+          <g:DockLayoutPanel unit='PX'>
+
+            <g:north size='100'>
+              <g:HorizontalPanel>
+                <b:Heading size='4' ui:field='repoTitle' />
+                <g:HTMLPanel ui:field='buttonBar' />
+              </g:HorizontalPanel>
+            </g:north>
+
+            <g:center>
+              <g:TabLayoutPanel barUnit='PX' barHeight='38' ui:field='tabPanel'>
+                <g:tab>
+                  <g:header>
+                    <ui:text from='{mess.repoCommitsTab}' />
+                  </g:header>
+                  <t:CommitsTimeline ui:field='commitsTimeline' />
+                </g:tab>
+                <g:tab>
+                  <g:header>
+                    <ui:text from='{mess.repoCollabImpactTab}' />
+                  </g:header>
+                  <collaborators:CollaboratorsImpactChart ui:field='collaboratorsImpactChart' />
+                </g:tab>
+              </g:TabLayoutPanel>
+            </g:center>
+
+          </g:DockLayoutPanel>
+
+        </g:layer>
+
+      </g:LayoutPanel>
+
     </g:center>
 
   </g:DockLayoutPanel>

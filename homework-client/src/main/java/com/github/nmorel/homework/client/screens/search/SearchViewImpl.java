@@ -47,7 +47,7 @@ public class SearchViewImpl
         /**
          * The styles used in this widget.
          */
-        @Source( "list.css" )
+        @Source( "searchResultList.css" )
         ListStyle cellListStyle();
     }
 

@@ -1,14 +1,19 @@
 package com.github.nmorel.homework.client.screens.main;
 
+import java.util.logging.Logger;
+
 import com.github.gwtbootstrap.client.ui.Button;
 import com.github.gwtbootstrap.client.ui.TextBox;
 import com.github.gwtbootstrap.client.ui.Tooltip;
 import com.github.gwtbootstrap.client.ui.constants.ButtonType;
 import com.github.gwtbootstrap.client.ui.constants.Placement;
+import com.github.nmorel.homework.client.model.RecentRepository;
 import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.ui.AbstractView;
+import com.github.nmorel.homework.client.ui.cell.RecentRepositoryCell;
 import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -17,7 +22,9 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -25,18 +32,41 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.ListDataProvider;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class MainViewImpl
     extends AbstractView
     implements MainView
 {
 
-    private static Binder uiBinder = GWT.create( Binder.class );
+    interface ListResources
+        extends CellList.Resources
+    {
+        /**
+         * The styles used in this widget.
+         */
+        @Source( "recentReposList.css" )
+        ListStyle cellListStyle();
+    }
+
+    interface ListStyle
+        extends CellList.Style
+    {
+
+    }
 
     interface Binder
         extends UiBinder<Widget, MainViewImpl>
     {
     }
+
+    private static final Logger logger = Logger.getLogger( MainViewImpl.class.getName() );
+
+    private static final ListResources listResources = GWT.create( ListResources.class );
+
+    private static Binder uiBinder = GWT.create( Binder.class );
 
     private MainPresenter presenter;
 
@@ -49,9 +79,26 @@ public class MainViewImpl
     @UiField
     SimplePanel loginPanel;
 
+    @UiField
+    DockLayoutPanel recentReposContainer;
+
+    @UiField( provided = true )
+    CellList<RecentRepository> recentReposList;
+
+    private ListDataProvider<RecentRepository> recentReposListProvider;
+
+    @Inject
+    Provider<RecentRepositoryCell> recentRepositoryCellProvider;
+
     @Override
     protected Widget initWidget()
     {
+        recentReposList = new CellList<RecentRepository>( recentRepositoryCellProvider.get(), listResources );
+        // doesn't need pagination
+        recentReposList.setPageSize( Integer.MAX_VALUE );
+        recentReposListProvider = new ListDataProvider<RecentRepository>();
+        recentReposListProvider.addDataDisplay( recentReposList );
+
         Widget widget = uiBinder.createAndBindUi( this );
         keyword.setPlaceholder( getMessages().headerSearchPlaceholder() );
 
@@ -131,5 +178,24 @@ public class MainViewImpl
     public void clear()
     {
         // nothing to do
+    }
+
+    @Override
+    public void updateRecentRepos( JsArray<RecentRepository> recentReposArray )
+    {
+        if ( null == recentReposArray || recentReposArray.length() == 0 )
+        {
+            recentReposContainer.setVisible( false );
+        }
+        else
+        {
+            recentReposContainer.setVisible( true );
+            recentReposListProvider.getList().clear();
+            for ( int i = 0; i < recentReposArray.length(); i++ )
+            {
+                RecentRepository repo = recentReposArray.get( i );
+                recentReposListProvider.getList().add( repo );
+            }
+        }
     }
 }

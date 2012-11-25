@@ -10,36 +10,49 @@
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
   <g:DockLayoutPanel unit='PX'>
-    <g:east size="200">
+  
+    <!-- Filter/Sort panel -->
+    <g:east size="180">
       <g:HTMLPanel>
         <!-- Empty -->
       </g:HTMLPanel>
     </g:east>
 
-    <g:north size='90'>
-      <g:HTMLPanel ui:field='searchPanel'>
-        <h2>
-          <ui:text from='{mess.searchTitle}' />
-        </h2>
-        <b:InputAddOn addStyleNames='input-append'>
-          <b:TextBox ui:field='keyword' debugId='searchKeyword' />
-          <b:Button ui:field='search' debugId='searchButton' icon='SEARCH' />
-        </b:InputAddOn>
-      </g:HTMLPanel>
-    </g:north>
     <g:center>
-      <g:DeckLayoutPanel ui:field='resultContainer'>
-        <h:LoadingWidget loadingText='{mess.searchLoading}' />
-        <g:HTMLPanel>
-          <h5>
-            <ui:text from='{mess.searchNoResult}' />
-          </h5>
-        </g:HTMLPanel>
-        <g:ScrollPanel>
-          <c:CellList ui:field='resultList'></c:CellList>
-        </g:ScrollPanel>
-      </g:DeckLayoutPanel>
+    
+      <!-- Main Panel -->
+      <g:DockLayoutPanel unit='PX' addStyleNames='{res.style.searchContainer}'>
+
+        <g:north size='90'>
+          <g:HTMLPanel ui:field='searchPanel' addStyleNames='{res.style.searchFormContainer}'>
+            <h4>
+              <ui:text from='{mess.searchTitle}' />
+            </h4>
+            <b:InputAddOn addStyleNames='input-append'>
+              <b:TextBox ui:field='keyword' debugId='searchKeyword' />
+              <b:Button ui:field='search' debugId='searchButton' icon='SEARCH' />
+            </b:InputAddOn>
+          </g:HTMLPanel>
+        </g:north>
+
+        <g:center>
+          <g:DeckLayoutPanel ui:field='resultContainer'>
+            <h:LoadingWidget loadingText='{mess.searchLoading}' />
+            <g:HTMLPanel>
+              <h5>
+                <ui:text from='{mess.searchNoResult}' />
+              </h5>
+            </g:HTMLPanel>
+            <g:ScrollPanel>
+              <c:CellList ui:field='resultList'></c:CellList>
+            </g:ScrollPanel>
+          </g:DeckLayoutPanel>
+        </g:center>
+
+      </g:DockLayoutPanel>
+      
     </g:center>
+    
   </g:DockLayoutPanel>
 
 </ui:UiBinder>

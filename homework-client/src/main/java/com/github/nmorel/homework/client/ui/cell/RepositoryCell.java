@@ -86,7 +86,7 @@ public class RepositoryCell
         }
 
         String forks = messages.repoForks( repo.getNbForks() );
-        String stars = messages.repoStars( repo.getNbFollowers() );
+        String stars = messages.repoStars( repo.getNbWatchers() );
         sb.append( template.details( sizeFormatted, forks, stars ) );
 
         sb.appendHtmlConstant( "</div>" );

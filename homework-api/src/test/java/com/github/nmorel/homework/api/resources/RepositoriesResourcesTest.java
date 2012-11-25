@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.github.nmorel.homework.api.model.Commit;
+import com.github.nmorel.homework.api.model.Repository;
 import com.github.nmorel.homework.api.model.User;
 import com.github.nmorel.homework.api.parsers.CommitsParser;
 import com.github.nmorel.homework.api.parsers.GsonHttpResponseParser;
@@ -149,5 +150,33 @@ public class RepositoriesResourcesTest
         verify( githubService ).execute( eq( HttpMethods.GET ), argument.capture(), any( CommitsParser.class ),
             eq( true ) );
         assertEquals( "http://api.github.test.com/repos/toto/zen/commits?per_page=100", argument.getValue().build() );
+    }
+
+    /**
+     * Test the recovery of the repository
+     */
+    @SuppressWarnings( "unchecked" )
+    @Test
+    public void getRepositoryTest()
+    {
+        GenericUrl baseTestUrl = new GenericUrl( "http://api.github.test.com" );
+        when( githubService.newGithubUrl() ).thenReturn( baseTestUrl );
+
+        Repository expectedResult = new Repository();
+        when(
+            githubService.execute( eq( HttpMethods.GET ), same( baseTestUrl ), any( GsonHttpResponseParser.class ),
+                eq( true ) ) ).thenReturn( expectedResult );
+
+        // get repository
+        Repository actualResult = resources.getRepository( "toto", "zen" );
+
+        // the result must be the same as the one returned by the service
+        assertSame( "The method shouldn't change the result", expectedResult, actualResult );
+
+        // we capture the url to test it
+        ArgumentCaptor<GenericUrl> argument = ArgumentCaptor.forClass( GenericUrl.class );
+        verify( githubService ).execute( eq( HttpMethods.GET ), argument.capture(), any( CommitsParser.class ),
+            eq( true ) );
+        assertEquals( "http://api.github.test.com/repos/toto/zen", argument.getValue().build() );
     }
 }

@@ -1,7 +1,9 @@
 package com.github.nmorel.homework.client.screens.main;
 
+import com.github.nmorel.homework.client.model.RecentRepository;
 import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.ui.View;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public interface MainView
@@ -17,4 +19,6 @@ public interface MainView
     AcceptsOneWidget getContainer();
 
     void setUser( User user );
+
+    void updateRecentRepos( JsArray<RecentRepository> recentReposArray );
 }

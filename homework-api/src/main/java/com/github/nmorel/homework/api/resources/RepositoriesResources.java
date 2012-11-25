@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.nmorel.homework.api.model.Commit;
+import com.github.nmorel.homework.api.model.Repository;
 import com.github.nmorel.homework.api.model.User;
 import com.github.nmorel.homework.api.parsers.CommitsParser;
 import com.github.nmorel.homework.api.parsers.GsonHttpResponseParser;
@@ -110,7 +111,7 @@ public class RepositoriesResources
     @Path( "{owner}/{repo}/commits" )
     public List<Commit> listCommits( @PathParam( "owner" ) String owner, @PathParam( "repo" ) String repo )
     {
-        logger.info( "Retrieving the informations for the repository : {}/{}", owner, repo );
+        logger.info( "Retrieving the commits for the repository : {}/{}", owner, repo );
 
         GenericUrl url = githubService.newGithubUrl();
         url.appendRawPath( "/repos/" );
@@ -125,6 +126,33 @@ public class RepositoriesResources
         logger.info( "{} commits found", commits.size() );
 
         return commits;
+    }
+
+    /**
+     * Get informations about the repository
+     * 
+     * @param owner owner of the repository
+     * @param repo name of the repository
+     * @return information about the repository
+     */
+    @GET
+    @Path( "{owner}/{repo}" )
+    public Repository getRepository( @PathParam( "owner" ) String owner, @PathParam( "repo" ) String repo )
+    {
+        logger.info( "Retrieving the informations for the repository : {}/{}", owner, repo );
+
+        GenericUrl url = githubService.newGithubUrl();
+        url.appendRawPath( "/repos/" );
+        url.appendRawPath( owner );
+        url.appendRawPath( "/" );
+        url.appendRawPath( repo );
+
+        Repository repository =
+            githubService.execute( HttpMethods.GET, url, new GsonHttpResponseParser<>( Repository.class ), true );
+
+        logger.info( "Repository found" );
+
+        return repository;
     }
 
 }

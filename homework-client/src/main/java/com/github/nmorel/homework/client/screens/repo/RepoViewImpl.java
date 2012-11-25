@@ -1,6 +1,10 @@
 package com.github.nmorel.homework.client.screens.repo;
 
+import java.util.logging.Logger;
+
+import com.github.gwtbootstrap.client.ui.Heading;
 import com.github.nmorel.homework.client.model.Commit;
+import com.github.nmorel.homework.client.model.DetailedRepository;
 import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.ui.AbstractView;
 import com.github.nmorel.homework.client.ui.cell.CollaboratorCell;
@@ -24,17 +28,40 @@ public class RepoViewImpl
     extends AbstractView
     implements RepoView
 {
-    private static Binder uiBinder = GWT.create( Binder.class );
+    interface ListResources
+        extends CellList.Resources
+    {
+        /**
+         * The styles used in this widget.
+         */
+        @Source( "collaboratorsList.css" )
+        ListStyle cellListStyle();
+    }
+
+    interface ListStyle
+        extends CellList.Style
+    {
+
+    }
 
     interface Binder
         extends UiBinder<Widget, RepoViewImpl>
     {
     }
 
+    private static final Logger logger = Logger.getLogger( RepoViewImpl.class.getName() );
+
+    private static final ListResources listResources = GWT.create( ListResources.class );
+
+    private static Binder uiBinder = GWT.create( Binder.class );
+
     @UiField( provided = true )
     CellList<User> collaboratorsList;
 
     private ListDataProvider<User> collaboratorsListProvider;
+
+    @UiField
+    Heading repoTitle;
 
     @UiField
     TabLayoutPanel tabPanel;
@@ -66,7 +93,7 @@ public class RepoViewImpl
     @Override
     protected Widget initWidget()
     {
-        collaboratorsList = new CellList<User>( new CollaboratorCell() );
+        collaboratorsList = new CellList<User>( new CollaboratorCell(), listResources );
         // doesn't need pagination
         collaboratorsList.setPageSize( Integer.MAX_VALUE );
         collaboratorsListProvider = new ListDataProvider<User>();
@@ -87,6 +114,13 @@ public class RepoViewImpl
         } );
 
         return widget;
+    }
+
+    @Override
+    public void showRepositoryInformations( DetailedRepository repository )
+    {
+        repoTitle.setText( repository.getOwner().getLogin() + " / " + repository.getName() );
+        // TODO show the rest of the informations
     }
 
     @Override
@@ -119,6 +153,7 @@ public class RepoViewImpl
     {
         commits = null;
         collaboratorsListProvider.getList().clear();
+        repoTitle.setText( null );
         commitsTimeline.clear();
         collaboratorsImpactChart.clear();
     }

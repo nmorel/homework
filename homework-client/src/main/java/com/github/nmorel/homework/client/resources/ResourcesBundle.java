@@ -15,9 +15,19 @@ public interface ResourcesBundle
 
         String headerTitle();
 
-        String westContainer();
+        String recentReposContainer();
+
+        String recentReposTitleContainer();
+
+        String recentReposTitle();
 
         String contentContainer();
+        
+        String searchContainer();
+        
+        String searchFormContainer();
+        
+        String repoContainer();
 
         String repoCollaboratorsContainer();
 

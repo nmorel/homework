@@ -16,6 +16,8 @@ public interface Messages
     String headerSearchPlaceholder();
 
     String headerTitle();
+    
+    String recentRepos();
 
     String repoCollabImpactColCollaborators();
 

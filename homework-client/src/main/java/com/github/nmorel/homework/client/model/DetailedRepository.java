@@ -2,14 +2,14 @@ package com.github.nmorel.homework.client.model;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class Repository
+public class DetailedRepository
     extends JavaScriptObject
 {
-    protected Repository()
+    protected DetailedRepository()
     {
     }
 
-    public final native String getOwner() /*-{
+    public final native User getOwner() /*-{
         return this.owner;
     }-*/;
 

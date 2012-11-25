@@ -1,11 +1,13 @@
 package com.github.nmorel.homework.client.screens.repo;
 
 import com.github.nmorel.homework.client.model.Commit;
+import com.github.nmorel.homework.client.model.DetailedRepository;
 import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.mvp.ActivityWithPlace;
 import com.github.nmorel.homework.client.place.RepoPlace;
 import com.github.nmorel.homework.client.request.CollaboratorsRequest;
 import com.github.nmorel.homework.client.request.CommitsRequest;
+import com.github.nmorel.homework.client.request.RepositoryRequest;
 import com.github.nmorel.homework.client.request.RestCallback;
 import com.github.nmorel.homework.client.screens.repo.RepoView.Presenter;
 import com.google.gwt.core.client.JsArray;
@@ -24,6 +26,9 @@ public class RepoActivity
 
     @Inject
     private PlaceController placeController;
+
+    @Inject
+    private Provider<RepositoryRequest> repositoryRequest;
 
     @Inject
     private Provider<CommitsRequest> commitsRequest;
@@ -50,6 +55,15 @@ public class RepoActivity
 
         if ( currentPlace.isReload() )
         {
+            repositoryRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(),
+                new RestCallback<DetailedRepository>() {
+
+                    @Override
+                    protected void onSuccess( DetailedRepository result )
+                    {
+                        view.showRepositoryInformations( result );
+                    }
+                } );
             commitsRequest.get().fire( currentPlace.getOwner(), currentPlace.getName(),
                 new RestCallback<JsArray<Commit>>() {
 
