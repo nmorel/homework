@@ -113,7 +113,7 @@ h3 {
 .alertGlassPanel {
   background-color: #000;
   opacity: 0.3;
-  filter: alpha(opacity=30);
+  filter: literal("alpha(opacity=30)");
 }
 
 /* TabLayoutPanel style */

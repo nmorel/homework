@@ -1,24 +1,20 @@
 .cellListWidget {
-  
+	
 }
 
-.cellListEvenItem {
-  cursor: pointer;
-  zoom: 1;
-  background-color: white;
-  color: black;
-}
-
-.cellListOddItem {
-  cursor: pointer;
-  zoom: 1;
-  background-color: black;
-  color: white;
+.cellListEvenItem,.cellListOddItem {
+	zoom: 1;
+	border-bottom: 1px solid #DDDDDD;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	border-left: 3px solid transparent;
 }
 
 .cellListKeyboardSelectedItem {
-	background-color: yellow;
+	border-left-color: #DD4B39;
 }
 
 .cellListSelectedItem {
+	
 }

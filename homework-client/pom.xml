@@ -77,15 +77,7 @@
           <genParam>${gwt.genParam}</genParam>
           <noserver>true</noserver>
           <runTarget>${runTarget}</runTarget>
-          <i18nMessagesBundle>com.github.nmorel.homework.client.resources.messages.Messages</i18nMessagesBundle>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>i18n</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
 
       <plugin>

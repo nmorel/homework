@@ -28,6 +28,8 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Default implementation of the view {@link SearchView}.
@@ -82,6 +84,9 @@ public class SearchViewImpl
 
     ListDataProvider<Repository> resultDataProvider;
 
+    @Inject
+    private Provider<RepositoryCell> repositoryCellProvider;
+
     @Override
     public void setPresenter( Presenter presenter )
     {
@@ -91,7 +96,7 @@ public class SearchViewImpl
     @Override
     protected Widget initWidget()
     {
-        resultList = new CellList<Repository>( new RepositoryCell(), listResources );
+        resultList = new CellList<Repository>( repositoryCellProvider.get(), listResources );
         // no pagination
         resultList.setPageSize( Integer.MAX_VALUE );
         // user can navigate and select with keyboard

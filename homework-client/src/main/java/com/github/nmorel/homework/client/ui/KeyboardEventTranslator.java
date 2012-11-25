@@ -8,7 +8,7 @@ import com.google.gwt.view.client.DefaultSelectionEventManager.EventTranslator;
 import com.google.gwt.view.client.DefaultSelectionEventManager.SelectAction;
 
 /**
- * Custom event translator allowing the selection with the enter key. By default, only space key works.
+ * Custom event translator allowing the selection with the enter and space key only, clicks are ignored.
  * 
  * @author Nicolas Morel
  * @param <T>
@@ -28,20 +28,7 @@ public class KeyboardEventTranslator<T>
     {
         NativeEvent nativeEvent = event.getNativeEvent();
         String type = nativeEvent.getType();
-        if ( BrowserEvents.CLICK.equals( type ) )
-        {
-            if ( nativeEvent.getCtrlKey() || nativeEvent.getMetaKey() )
-            {
-                // Toggle selection on ctrl+click.
-                return SelectAction.TOGGLE;
-            }
-            else
-            {
-                // Select on click.
-                return SelectAction.SELECT;
-            }
-        }
-        else if ( BrowserEvents.KEYUP.equals( type ) )
+        if ( BrowserEvents.KEYUP.equals( type ) )
         {
             // Toggle selection on space and enter.
             int keyCode = nativeEvent.getKeyCode();

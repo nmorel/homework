@@ -21,11 +21,23 @@ public class Repository
         return this.description;
     }-*/;
 
+    public final native String getLanguage() /*-{
+        return this.language;
+    }-*/;
+
+    public final native int getSize() /*-{
+        return this.size;
+    }-*/;
+
+    public final native int getNbForks() /*-{
+        return this.forks;
+    }-*/;
+
     public final native int getNbFollowers() /*-{
         return this.followers;
     }-*/;
 
-    public final native String getLanguage() /*-{
-        return this.language;
+    public final native boolean isAFork() /*-{
+        return this.fork;
     }-*/;
 }
