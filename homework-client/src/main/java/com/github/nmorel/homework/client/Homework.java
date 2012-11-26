@@ -22,11 +22,13 @@ import com.google.web.bindery.event.shared.UmbrellaException;
  * Homework entry point
  */
 public class Homework
-    implements EntryPoint, UncaughtExceptionHandler
+    implements EntryPoint, UncaughtExceptionHandler, ResizeHandler
 {
     public static final HomeworkGinjector ginjector = GWT.create( HomeworkGinjector.class );
 
     private static final Logger logger = Logger.getLogger( Homework.class.getName() );
+
+    private final SimplePanel container = new SimplePanel();
 
     /**
      * This is the entry point method.
@@ -34,28 +36,16 @@ public class Homework
     public void onModuleLoad()
     {
         GWT.setUncaughtExceptionHandler( this );
+        Window.addResizeHandler( this );
 
         initLog();
 
         // We directly load the visualization api to gain a few ms
         VisualizationLoader.load();
 
-        final SimplePanel panel = new SimplePanel();
-        RootPanel.get().add( panel );
-        
-        panel.setSize( Window.getClientWidth() + "px", Window.getClientHeight() + "px" );
-        panel.getElement().getStyle().setPropertyPx( "minWidth", 800 );
-        panel.getElement().getStyle().setPropertyPx( "minHeight", 600 );
-        panel.setWidget( ginjector.getMainPresenter().getView() );
-
-        Window.addResizeHandler( new ResizeHandler() {
-
-            @Override
-            public void onResize( ResizeEvent event )
-            {
-                panel.setSize( Window.getClientWidth() + "px", Window.getClientHeight() + "px" );
-            }
-        } );
+        container.setWidget( ginjector.getMainPresenter().getView() );
+        RootPanel.get().add( container );
+        onResize( null );
 
         // Goes to place represented on URL or default place
         ginjector.getPlaceHistoryHandler().handleCurrentHistory();
@@ -91,5 +81,18 @@ public class Homework
 
         logger.log( Level.SEVERE, "Uncaught exception", throwable );
         Alert.showError( throwable.getMessage() );
+    }
+
+    @Override
+    public void onResize( ResizeEvent event )
+    {
+        // Using a min resolution of 800*600 before adding scrollbars to the entire application
+        int newWidth = Math.max( Window.getClientWidth(), 800 );
+        int newHeight = Math.max( Window.getClientHeight(), 600 );
+        if ( logger.isLoggable( Level.FINER ) )
+        {
+            logger.finer( "Window resized : new width = " + newWidth + " / new height = " + newHeight );
+        }
+        container.setPixelSize( newWidth, newHeight );
     }
 }
