@@ -5,7 +5,7 @@
   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
-  <g:DockLayoutPanel unit="PX">
+  <g:DockLayoutPanel unit="PX" width='100%' height='100%'>
     <g:north size="40">
       <g:HTMLPanel addStyleNames='{res.style.headerContainer}'>
         <div class='{res.style.headerInnerContainer}'>

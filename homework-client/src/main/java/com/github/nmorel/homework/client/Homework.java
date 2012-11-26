@@ -10,9 +10,12 @@ import com.github.nmorel.homework.client.utils.Alert;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.web.bindery.event.shared.UmbrellaException;
 
 /**
@@ -37,7 +40,22 @@ public class Homework
         // We directly load the visualization api to gain a few ms
         VisualizationLoader.load();
 
-        RootLayoutPanel.get().add( ginjector.getMainPresenter().getView() );
+        final SimplePanel panel = new SimplePanel();
+        RootPanel.get().add( panel );
+        
+        panel.setSize( Window.getClientWidth() + "px", Window.getClientHeight() + "px" );
+        panel.getElement().getStyle().setPropertyPx( "minWidth", 800 );
+        panel.getElement().getStyle().setPropertyPx( "minHeight", 600 );
+        panel.setWidget( ginjector.getMainPresenter().getView() );
+
+        Window.addResizeHandler( new ResizeHandler() {
+
+            @Override
+            public void onResize( ResizeEvent event )
+            {
+                panel.setSize( Window.getClientWidth() + "px", Window.getClientHeight() + "px" );
+            }
+        } );
 
         // Goes to place represented on URL or default place
         ginjector.getPlaceHistoryHandler().handleCurrentHistory();
