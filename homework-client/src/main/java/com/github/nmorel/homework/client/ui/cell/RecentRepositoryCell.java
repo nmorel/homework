@@ -17,7 +17,7 @@ public class RecentRepositoryCell
     interface Template
         extends SafeHtmlTemplates
     {
-        @SafeHtmlTemplates.Template( "<div style='max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;' title='{1} / {2}'><a href='#{0}' style='font-size: 13px;'>{1} / {2}</a></div>" )
+        @SafeHtmlTemplates.Template( "<div style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap;' title='{1} / {2}'><a href='#{0}' style='font-size: 13px;'>{1} / {2}</a></div>" )
         SafeHtml title( String href, String owner, String name );
     }
 

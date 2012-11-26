@@ -36,20 +36,16 @@
     </g:north>
 
     <g:west size="180">
-      <g:DockLayoutPanel unit='PX' addStyleNames='{res.style.recentReposContainer}' ui:field='recentReposContainer'>
-        <g:north size='25'>
-          <g:HTMLPanel addStyleNames='{res.style.recentReposTitleContainer}'>
-            <h6 class='{res.style.recentReposTitle}'>
-              <ui:text from='{mess.recentRepos}' />
-            </h6>
-          </g:HTMLPanel>
-        </g:north>
-        <g:center>
-          <g:ScrollPanel addStyleNames='res.style.recentReposScroll}'>
-            <c:CellList ui:field='recentReposList' />
-          </g:ScrollPanel>
-        </g:center>
-      </g:DockLayoutPanel>
+      <g:HeaderPanel addStyleNames='{res.style.recentReposContainer}' ui:field='recentReposContainer'>
+        <g:HTMLPanel addStyleNames='{res.style.recentReposTitleContainer}'>
+          <h6 class='{res.style.recentReposTitle}'>
+            <ui:text from='{mess.recentRepos}' />
+          </h6>
+        </g:HTMLPanel>
+        <g:ScrollPanel addStyleNames='{res.style.recentReposScroll}'>
+          <c:CellList ui:field='recentReposList' />
+        </g:ScrollPanel>
+      </g:HeaderPanel>
     </g:west>
 
     <g:center>

@@ -23,6 +23,8 @@ public class Repository
 
     private String language;
 
+    private String homepage;
+
     public User getOwner()
     {
         return owner;
@@ -61,6 +63,11 @@ public class Repository
     public String getLanguage()
     {
         return language;
+    }
+
+    public String getHomepage()
+    {
+        return homepage;
     }
 
 }

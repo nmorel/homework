@@ -20,5 +20,10 @@ public enum State
     /**
      * After a request to the server has returned. Usually show a list of results.
      */
-    LOADED;
+    LOADED,
+
+    /**
+     * After a request to the server has returned in error.
+     */
+    ERROR;
 }

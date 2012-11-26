@@ -59,9 +59,9 @@ public class PopupAlertPanel
                 public void setPosition( int offsetWidth, int offsetHeight )
                 {
                     PopupAlertPanel.this.getElement().getStyle().clearTop();
-                    PopupAlertPanel.this.getElement().getStyle().clearLeft();
+                    PopupAlertPanel.this.getElement().getStyle().clearRight();
                     PopupAlertPanel.this.getElement().getStyle().setBottom( 5, Unit.PX );
-                    PopupAlertPanel.this.getElement().getStyle().setRight( 5, Unit.PX );
+                    PopupAlertPanel.this.getElement().getStyle().setLeft( 5, Unit.PX );
                 }
             } );
         }

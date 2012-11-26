@@ -7,6 +7,8 @@ import com.github.nmorel.homework.client.model.Commit;
 import com.github.nmorel.homework.client.model.DetailedRepository;
 import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.ui.AbstractView;
+import com.github.nmorel.homework.client.ui.LoadingWidget;
+import com.github.nmorel.homework.client.ui.State;
 import com.github.nmorel.homework.client.ui.cell.CollaboratorCell;
 import com.github.nmorel.homework.client.ui.repo.collaborators.CollaboratorsImpactChart;
 import com.github.nmorel.homework.client.ui.repo.commits.CommitsTimeline;
@@ -19,6 +21,11 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HeaderPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
@@ -55,13 +62,37 @@ public class RepoViewImpl
 
     private static Binder uiBinder = GWT.create( Binder.class );
 
+    @UiField
+    HeaderPanel collaboratorsPanel;
+
     @UiField( provided = true )
     CellList<User> collaboratorsList;
 
     private ListDataProvider<User> collaboratorsListProvider;
 
     @UiField
-    Heading repoTitle;
+    LayoutPanel container;
+
+    @UiField
+    LoadingWidget loading;
+
+    @UiField
+    HeaderPanel content;
+
+    private boolean titleLoading;
+    private boolean commitsLoading;
+    
+    @UiField
+    HTMLPanel titleContainer;
+
+    @UiField
+    Heading title;
+
+    @UiField
+    Label description;
+
+    @UiField
+    Anchor homepage;
 
     @UiField
     TabLayoutPanel tabPanel;
@@ -119,12 +150,19 @@ public class RepoViewImpl
     @Override
     public void showRepositoryInformations( DetailedRepository repository )
     {
-        repoTitle.setText( repository.getOwner().getLogin() + " / " + repository.getName() );
+        title.setText( repository.getOwner().getLogin() + " / " + repository.getName() );
+
+        description.setVisible( null != repository.getDescription() );
+        description.setText( repository.getDescription() );
+
+        homepage.setVisible( null != repository.getHomepage() );
+        homepage.setHref( repository.getHomepage() );
+        homepage.setText( repository.getHomepage() );
         // TODO show the rest of the informations
     }
 
     @Override
-    public void showResults( final JsArray<Commit> commits )
+    public void showCommits( final JsArray<Commit> commits )
     {
         this.commits = commits;
 
@@ -153,7 +191,7 @@ public class RepoViewImpl
     {
         commits = null;
         collaboratorsListProvider.getList().clear();
-        repoTitle.setText( null );
+        title.setText( null );
         commitsTimeline.clear();
         collaboratorsImpactChart.clear();
     }
@@ -191,5 +229,83 @@ public class RepoViewImpl
                 }
             } );
         }
+    }
+
+    @Override
+    public void setStateTitle( State state )
+    {
+        switch ( state )
+        {
+            case DEFAULT:
+            case LOADING:
+                titleLoading = true;
+                updateLoadingState();
+                break;
+            case LOADED:
+                titleLoading = false;
+                titleContainer.setVisible( true );
+                updateLoadingState();
+                break;
+            case ERROR:
+                titleLoading = false;
+                titleContainer.setVisible( false );
+                updateLoadingState();
+                break;
+        }
+    }
+
+    @Override
+    public void setStateCommits( State state )
+    {
+        switch ( state )
+        {
+            case DEFAULT:
+            case LOADING:
+                commitsLoading = true;
+                updateLoadingState();
+                break;
+            case LOADED:
+                commitsLoading = false;
+                tabPanel.setVisible( true );
+                updateLoadingState();
+                break;
+            case ERROR:
+                commitsLoading = false;
+                tabPanel.setVisible( false );
+                updateLoadingState();
+                break;
+        }
+    }
+
+    @Override
+    public void setStateCollaborators( State state )
+    {
+        switch ( state )
+        {
+            case DEFAULT:
+            case LOADING:
+            case ERROR:
+                collaboratorsPanel.setVisible( false );
+                break;
+            case LOADED:
+                if ( collaboratorsListProvider.getList().isEmpty() )
+                {
+                    collaboratorsPanel.setVisible( false );
+                }
+                else
+                {
+                    collaboratorsPanel.setVisible( true );
+                    collaboratorsPanel.onResize();
+                }
+                break;
+        }
+    }
+
+    private void updateLoadingState()
+    {
+        boolean isLoading = titleLoading || commitsLoading;
+        container.setWidgetVisible( loading, isLoading );
+        container.setWidgetVisible( content, !isLoading );
+        container.onResize();
     }
 }

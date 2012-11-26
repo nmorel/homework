@@ -40,4 +40,8 @@ public class DetailedRepository
     public final native boolean isAFork() /*-{
         return this.fork;
     }-*/;
+
+    public final native String getHomepage() /*-{
+        return this.homepage;
+    }-*/;
 }

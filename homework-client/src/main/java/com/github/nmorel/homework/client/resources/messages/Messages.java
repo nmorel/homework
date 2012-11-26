@@ -51,6 +51,8 @@ public interface Messages
 
     String searchButton();
 
+    String searchError();
+
     String searchLoading();
 
     String searchNoResult();

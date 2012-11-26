@@ -10,7 +10,7 @@
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
   <g:DockLayoutPanel unit='PX'>
-  
+
     <!-- Filter/Sort panel -->
     <g:east size="180">
       <g:HTMLPanel>
@@ -19,40 +19,33 @@
     </g:east>
 
     <g:center>
-    
+
       <!-- Main Panel -->
-      <g:DockLayoutPanel unit='PX' addStyleNames='{res.style.searchContainer}'>
+      <g:HeaderPanel addStyleNames='{res.style.searchContainer}'>
 
-        <g:north size='90'>
-          <g:HTMLPanel ui:field='searchPanel' addStyleNames='{res.style.searchFormContainer}'>
-            <h4>
-              <ui:text from='{mess.searchTitle}' />
-            </h4>
-            <b:InputAddOn addStyleNames='input-append'>
-              <b:TextBox ui:field='keyword' debugId='searchKeyword' />
-              <b:Button ui:field='search' debugId='searchButton' icon='SEARCH' />
-            </b:InputAddOn>
-          </g:HTMLPanel>
-        </g:north>
+        <g:HTMLPanel ui:field='searchPanel' addStyleNames='{res.style.searchFormContainer}'>
+          <h4>
+            <ui:text from='{mess.searchTitle}' />
+          </h4>
+          <b:InputAddOn addStyleNames='input-append'>
+            <b:TextBox ui:field='keyword' debugId='searchKeyword' />
+            <b:Button ui:field='search' debugId='searchButton' icon='SEARCH' />
+          </b:InputAddOn>
+        </g:HTMLPanel>
 
-        <g:center>
-          <g:DeckLayoutPanel ui:field='resultContainer'>
-            <h:LoadingWidget loadingText='{mess.searchLoading}' />
-            <g:HTMLPanel>
-              <h5>
-                <ui:text from='{mess.searchNoResult}' />
-              </h5>
-            </g:HTMLPanel>
-            <g:ScrollPanel>
-              <c:CellList ui:field='resultList'></c:CellList>
-            </g:ScrollPanel>
-          </g:DeckLayoutPanel>
-        </g:center>
+        <g:DeckLayoutPanel ui:field='resultContainer' width='100%' height='100%'>
+          <h:LoadingWidget loadingText='{mess.searchLoading}' />
+          <b:Heading size='5' text='{mess.searchNoResult}' addStyleNames='{res.style.searchNoResult}' />
+          <b:Heading size='5' text='{mess.searchError}' addStyleNames='{res.style.searchError}' />
+          <g:ScrollPanel>
+            <c:CellList ui:field='resultList'></c:CellList>
+          </g:ScrollPanel>
+        </g:DeckLayoutPanel>
 
-      </g:DockLayoutPanel>
-      
+      </g:HeaderPanel>
+
     </g:center>
-    
+
   </g:DockLayoutPanel>
 
 </ui:UiBinder>

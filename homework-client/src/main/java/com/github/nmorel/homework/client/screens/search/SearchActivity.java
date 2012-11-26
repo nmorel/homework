@@ -73,6 +73,14 @@ public class SearchActivity
                     view.showResults( result.getRepositories() );
                     view.setState( State.LOADED );
                 }
+                
+                @Override
+                protected void onError( Throwable throwable )
+                {
+                    // we let the default error handling
+                    super.onError( throwable );
+                    view.setState( State.ERROR );
+                }
             } );
             view.setState( State.LOADING );
         }

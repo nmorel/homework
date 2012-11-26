@@ -20,6 +20,8 @@ public interface ResourcesBundle
         String recentReposTitleContainer();
 
         String recentReposTitle();
+        
+        String recentReposScroll();
 
         String contentContainer();
         
@@ -27,8 +29,12 @@ public interface ResourcesBundle
         
         String searchFormContainer();
         
+        String searchNoResult();
+        
+        String searchError();
+        
         String repoContainer();
-
+        
         String repoCollaboratorsContainer();
 
         String repoCollaboratorsTitleContainer();
@@ -40,6 +46,8 @@ public interface ResourcesBundle
         String repoCollaboratorCell();
 
         String repoCollaboratorAvatar();
+        
+        String repoTitleContainer();
         
         String repoCommitTimelineDivAvatar();
         

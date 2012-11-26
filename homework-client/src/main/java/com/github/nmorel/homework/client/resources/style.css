@@ -45,6 +45,10 @@ h3 {
 	line-height: 16px;
 }
 
+.recentReposScroll {
+	height: 100%;
+}
+
 .searchContainer, .repoContainer {
 	margin: 0px 5px;
 	-moz-box-shadow: 0px 0px 5px 2px #656565;
@@ -55,6 +59,15 @@ h3 {
 
 .searchFormContainer {
 	margin-left: 10px;
+}
+
+.searchNoResult {
+	margin-left: 10px;
+}
+
+.searchError {
+	margin-left: 10px;
+	color: red;
 }
 
 .repoCollaboratorsContainer {
@@ -72,7 +85,7 @@ h3 {
 }
 
 .repoCollaboratorsScroll {
-	
+	height: 100%;
 }
 
 .repoCollaboratorCell {
@@ -92,6 +105,11 @@ h3 {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+}
+
+.repoTitleContainer {
+	min-height: 50px;
+	margin-bottom: 10px;
 }
 
 .repoCommitTimelineDivAvatar, .repoCommitTimelineDivNoAvatar {
@@ -168,34 +186,3 @@ h3 {
 }
 
 /* End TabLayoutPanel style */
-
-/* Webkit custom scrollbar style */
-body ::-webkit-scrollbar {
-	width: 16px;
-	height: 16px;
-}
-
-body ::-webkit-scrollbar-thumb {
-	min-height: 28px;
-	padding-top: 100px;
-	border-left: 6px solid transparent;
-	border-right: 1px solid transparent;
-	border-top: 0 solid transparent;
-	border-bottom: 0 solid transparent;
-	background-clip: padding-box;
-	background-color: rgba(0, 0, 0, 0.2);
-	-webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0
-		rgba(0, 0, 0, 0.07);
-}
-
-body ::-webkit-scrollbar-button {
-	height: 0;
-	width: 0;
-}
-
-body ::-webkit-scrollbar-track {
-	border-left: 6px solid transparent;
-	border-right: 1px solid transparent;
-	background-clip: padding-box;
-}
-/* End Webkit custom scrollbar style */

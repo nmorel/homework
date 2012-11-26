@@ -187,9 +187,15 @@ public class SearchViewImpl
                 }
                 else
                 {
-                    resultContainer.showWidget( 2 );
+                    resultContainer.showWidget( 3 );
                     setFocusOnList();
                 }
+                resultContainer.setVisible( true );
+                break;
+            case ERROR:
+                setFormEnabled( true );
+                resultContainer.showWidget( 2 );
+                setFocusOnKeyword();
                 resultContainer.setVisible( true );
                 break;
         }
