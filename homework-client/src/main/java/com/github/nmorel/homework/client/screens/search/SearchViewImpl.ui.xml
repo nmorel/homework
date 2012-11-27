@@ -34,11 +34,11 @@
         </g:HTMLPanel>
 
         <g:DeckLayoutPanel ui:field='resultContainer' width='100%' height='100%'>
-          <h:LoadingWidget loadingText='{mess.searchLoading}' />
+          <h:LoadingWidget loadingText='{mess.searchLoading}' debugId='searchLoading' />
           <b:Heading size='5' text='{mess.searchNoResult}' addStyleNames='{res.style.searchNoResult}' />
           <b:Heading size='5' text='{mess.searchError}' addStyleNames='{res.style.searchError}' />
           <g:ScrollPanel>
-            <c:CellList ui:field='resultList'></c:CellList>
+            <c:CellList ui:field='resultList' debugId='searchResultList' />
           </g:ScrollPanel>
         </g:DeckLayoutPanel>
 

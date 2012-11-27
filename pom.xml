@@ -59,6 +59,8 @@
     <powermock.version>1.4.12</powermock.version>
     <javassist.version>3.17.0-GA</javassist.version>
     <mockwebserver.version>20121111</mockwebserver.version>
+    <selenium.version>2.25.0</selenium.version>
+    <selenium-operadriver.version>0.14</selenium-operadriver.version>
   </properties>
 
   <dependencyManagement>
@@ -242,6 +244,40 @@
         <groupId>com.google.mockwebserver</groupId>
         <artifactId>mockwebserver</artifactId>
         <version>${mockwebserver.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- Selenium dependencies -->
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>${selenium.version}</version>
+        <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <artifactId>selenium-android-driver</artifactId>
+            <groupId>org.seleniumhq.selenium</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>selenium-iphone-driver</artifactId>
+            <groupId>org.seleniumhq.selenium</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>selenium-htmlunit-driver</artifactId>
+            <groupId>org.seleniumhq.selenium</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-remote-driver</artifactId>
+        <version>${selenium.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.opera</groupId>
+        <artifactId>operadriver</artifactId>
+        <version>${selenium-operadriver.version}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>

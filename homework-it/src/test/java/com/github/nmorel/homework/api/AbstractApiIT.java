@@ -2,27 +2,21 @@ package com.github.nmorel.homework.api;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-
+import com.github.nmorel.homework.AbstractIT;
 import com.google.api.client.http.EmptyContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
-import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-import com.google.mockwebserver.MockWebServer;
 import com.google.mockwebserver.RecordedRequest;
 
 /**
@@ -31,27 +25,11 @@ import com.google.mockwebserver.RecordedRequest;
  * @author Nicolas Morel
  */
 public abstract class AbstractApiIT
+    extends AbstractIT
 {
-    protected static final String URL_BASE = "http://localhost:8090";
     protected static final String LAST_MODIFIED = "Last-Modified";
     protected static final String IF_MODIFIED_SINCE = "If-Modified-Since";
     protected static final HttpTransport httpTransport = new NetHttpTransport();
-    protected MockWebServer githubMock;
-
-    @Before
-    public void startGithubMock()
-        throws IOException
-    {
-        githubMock = new MockWebServer();
-        githubMock.play( 8091 );
-    }
-
-    @After
-    public void shutdownGithubMock()
-        throws IOException
-    {
-        githubMock.shutdown();
-    }
 
     protected GenericUrl url()
     {
@@ -92,17 +70,6 @@ public abstract class AbstractApiIT
         throws IOException
     {
         return buildPostRequest( url ).execute();
-    }
-
-    protected String getMockedBody( String file )
-        throws IOException
-    {
-        return Files.toString( getTestFile( file ), Charsets.UTF_8 );
-    }
-
-    protected File getTestFile( String file )
-    {
-        return new File( "src/test/resources", file );
     }
 
     protected void assertResponseOk( HttpResponse response )

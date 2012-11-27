@@ -44,6 +44,16 @@
       <groupId>com.google.mockwebserver</groupId>
       <artifactId>mockwebserver</artifactId>
     </dependency>
+
+    <!-- Selenium dependencies -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.opera</groupId>
+      <artifactId>operadriver</artifactId>
+    </dependency>
   </dependencies>
 
   <build>

@@ -12,6 +12,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.debug.client.DebugInfo;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.DOM;
@@ -59,6 +60,7 @@ public class Homework
     {
         GWT.setUncaughtExceptionHandler( this );
         Window.addResizeHandler( this );
+        DebugInfo.setDebugIdPrefix( "" );
 
         initLog();
 
