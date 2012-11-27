@@ -13,8 +13,9 @@
   </prerequisites>
 
   <modules>
-    <module>homework-api</module>
     <module>homework-client</module>
+    <module>homework-api</module>
+    <module>homework-it</module>
   </modules>
 
   <repositories>
@@ -36,6 +37,8 @@
     <gwt-maven.version>2.5.0</gwt-maven.version>
     <tomcat7-maven.version>2.0</tomcat7-maven.version>
     <maven-war.version>2.3</maven-war.version>
+    <surefire.version>2.12.4</surefire.version>
+    <failsafe.version>2.12.4</failsafe.version>
 
     <!-- Dependencies version -->
     <gwt.version>2.5.0</gwt.version>
@@ -55,6 +58,7 @@
     <mockito.version>1.9.0</mockito.version>
     <powermock.version>1.4.12</powermock.version>
     <javassist.version>3.17.0-GA</javassist.version>
+    <mockwebserver.version>20121111</mockwebserver.version>
   </properties>
 
   <dependencyManagement>
@@ -234,7 +238,12 @@
         <version>${javassist.version}</version>
         <scope>test</scope>
       </dependency>
-
+      <dependency>
+        <groupId>com.google.mockwebserver</groupId>
+        <artifactId>mockwebserver</artifactId>
+        <version>${mockwebserver.version}</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -315,6 +324,27 @@
               <addMavenDescriptor>false</addMavenDescriptor>
             </archive>
           </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${surefire.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${failsafe.version}</version>
+          <executions>
+            <execution>
+              <id>it</id>
+              <phase>integration-test</phase>
+              <goals>
+                <goal>integration-test</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
 
         <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build 

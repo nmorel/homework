@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.nmorel.homework</groupId>
+    <artifactId>homework</artifactId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>homework-it</artifactId>
+  <packaging>jar</packaging>
+
+  <prerequisites>
+    <maven>${maven.version}</maven>
+  </prerequisites>
+
+  <dependencies>
+    <!-- Guava dependencies -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+
+    <!-- HttpClient dependencies -->
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client</artifactId>
+    </dependency>
+
+    <!-- Test dependencies -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.mockwebserver</groupId>
+      <artifactId>mockwebserver</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>start-it</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>run-war</goal>
+            </goals>
+            <configuration>
+              <fork>true</fork>
+            </configuration>
+          </execution>
+          <execution>
+            <id>stop-it</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>shutdown</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <uriEncoding>UTF-8</uriEncoding>
+          <port>8090</port>
+          <addContextWarDependencies>false</addContextWarDependencies>
+          <addWarDependenciesInClassloader>false</addWarDependenciesInClassloader>
+          <ignorePackaging>true</ignorePackaging>
+          <contextFile>${basedir}/src/tomcat/context.xml</contextFile>
+          <warDirectory>${basedir}/src/tomcat</warDirectory>
+          <webapps>
+            <webapp>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>homework-api</artifactId>
+              <version>${project.version}</version>
+              <type>war</type>
+              <asWebapp>true</asWebapp>
+              <contextPath>/</contextPath>
+            </webapp>
+          </webapps>
+          <systemProperties>
+            <homework.config>${basedir}/src/test/resources/it.config</homework.config>
+            <github.client.id>1234567890</github.client.id>
+            <github.client.secret>9876543210987654321</github.client.secret>
+          </systemProperties>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
