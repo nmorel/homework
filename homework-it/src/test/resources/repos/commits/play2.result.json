@@ -1,0 +1,20 @@
+[
+  {
+	"sha": "9c5bf9f48fe18a07008819229ce59c0238893511",
+	"message": "[#1162] Session is lost when application.session.maxAge is set to 30d",
+	"author": {
+		"date": "2012-05-10T14:21:09Z",
+		"login": "pepite",
+		"name": "Nicolas Leroux",
+		"email": "leroux.nicolas@gmail.com",
+		"avatar_url": "https://secure.gravatar.com/avatar/34fe9578c98748263731073b5013cb07?d\u003dhttps://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
+	},
+	"committer": {
+		"date": "2012-05-10T14:21:27Z",
+		"login": "pepite",
+		"name": "Nicolas Leroux",
+		"email": "leroux.nicolas@gmail.com",
+		"avatar_url": "https://secure.gravatar.com/avatar/34fe9578c98748263731073b5013cb07?d\u003dhttps://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
+	}
+  }
+]

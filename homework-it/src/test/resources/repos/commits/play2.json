@@ -1,0 +1,64 @@
+[
+  {
+    "sha": "9c5bf9f48fe18a07008819229ce59c0238893511",
+    "parents": [
+      {
+        "sha": "c95fe6986fa881ee346b6b18740c79fbada9fc76",
+        "url": "https://api.github.com/repos/playframework/play/commits/c95fe6986fa881ee346b6b18740c79fbada9fc76"
+      }
+    ],
+    "commit": {
+      "comment_count": 0,
+      "message": "[#1162] Session is lost when application.session.maxAge is set to 30d",
+      "author": {
+        "email": "leroux.nicolas@gmail.com",
+        "name": "Nicolas Leroux",
+        "date": "2012-05-10T14:21:09Z"
+      },
+      "url": "https://api.github.com/repos/playframework/play/git/commits/9c5bf9f48fe18a07008819229ce59c0238893511",
+      "committer": {
+        "email": "leroux.nicolas@gmail.com",
+        "name": "Nicolas Leroux",
+        "date": "2012-05-10T14:21:27Z"
+      },
+      "tree": {
+        "sha": "98af26d242639eaf93b93e2f2d9f1443fc9b3520",
+        "url": "https://api.github.com/repos/playframework/play/git/trees/98af26d242639eaf93b93e2f2d9f1443fc9b3520"
+      }
+    },
+    "author": {
+      "gravatar_id": "34fe9578c98748263731073b5013cb07",
+      "starred_url": "https://api.github.com/users/pepite/starred{/owner}{/repo}",
+      "gists_url": "https://api.github.com/users/pepite/gists{/gist_id}",
+      "repos_url": "https://api.github.com/users/pepite/repos",
+      "organizations_url": "https://api.github.com/users/pepite/orgs",
+      "events_url": "https://api.github.com/users/pepite/events{/privacy}",
+      "followers_url": "https://api.github.com/users/pepite/followers",
+      "following_url": "https://api.github.com/users/pepite/following",
+      "url": "https://api.github.com/users/pepite",
+      "avatar_url": "https://secure.gravatar.com/avatar/34fe9578c98748263731073b5013cb07?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+      "received_events_url": "https://api.github.com/users/pepite/received_events",
+      "login": "pepite",
+      "subscriptions_url": "https://api.github.com/users/pepite/subscriptions",
+      "id": 180989
+    },
+    "comments_url": "https://api.github.com/repos/playframework/play/commits/9c5bf9f48fe18a07008819229ce59c0238893511/comments",
+    "url": "https://api.github.com/repos/playframework/play/commits/9c5bf9f48fe18a07008819229ce59c0238893511",
+    "committer": {
+      "gravatar_id": "34fe9578c98748263731073b5013cb07",
+      "starred_url": "https://api.github.com/users/pepite/starred{/owner}{/repo}",
+      "gists_url": "https://api.github.com/users/pepite/gists{/gist_id}",
+      "repos_url": "https://api.github.com/users/pepite/repos",
+      "organizations_url": "https://api.github.com/users/pepite/orgs",
+      "events_url": "https://api.github.com/users/pepite/events{/privacy}",
+      "followers_url": "https://api.github.com/users/pepite/followers",
+      "following_url": "https://api.github.com/users/pepite/following",
+      "url": "https://api.github.com/users/pepite",
+      "avatar_url": "https://secure.gravatar.com/avatar/34fe9578c98748263731073b5013cb07?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+      "received_events_url": "https://api.github.com/users/pepite/received_events",
+      "login": "pepite",
+      "subscriptions_url": "https://api.github.com/users/pepite/subscriptions",
+      "id": 180989
+    }
+  }
+]

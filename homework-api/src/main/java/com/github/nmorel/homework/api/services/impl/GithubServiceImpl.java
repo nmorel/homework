@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
-import javax.xml.ws.http.HTTPException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,7 +116,7 @@ public class GithubServiceImpl
         catch ( IOException e )
         {
             logger.error( "Error during the execution of the request {} {}", method, url, e );
-            return fallbackToCacheOrThrow( cachedResult );
+            return fallbackToCacheOrThrow( cachedResult, Status.INTERNAL_SERVER_ERROR.getStatusCode() );
         }
 
         if ( logger.isDebugEnabled() )
@@ -140,7 +139,7 @@ public class GithubServiceImpl
             {
                 logger.error( "Error while reading the response of the request {} {}", method, url, e1 );
                 closeResponse( response );
-                return fallbackToCacheOrThrow( cachedResult );
+                return fallbackToCacheOrThrow( cachedResult, Status.INTERNAL_SERVER_ERROR.getStatusCode() );
             }
             if ( cacheable )
             {
@@ -175,7 +174,7 @@ public class GithubServiceImpl
 
             logger.error( "Error while executing the request {} {}. Status : {} {}", method, url,
                 response.getStatusCode(), response.getStatusMessage() );
-            throw new WebApplicationException( response.getStatusCode() );
+            return fallbackToCacheOrThrow( cachedResult, response.getStatusCode() );
         }
         finally
         {
@@ -198,7 +197,7 @@ public class GithubServiceImpl
         }
     }
 
-    private <T> T fallbackToCacheOrThrow( CachedGithubRequest<T> cachedResult )
+    private <T> T fallbackToCacheOrThrow( CachedGithubRequest<T> cachedResult, int statusCode )
     {
         // if we have a cache, we fallback to it otherwise we return a 500 error
         if ( null != cachedResult )
@@ -208,7 +207,7 @@ public class GithubServiceImpl
         }
         else
         {
-            throw new HTTPException( HttpStatusCodes.STATUS_CODE_SERVER_ERROR );
+            throw new WebApplicationException( statusCode );
         }
     }
 

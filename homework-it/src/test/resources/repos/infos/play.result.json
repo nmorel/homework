@@ -1,0 +1,14 @@
+{
+	"owner": {
+		"login": "playframework",
+		"avatar_url": "https://secure.gravatar.com/avatar/8f606b24a39eeb8b9c64cad22befa099?d\u003dhttps://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-org-420.png"
+	},
+	"name": "play",
+	"description": "Play framework",
+	"fork": false,
+	"forks": 442.0,
+	"watchers": 1345.0,
+	"size": 196652.0,
+	"language": "Python",
+	"homepage": "http://www.playframework.org"
+}

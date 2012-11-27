@@ -1,0 +1,38 @@
+[
+  {
+    "sha": "b584e8ef8f4fcaac531726cef61124daa7f5dbce",
+    "message": "[#1592] Change URLDecoding library in URLEncodedParser.(From java.net.URLDecoder to commons-codec)",
+    "author": {
+      "date": "2012-09-07T07:15:06Z",
+      "login": "k-shunji",
+      "name": "k-shunji",
+      "email": "k-shunji@flect.co.jp",
+      "avatar_url": "https://secure.gravatar.com/avatar/23e3fc9d360f7d085462c7889b903d1e?d\u003dhttps://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
+    },
+    "committer": {
+      "date": "2012-09-17T07:37:41Z",
+      "login": "ikeike443",
+      "name": "ikeike443",
+      "email": "ikeike443@gmail.com",
+      "avatar_url": "https://secure.gravatar.com/avatar/5df67047ff8dd67c1f3b7e0f9b48c2ee?d\u003dhttps://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
+    }
+  },
+  {
+    "sha": "39c6a296615215e4156bacb06a4ec911c10219b6",
+    "message": "[#1582] - Response only prints first value of each Header",
+    "author": {
+      "date": "2012-09-18T19:30:40Z",
+      "login": "pepite",
+      "name": "Nicolas Leroux",
+      "email": "leroux.nicolas@gmail.com",
+      "avatar_url": "https://secure.gravatar.com/avatar/34fe9578c98748263731073b5013cb07?d\u003dhttps://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
+    },
+    "committer": {
+      "date": "2012-09-18T19:32:37Z",
+      "login": "pepite",
+      "name": "Nicolas Leroux",
+      "email": "leroux.nicolas@gmail.com",
+      "avatar_url": "https://secure.gravatar.com/avatar/34fe9578c98748263731073b5013cb07?d\u003dhttps://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
+    }
+  }
+]

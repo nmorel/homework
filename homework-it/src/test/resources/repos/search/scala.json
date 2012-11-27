@@ -1,0 +1,58 @@
+{
+  "repositories": [
+    {
+      "type": "repo",
+      "language": "Scala",
+      "owner": "scala",
+      "created": "2011-11-30T21:02:34-08:00",
+      "followers": 871,
+      "username": "scala",
+      "pushed": "2012-11-27T09:47:28-08:00",
+      "description": "The Scala programming language",
+      "created_at": "2011-11-30T21:02:34-08:00",
+      "pushed_at": "2012-11-27T09:47:28-08:00",
+      "fork": false,
+      "watchers": 871,
+      "size": 70092,
+      "forks": 266,
+      "name": "scala",
+      "private": false
+    },
+    {
+      "type": "repo",
+      "language": "Scala",
+      "owner": "twitter",
+      "created": "2010-09-08T08:39:28-07:00",
+      "followers": 456,
+      "username": "twitter",
+      "pushed": "2012-11-21T14:31:34-08:00",
+      "description": "Lessons in the Fundamentals of Scala",
+      "created_at": "2010-09-08T08:39:28-07:00",
+      "pushed_at": "2012-11-21T14:31:34-08:00",
+      "fork": false,
+      "watchers": 456,
+      "size": 260,
+      "forks": 84,
+      "name": "scala_school",
+      "private": false
+    },
+    {
+      "type": "repo",
+      "language": "Scala",
+      "owner": "scala-ide",
+      "created": "2011-10-03T22:56:23-07:00",
+      "followers": 233,
+      "username": "scala-ide",
+      "pushed": "2012-11-27T08:17:41-08:00",
+      "description": "Scala IDE for Eclipse",
+      "created_at": "2011-10-03T22:56:23-07:00",
+      "pushed_at": "2012-11-27T08:17:41-08:00",
+      "fork": false,
+      "watchers": 233,
+      "size": 804,
+      "forks": 74,
+      "name": "scala-ide",
+      "private": false
+    }
+  ]
+}

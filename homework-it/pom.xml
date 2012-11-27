@@ -23,6 +23,12 @@
       <artifactId>guava</artifactId>
     </dependency>
 
+    <!-- Gson dependencies -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+    </dependency>
+
     <!-- HttpClient dependencies -->
     <dependency>
       <groupId>com.google.http-client</groupId>
