@@ -139,7 +139,7 @@ public class CollaboratorsImpactChart
         // create options
         Options options = Options.create();
 
-        int totalWidth = 500;
+        int totalWidth = 600;
         int decorationWidth = 100;
         int chartWidth = totalWidth - decorationWidth;
 

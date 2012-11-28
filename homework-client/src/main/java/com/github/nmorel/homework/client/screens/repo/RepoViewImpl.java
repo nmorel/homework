@@ -81,7 +81,7 @@ public class RepoViewImpl
 
     private boolean titleLoading;
     private boolean commitsLoading;
-    
+
     @UiField
     HTMLPanel titleContainer;
 
@@ -166,13 +166,24 @@ public class RepoViewImpl
     {
         this.commits = commits;
 
-        if ( tabPanel.getSelectedIndex() == 0 )
+        if ( null != commits && commits.length() > 0 )
         {
-            commitsTimeline.setData( commits );
-        }
-        else
-        {
-            collaboratorsImpactChart.setData( commits );
+            // deferred because the timeline and graph needs their panel to be visible before calculation
+            Scheduler.get().scheduleDeferred( new ScheduledCommand() {
+
+                @Override
+                public void execute()
+                {
+                    if ( tabPanel.getSelectedIndex() == 0 )
+                    {
+                        commitsTimeline.setData( commits );
+                    }
+                    else
+                    {
+                        collaboratorsImpactChart.setData( commits );
+                    }
+                }
+            } );
         }
     }
 

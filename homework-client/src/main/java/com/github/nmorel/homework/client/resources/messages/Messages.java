@@ -27,6 +27,8 @@ public interface Messages
 
     String repoCollabImpactTab();
 
+    String repoCollabImpactDescription();
+
     String repoCollaborators();
 
     String repoCommitsDescription();
