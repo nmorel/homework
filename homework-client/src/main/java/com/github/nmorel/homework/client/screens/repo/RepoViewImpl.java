@@ -325,6 +325,7 @@ public class RepoViewImpl
         boolean isLoading = titleLoading || commitsLoading;
         container.setWidgetVisible( loading, isLoading );
         container.setWidgetVisible( content, !isLoading );
+        container.forceLayout();
         container.onResize();
     }
 }

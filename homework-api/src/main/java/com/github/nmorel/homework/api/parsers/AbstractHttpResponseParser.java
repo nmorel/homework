@@ -17,7 +17,7 @@ import com.google.api.client.http.HttpResponse;
 public abstract class AbstractHttpResponseParser<T>
     implements HttpResponseParser<T>
 {
-    private static final Logger logger = LoggerFactory.getLogger( GsonHttpResponseParser.class );
+    private static final Logger logger = LoggerFactory.getLogger( AbstractHttpResponseParser.class );
 
     /**
      * Try to close the response

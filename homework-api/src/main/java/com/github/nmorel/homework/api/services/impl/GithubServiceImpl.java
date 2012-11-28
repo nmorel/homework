@@ -142,9 +142,9 @@ public class GithubServiceImpl
                 result = parser.parseResponse( response );
                 logger.trace( "Result of the request : {}", result );
             }
-            catch ( IOException e1 )
+            catch ( Exception e )
             {
-                logger.error( "Error while reading the response of the request {} {}", method, url, e1 );
+                logger.error( "Error while reading the response of the request {} {}", method, url, e );
                 closeResponse( response );
                 return fallbackToCacheOrThrow( cachedResult, Status.INTERNAL_SERVER_ERROR.getStatusCode() );
             }

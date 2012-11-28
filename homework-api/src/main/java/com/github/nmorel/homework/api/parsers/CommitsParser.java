@@ -46,7 +46,7 @@ public class CommitsParser
             }
 
             List<Commit> result = parseResponse( reader );
-            
+
             // We sort the list by author date. Github sorts it by sha.
             Collections.sort( result, new Comparator<Commit>() {
 
@@ -102,6 +102,11 @@ public class CommitsParser
             while ( JsonToken.NAME.equals( reader.peek() ) )
             {
                 String name = reader.nextName();
+                if ( JsonToken.NULL.equals( reader.peek() ) )
+                {
+                    reader.skipValue();
+                    continue;
+                }
                 switch ( name )
                 {
                     case "author":
@@ -144,6 +149,11 @@ public class CommitsParser
         while ( JsonToken.NAME.equals( reader.peek() ) )
         {
             String name = reader.nextName();
+            if ( JsonToken.NULL.equals( reader.peek() ) )
+            {
+                reader.skipValue();
+                continue;
+            }
             switch ( name )
             {
                 case "author":
@@ -177,6 +187,11 @@ public class CommitsParser
         while ( JsonToken.NAME.equals( reader.peek() ) )
         {
             String name = reader.nextName();
+            if ( JsonToken.NULL.equals( reader.peek() ) )
+            {
+                reader.skipValue();
+                continue;
+            }
             switch ( name )
             {
                 case "date":
@@ -217,6 +232,11 @@ public class CommitsParser
         while ( JsonToken.NAME.equals( reader.peek() ) )
         {
             String name = reader.nextName();
+            if ( JsonToken.NULL.equals( reader.peek() ) )
+            {
+                reader.skipValue();
+                continue;
+            }
             switch ( name )
             {
                 case "login":
