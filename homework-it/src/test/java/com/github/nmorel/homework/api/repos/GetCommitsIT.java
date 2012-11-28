@@ -26,7 +26,8 @@ public class GetCommitsIT
         // execute
         HttpResponse response = executeGetRequest( url );
 
-        assertResponseKo( response, 409 );
+        assertResponseOk( response );
+        assertContent( response, "repos/commits/empty.result.json" );
 
         RecordedRequest request = githubMock.takeRequest();
         assertGetUrl( "/repos/luchodelavega/toto/commits?per_page=100&client_id=1234567890&client_secret=9876543210987654321", request );

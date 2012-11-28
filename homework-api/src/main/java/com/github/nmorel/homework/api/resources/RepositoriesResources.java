@@ -1,5 +1,6 @@
 package com.github.nmorel.homework.api.resources;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -121,7 +122,25 @@ public class RepositoriesResources
         url.appendRawPath( "/commits" );
         url.set( "per_page", 100 );
 
-        List<Commit> commits = githubService.execute( HttpMethods.GET, url, new CommitsParser(), true );
+        List<Commit> commits;
+        try
+        {
+            commits = githubService.execute( HttpMethods.GET, url, new CommitsParser(), true );
+        }
+        catch ( WebApplicationException e )
+        {
+            if ( Status.CONFLICT.getStatusCode() == e.getResponse().getStatus() )
+            {
+                // Github returns this error code when there is no commits on a repo, we just return an empty list
+                logger
+                    .info( "Github returned a 409 Conflict which means there is no commit on this repository. We return an empty list." );
+                commits = Collections.emptyList();
+            }
+            else
+            {
+                throw e;
+            }
+        }
 
         logger.info( "{} commits found", commits.size() );
 

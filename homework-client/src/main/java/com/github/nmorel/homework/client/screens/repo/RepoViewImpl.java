@@ -212,7 +212,7 @@ public class RepoViewImpl
     {
         tabPanel.selectTab( tab, false );
 
-        if ( null != commits )
+        if ( null != commits && commits.length() > 0 )
         {
             Scheduler.get().scheduleDeferred( new ScheduledCommand() {
 
@@ -277,7 +277,15 @@ public class RepoViewImpl
                 break;
             case LOADED:
                 commitsLoading = false;
-                tabPanel.setVisible( true );
+                if ( null == commits || commits.length() == 0 )
+                {
+                    // no commits, we don't show the tabs
+                    tabPanel.setVisible( false );
+                }
+                else
+                {
+                    tabPanel.setVisible( true );
+                }
                 updateLoadingState();
                 break;
             case ERROR:
