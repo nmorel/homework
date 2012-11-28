@@ -1,9 +1,12 @@
 package com.github.nmorel.homework.client.ui.repo.commits;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.chap.links.client.Timeline;
+import com.chap.links.client.Timeline.DateRange;
 import com.chap.links.client.events.SelectHandler;
 import com.github.gwtbootstrap.client.ui.Button;
 import com.github.nmorel.homework.client.model.Commit;
@@ -54,7 +57,7 @@ public class CommitsTimeline
     {
     }
 
-    // TODO max-width and ellipsis
+    // FIXME bug under chrome : a padding appears between image and text
     interface CommitTemplate
         extends SafeHtmlTemplates
     {
@@ -72,6 +75,8 @@ public class CommitsTimeline
     private static TimelineBundle timelineBundle = GWT.create( TimelineBundle.class );
 
     private static CommitTemplate template = GWT.create( CommitTemplate.class );
+
+    private static final double ZOOM_FACTOR = 0.5;
 
     @UiField( provided = true )
     DockLayoutPanel root;
@@ -98,11 +103,15 @@ public class CommitsTimeline
 
     private Timeline timeline;
 
+    private List<Date> commitsDate;
+
     @Override
     public void init()
     {
         // inject the timeline css
         timelineBundle.style().ensureInjected();
+
+        commitsDate = new ArrayList<Date>();
 
         // little trick to redraw automatically the timeline when the browser is resizing
         root = new DockLayoutPanel( Unit.PX );
@@ -113,6 +122,7 @@ public class CommitsTimeline
     protected void clearChart()
     {
         lastSelectedRow = null;
+        commitsDate.clear();
         if ( null != timeline )
         {
             timeline.deleteAllItems();
@@ -163,6 +173,7 @@ public class CommitsTimeline
             Committer committer = commit.getAuthor();
 
             Date commitDate = dtf.parse( committer.getDate() );
+            commitsDate.add( commitDate );
             if ( null == minCommitDate || commitDate.before( minCommitDate ) )
             {
                 minCommitDate = commitDate;
@@ -198,14 +209,12 @@ public class CommitsTimeline
 
         if ( null != minCommitDate )
         {
-            minCommitDate.setDate( minCommitDate.getDate() - 7 );
-            options.setMin( minCommitDate );
+            options.setMin( new Date( minCommitDate.getYear(), minCommitDate.getMonth(), minCommitDate.getDate() - 7 ) );
         }
 
         if ( null != maxCommitDate )
         {
-            maxCommitDate.setDate( maxCommitDate.getDate() + 7 );
-            options.setMax( maxCommitDate );
+            options.setMax( new Date( maxCommitDate.getYear(), maxCommitDate.getMonth(), maxCommitDate.getDate() + 7 ) );
         }
 
         options.setEventMargin( 5 );
@@ -246,6 +255,28 @@ public class CommitsTimeline
     }
 
     /**
+     * On click on the toolbar button 'Zoom in'
+     * 
+     * @param e event
+     */
+    @UiHandler( "zoomIn" )
+    void onClickZoomIn( ClickEvent e )
+    {
+        zoom( ZOOM_FACTOR );
+    }
+
+    /**
+     * On click on the toolbar button 'Zoom out'
+     * 
+     * @param e event
+     */
+    @UiHandler( "zoomOut" )
+    void onClickZoomOut( ClickEvent e )
+    {
+        zoom( -ZOOM_FACTOR );
+    }
+
+    /**
      * On click on the toolbar button 'First commit'
      * 
      * @param e event
@@ -267,7 +298,7 @@ public class CommitsTimeline
         Integer currentRow = getSelectedRow();
         if ( null == currentRow )
         {
-            selectRow( 0 );
+            selectClosest( true );
         }
         else
         {
@@ -286,7 +317,7 @@ public class CommitsTimeline
         Integer currentRow = getSelectedRow();
         if ( null == currentRow )
         {
-            selectRow( commits.length() - 1 );
+            selectClosest( false );
         }
         else
         {
@@ -344,11 +375,99 @@ public class CommitsTimeline
         lastSelectedRow = selectedRow;
 
         // Enable/disable toolbar buttons
-        first.setEnabled( null == selectedRow || selectedRow != 0 );
-        prev.setEnabled( null != selectedRow && selectedRow != 0 );
-        next.setEnabled( null != selectedRow && selectedRow != commits.length() - 1 );
-        last.setEnabled( null == selectedRow || selectedRow != commits.length() - 1 );
+        boolean firstSelected = null != selectedRow && selectedRow == 0;
+        boolean lastSelected = null != selectedRow && selectedRow == commits.length() - 1;
+        first.setEnabled( !firstSelected );
+        prev.setEnabled( !firstSelected );
+        next.setEnabled( !lastSelected );
+        last.setEnabled( !lastSelected );
 
         // TODO show a commit detail
+    }
+
+    /**
+     * Select the closest row to the middle
+     * 
+     * @param left
+     */
+    private void selectClosest( boolean left )
+    {
+        DateRange range = timeline.getVisibleChartRange();
+        Date midDate =
+            new Date( range.getStart().getTime() + ( ( range.getEnd().getTime() - range.getStart().getTime() ) / 2 ) );
+        int row = commitsDate.indexOf( midDate );
+        if ( row == -1 )
+        {
+            selectRow( findClosestRow( 0, commitsDate.size() - 1, midDate, left ) );
+        }
+        else
+        {
+            // for the rare case, the midDate is exactly a commit date
+            selectRow( row );
+        }
+    }
+
+    /**
+     * Determines the closest row to the date
+     * 
+     * @param startIndex
+     * @param endIndex
+     * @param midDate
+     * @param left
+     * @return
+     */
+    private int findClosestRow( int startIndex, int endIndex, Date midDate, boolean left )
+    {
+        if ( startIndex == endIndex )
+        {
+            return startIndex;
+        }
+
+        int diff = endIndex - startIndex;
+        if ( diff == 1 )
+        {
+            // we have two dates left
+            Date firstDate = commitsDate.get( startIndex );
+            if ( firstDate.after( midDate ) )
+            {
+                return startIndex;
+            }
+            Date secondDate = commitsDate.get( endIndex );
+            if ( secondDate.before( midDate ) )
+            {
+                return endIndex;
+            }
+
+            if ( left )
+            {
+                return startIndex;
+            }
+            else
+            {
+                return endIndex;
+            }
+        }
+
+        int index = ( startIndex + endIndex ) / 2;
+        Date date = commitsDate.get( index );
+
+        if ( date.before( midDate ) )
+        {
+            return findClosestRow( index, endIndex, midDate, left );
+        }
+        else
+        {
+            return findClosestRow( startIndex, index, midDate, left );
+        }
+    }
+
+    /**
+     * Zomm in or out depending of the zoomFactor
+     * 
+     * @param zoomFactor
+     */
+    private void zoom( double zoomFactor )
+    {
+        timeline.zoom( zoomFactor );
     }
 }

@@ -33,6 +33,8 @@ public interface Messages
 
     String repoCommitsTab();
 
+    String repoCommitsToolbarAuto();
+
     String repoCommitsToolbarFirst();
 
     String repoCommitsToolbarLast();
@@ -41,7 +43,9 @@ public interface Messages
 
     String repoCommitsToolbarPrev();
 
-    String repoCommitsToolbarZoom();
+    String repoCommitsToolbarZoomIn();
+
+    String repoCommitsToolbarZoomOut();
 
     String repoBytes( @PluralCount int bytes );
 

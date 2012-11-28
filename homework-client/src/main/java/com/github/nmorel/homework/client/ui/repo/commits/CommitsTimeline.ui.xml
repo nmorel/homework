@@ -12,6 +12,14 @@
         <g:cell horizontalAlignment='RIGHT'>
           <b:ButtonToolbar>
             <b:ButtonGroup>
+              <b:Tooltip text='{mess.repoCommitsToolbarZoomIn}'>
+                <b:Button ui:field='zoomIn' icon='ZOOM_IN' />
+              </b:Tooltip>
+              <b:Tooltip text='{mess.repoCommitsToolbarZoomOut}'>
+                <b:Button ui:field='zoomOut' icon='ZOOM_OUT' />
+              </b:Tooltip>
+            </b:ButtonGroup>
+            <b:ButtonGroup>
               <b:Tooltip text='{mess.repoCommitsToolbarFirst}'>
                 <b:Button ui:field='first' icon='STEP_BACKWARD' />
               </b:Tooltip>
@@ -26,7 +34,7 @@
               </b:Tooltip>
             </b:ButtonGroup>
             <b:ButtonGroup>
-              <b:Tooltip text='{mess.repoCommitsToolbarZoom}'>
+              <b:Tooltip text='{mess.repoCommitsToolbarAuto}'>
                 <b:Button ui:field='auto' icon='FULLSCREEN' />
               </b:Tooltip>
             </b:ButtonGroup>
