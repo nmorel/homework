@@ -29,7 +29,7 @@ public class GetInfosIT
         assertContent( response, "repos/infos/play.result.json" );
 
         RecordedRequest request = githubMock.takeRequest();
-        assertGetUrl( "/repos/playframework/play", request );
+        assertGetUrl( "/repos/playframework/play?client_id=1234567890&client_secret=9876543210987654321", request );
     }
 
 }

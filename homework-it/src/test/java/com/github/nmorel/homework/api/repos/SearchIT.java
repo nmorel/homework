@@ -35,7 +35,7 @@ public class SearchIT
         assertEquals( "the api should returns the exact same result", expectedResult, actual );
 
         RecordedRequest request = githubMock.takeRequest();
-        assertGetUrl( "/legacy/repos/search/totoazsdfdfg", request );
+        assertGetUrl( "/legacy/repos/search/totoazsdfdfg?client_id=1234567890&client_secret=9876543210987654321", request );
     }
     
     @Test
@@ -57,7 +57,7 @@ public class SearchIT
         assertEquals( "the api should returns the exact same result", expectedResult, actual );
 
         RecordedRequest request = githubMock.takeRequest();
-        assertGetUrl( "/legacy/repos/search/scala", request );
+        assertGetUrl( "/legacy/repos/search/scala?client_id=1234567890&client_secret=9876543210987654321", request );
         assertNull( request.getHeader( "If-Modified-Since" ) );
     }
     
@@ -76,7 +76,7 @@ public class SearchIT
         assertResponseKo( response, 409 );
 
         RecordedRequest request = githubMock.takeRequest();
-        assertGetUrl( "/legacy/repos/search/scala", request );
+        assertGetUrl( "/legacy/repos/search/scala?client_id=1234567890&client_secret=9876543210987654321", request );
     }
 
 }

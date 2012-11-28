@@ -37,7 +37,7 @@ public class RequestCacheIT
         assertContent( response, "repos/commits/play.result.json" );
 
         RecordedRequest request = githubMock.takeRequest();
-        assertGetUrl( "/repos/test/cache/commits?per_page=100", request );
+        assertGetUrl( "/repos/test/cache/commits?per_page=100&client_id=1234567890&client_secret=9876543210987654321", request );
 
         /*
          * in case of an error, the api returns the cached result
@@ -51,7 +51,7 @@ public class RequestCacheIT
         assertContent( response, "repos/commits/play.result.json" );
 
         request = githubMock.takeRequest();
-        assertGetUrl( "/repos/test/cache/commits?per_page=100", request );
+        assertGetUrl( "/repos/test/cache/commits?per_page=100&client_id=1234567890&client_secret=9876543210987654321", request );
         assertEquals( ifModifiedSince, request.getHeader( IF_MODIFIED_SINCE ) );
 
         /*
@@ -66,7 +66,7 @@ public class RequestCacheIT
         assertContent( response, "repos/commits/play.result.json" );
 
         request = githubMock.takeRequest();
-        assertGetUrl( "/repos/test/cache/commits?per_page=100", request );
+        assertGetUrl( "/repos/test/cache/commits?per_page=100&client_id=1234567890&client_secret=9876543210987654321", request );
         assertEquals( ifModifiedSince, request.getHeader( IF_MODIFIED_SINCE ) );
         
         /*
@@ -84,7 +84,7 @@ public class RequestCacheIT
         assertContent( response, "repos/commits/play2.result.json" );
 
         request = githubMock.takeRequest();
-        assertGetUrl( "/repos/test/cache/commits?per_page=100", request );
+        assertGetUrl( "/repos/test/cache/commits?per_page=100&client_id=1234567890&client_secret=9876543210987654321", request );
         
         /*
          * We verify that we return the previous result from cache and not the first one
@@ -98,7 +98,7 @@ public class RequestCacheIT
         assertContent( response, "repos/commits/play2.result.json" );
 
         request = githubMock.takeRequest();
-        assertGetUrl( "/repos/test/cache/commits?per_page=100", request );
+        assertGetUrl( "/repos/test/cache/commits?per_page=100&client_id=1234567890&client_secret=9876543210987654321", request );
         assertEquals( ifModifiedSince, request.getHeader( IF_MODIFIED_SINCE ) );
     }
 

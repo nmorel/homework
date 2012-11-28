@@ -29,7 +29,7 @@ public class GetCollaboratorsIT
         assertContent( response, "repos/collaborators/play.result.json" );
 
         RecordedRequest request = githubMock.takeRequest();
-        assertGetUrl( "/repos/playframework/play/collaborators", request );
+        assertGetUrl( "/repos/playframework/play/collaborators?client_id=1234567890&client_secret=9876543210987654321", request );
     }
 
 }

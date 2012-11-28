@@ -29,7 +29,7 @@ public class GetCommitsIT
         assertResponseKo( response, 409 );
 
         RecordedRequest request = githubMock.takeRequest();
-        assertGetUrl( "/repos/luchodelavega/toto/commits?per_page=100", request );
+        assertGetUrl( "/repos/luchodelavega/toto/commits?per_page=100&client_id=1234567890&client_secret=9876543210987654321", request );
     }
 
     @Test
@@ -48,7 +48,7 @@ public class GetCommitsIT
         assertContent( response, "repos/commits/play.result.json" );
 
         RecordedRequest request = githubMock.takeRequest();
-        assertGetUrl( "/repos/playframework/play/commits?per_page=100", request );
+        assertGetUrl( "/repos/playframework/play/commits?per_page=100&client_id=1234567890&client_secret=9876543210987654321", request );
     }
 
 }

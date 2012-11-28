@@ -80,6 +80,13 @@ public class GithubServiceImpl
                 logger.debug( "Token found => authenticated request" );
                 url.set( ACCESS_TOKEN_PARAM, token.get() );
             }
+            else
+            {
+                logger
+                    .debug( "No token associated to the user, we use our client id and secret to increase the rate limit" );
+                url.set( "client_id", config.getGithubClientId() );
+                url.set( "client_secret", config.getGithubClientSecret() );
+            }
         }
         else
         {
