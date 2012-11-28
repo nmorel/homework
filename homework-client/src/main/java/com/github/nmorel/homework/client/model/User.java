@@ -36,4 +36,9 @@ public class User
     {
         return UriUtils.fromTrustedString( getAvatarUrl() );
     }
+
+    public final SafeUri getUserSafeUri()
+    {
+        return UriUtils.fromTrustedString( "https://github.com/" + getLogin() );
+    }
 }

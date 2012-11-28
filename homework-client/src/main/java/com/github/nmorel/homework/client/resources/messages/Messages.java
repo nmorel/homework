@@ -16,7 +16,7 @@ public interface Messages
     String headerSearchPlaceholder();
 
     String headerTitle();
-    
+
     String recentRepos();
 
     String repoCollabImpactColCollaborators();
@@ -58,6 +58,10 @@ public interface Messages
     String searchNoResult();
 
     String searchTitle();
+
+    String switchLocaleEn();
+
+    String switchLocaleFr();
 
     String unauthorizedDescription();
 

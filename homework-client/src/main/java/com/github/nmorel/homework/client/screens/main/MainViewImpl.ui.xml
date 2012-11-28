@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
-  xmlns:c="urn:import:com.google.gwt.user.cellview.client" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+  xmlns:c="urn:import:com.google.gwt.user.cellview.client" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
+  xmlns:h="urn:import:com.github.nmorel.homework.client.ui">
 
   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
@@ -17,7 +18,7 @@
                     <ui:text from='{mess.headerTitle}' />
                   </h3>
                 </td>
-                <td valign='middle' style='width: 300px'>
+                <td valign='middle'>
                   <div class='input-append' style='margin-bottom:0px;'>
                     <b:InputAddOn>
                       <b:TextBox ui:field='keyword' debugId='headerSearchKeyword' />
@@ -26,7 +27,19 @@
                   </div>
                 </td>
                 <td align='right'>
-                  <g:SimplePanel ui:field='loginPanel' />
+                  <table>
+                    <tr>
+                      <td>
+                        <div style='margin-right: 20px'>
+                          <h:FlagWidget flag='{res.flagEn}' locale='' tooltip='{mess.switchLocaleEn}' ui:field='flagEn' />
+                          <h:FlagWidget flag='{res.flagFr}' locale='fr' tooltip='{mess.switchLocaleFr}' ui:field='flagFr' />
+                        </div>
+                      </td>
+                      <td>
+                        <g:SimplePanel ui:field='loginPanel' />
+                      </td>
+                    </tr>
+                  </table>
                 </td>
               </tr>
             </tbody>
