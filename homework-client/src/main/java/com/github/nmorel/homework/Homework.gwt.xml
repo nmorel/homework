@@ -7,7 +7,7 @@
   <inherits name="com.google.gwt.place.Place" />
 
   <!-- GWT Bootstrap -->
-  <inherits name="com.github.gwtbootstrap.Bootstrap" />
+  <inherits name="com.github.gwtbootstrap.BootstrapNoResources" />
 
   <!-- Guava -->
   <inherits name="com.google.common.collect.Collect" />
@@ -17,7 +17,7 @@
 
   <!-- gwt-visualization -->
   <inherits name="com.google.gwt.visualization.Visualization" />
-  <inherits name='com.chap.links.TimelineOverload'/>
+  <inherits name='com.chap.links.TimelineOverload' />
 
   <!-- Logging -->
   <inherits name="com.google.gwt.logging.Logging" />

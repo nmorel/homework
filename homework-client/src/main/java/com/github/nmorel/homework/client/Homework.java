@@ -4,6 +4,7 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.github.gwtbootstrap.client.ui.resources.ResourceInjector;
 import com.github.nmorel.homework.client.gin.HomeworkGinjector;
 import com.github.nmorel.homework.client.ui.VisualizationLoader;
 import com.github.nmorel.homework.client.utils.Alert;
@@ -58,14 +59,15 @@ public class Homework
      */
     public void onModuleLoad()
     {
+        // We load the css and js files
+        ResourceInjector.configure();
+        VisualizationLoader.load();
+        
         GWT.setUncaughtExceptionHandler( this );
         Window.addResizeHandler( this );
         DebugInfo.setDebugIdPrefix( "" );
 
         initLog();
-
-        // We directly load the visualization api to gain a few ms
-        VisualizationLoader.load();
 
         Window.enableScrolling( false );
         container.setWidget( ginjector.getMainPresenter().getView() );

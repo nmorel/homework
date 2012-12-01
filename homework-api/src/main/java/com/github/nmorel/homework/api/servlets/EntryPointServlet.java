@@ -80,34 +80,53 @@ public class EntryPointServlet
 
     /**
      * Write the content of the page into the response
+     * 
+     * @throws ServletException
      */
     private void writePage( HttpServletRequest request, HttpServletResponse response )
-        throws IOException
+        throws IOException, ServletException
     {
         response.setContentType( "text/html" );
         response.setCharacterEncoding( DEFAULT_CHARSET.name() );
 
         PrintWriter writer = response.getWriter();
-        writer.println( DEFAULT_DOCTYPE );
-        writer.println( "<html>" );
-        writer.println( "<head>" );
+        writer.print( DEFAULT_DOCTYPE );
+        writer.print( "<html>" );
+        writer.print( "<head>" );
         writeHead( request, response, writer );
-        writer.println( "</head>" );
-        writer.println( "<body>" );
+        writer.print( "</head>" );
+        writer.print( "<body>" );
         writeBody( request, response, writer );
-        writer.println( "</body>" );
-        writer.println( "</html>" );
+        writer.print( "</body>" );
+        writer.print( "</html>" );
     }
 
     /**
      * Write the head element
+     * 
+     * @throws IOException
+     * @throws ServletException
      */
     private void writeHead( HttpServletRequest request, HttpServletResponse response, PrintWriter writer )
+        throws ServletException, IOException
     {
         writeEncodage( request, response, writer );
         writeTitle( request, response, writer );
+        writeCss( request, response, writer );
         writeGWTJavascript( request, response, writer );
         writeVariables( request, response, writer );
+    }
+
+    private void writeCss( HttpServletRequest request, HttpServletResponse response, PrintWriter writer )
+    {
+        addStyleSheet( "/" + getModuleName() + "/css/bootstrap.min.css", writer );
+        addStyleSheet( "/" + getModuleName() + "/css/gwt-bootstrap.css", writer );
+        addStyleSheet( "/" + getModuleName() + "/css/font-awesome.css", writer );
+    }
+
+    private void addStyleSheet( String stylesheet, PrintWriter writer )
+    {
+        writer.print( "<link rel=\"stylesheet\" href=\"" + stylesheet + "\" >" );
     }
 
     /**
@@ -117,7 +136,7 @@ public class EntryPointServlet
     {
         writer.print( "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" );
         writer.print( DEFAULT_CHARSET );
-        writer.println( "\" />" );
+        writer.print( "\" />" );
     }
 
     /**
@@ -127,19 +146,24 @@ public class EntryPointServlet
     {
         writer.print( "<title>" );
         writer.print( "Homework" );
-        writer.println( "</title>" );
+        writer.print( "</title>" );
     }
 
     /**
      * Write the GWT javascript module to load
+     * 
+     * @throws IOException
+     * @throws ServletException
      */
     private void writeGWTJavascript( HttpServletRequest request, HttpServletResponse response, PrintWriter writer )
+        throws ServletException, IOException
     {
-        writer.print( "<script type=\"text/javascript\" language=\"javascript\" src=\"" );
-        writer.print( getModuleName() );
-        writer.print( "/" );
-        writer.print( getModuleName() );
-        writer.println( ".nocache.js\"></script>" );
+        // Inline the nocache.js to save a roundtrip to the server
+        writer.print( "<meta name=gwt:property content='baseUrl=/" + getModuleName() + "/'>" );
+        writer.print( "<script type=\"text/javascript\" language=\"javascript\" >" );
+        getServletContext().getRequestDispatcher( "/" + getModuleName() + "/" + getModuleName() + ".nocache.js" )
+            .include( request, response );
+        writer.print( "</script>" );
     }
 
     /**
@@ -153,11 +177,11 @@ public class EntryPointServlet
         Optional<User> user = userService.getAuthenticatedUserInformations();
         if ( user.isPresent() )
         {
-            writer.println( "<script type=\"text/javascript\" language=\"javascript\">" );
+            writer.print( "<script type=\"text/javascript\" language=\"javascript\">" );
             writer.print( "var userInfos=" );
             writer.print( new Gson().toJson( user.get() ) );
-            writer.println( ";" );
-            writer.println( "</script>" );
+            writer.print( ";" );
+            writer.print( "</script>" );
         }
 
     }
@@ -177,7 +201,7 @@ public class EntryPointServlet
     private void writeHistoryHandler( HttpServletRequest request, HttpServletResponse response, PrintWriter writer )
     {
         writer
-            .println( "<iframe src=\"javascript:''\" id=\"__gwt_historyFrame\" tabIndex='-1' style=\"position:absolute;width:0;height:0;border:0\"></iframe>" );
+            .print( "<iframe src=\"javascript:''\" id=\"__gwt_historyFrame\" tabIndex='-1' style=\"position:absolute;width:0;height:0;border:0\"></iframe>" );
     }
 
     /**
@@ -186,10 +210,10 @@ public class EntryPointServlet
     private void writeDivLoad( HttpServletRequest request, HttpServletResponse response, PrintWriter writer )
     {
         writer
-            .println( "<div id=\"load\" style=\"position: absolute; width:100px; left: 50%; margin-left: -50px; height:100px; top: 50%; margin-top: -50px\">" );
-        writer.print( "<img src=\"" );
-        writer.println( "wait.gif\" />" );
-        writer.println( "</div>" );
+            .print( "<div id=\"load\" style=\"position: absolute; width:75%; left: 12.5%; height:20px; top: 50%; margin-top: -10px\">" );
+        writer
+            .print( "<div class=\"progress progress-striped active\"><div class=\"bar\" style=\"width: 100%;\">Loading...</div></div>" );
+        writer.print( "</div>" );
     }
 
     /**
