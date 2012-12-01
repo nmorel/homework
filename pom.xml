@@ -5,7 +5,7 @@
 
   <groupId>com.github.nmorel.homework</groupId>
   <artifactId>homework</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>pom</packaging>
 
   <prerequisites>
