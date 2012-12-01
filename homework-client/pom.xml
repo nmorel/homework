@@ -20,7 +20,7 @@
     <!-- we use 1.6 so IDE don't suggest 1.7 stuff that won't compile in GWT -->
     <jdk.version>1.6</jdk.version>
 
-    <gwt.module>com.github.nmorel.homework.HomeworkTest</gwt.module>
+    <gwt.module>com.github.nmorel.homework.Homework</gwt.module>
     <gwt.draftCompile>false</gwt.draftCompile>
     <gwt.style>OBF</gwt.style>
     <gwt.genParam>false</gwt.genParam>
@@ -132,6 +132,15 @@
       </activation>
       <properties>
         <gwt.module>com.github.nmorel.homework.HomeworkDev</gwt.module>
+        <gwt.draftCompile>true</gwt.draftCompile>
+        <gwt.style>PRETTY</gwt.style>
+      </properties>
+    </profile>
+    
+    <profile>
+      <id>it</id>
+      <properties>
+        <gwt.module>com.github.nmorel.homework.HomeworkTest</gwt.module>
         <gwt.draftCompile>true</gwt.draftCompile>
         <gwt.style>PRETTY</gwt.style>
       </properties>

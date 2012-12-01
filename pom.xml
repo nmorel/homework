@@ -15,7 +15,6 @@
   <modules>
     <module>homework-client</module>
     <module>homework-api</module>
-    <module>homework-it</module>
   </modules>
 
   <repositories>
@@ -23,6 +22,10 @@
       <id>cloudbees</id>
       <name>Cloudbees repository</name>
       <url>http://repository-nmorel.forge.cloudbees.com/release/</url>
+    </repository>
+    <repository>
+      <id>saucelabs-repository</id>
+      <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
     </repository>
   </repositories>
 
@@ -61,6 +64,7 @@
     <mockwebserver.version>20121111</mockwebserver.version>
     <selenium.version>2.25.0</selenium.version>
     <selenium-operadriver.version>0.14</selenium-operadriver.version>
+    <saucelabs.version>1.0.11</saucelabs.version>
   </properties>
 
   <dependencyManagement>
@@ -280,6 +284,12 @@
         <version>${selenium-operadriver.version}</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>com.saucelabs</groupId>
+        <artifactId>sauce_junit</artifactId>
+        <version>${saucelabs.version}</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -412,5 +422,14 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <profiles>
+    <profile>
+      <id>it</id>
+      <modules>
+        <module>homework-it</module>
+      </modules>
+    </profile>
+  </profiles>
 
 </project>

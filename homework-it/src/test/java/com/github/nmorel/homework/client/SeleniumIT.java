@@ -6,49 +6,25 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.nmorel.homework.AbstractIT;
 import com.google.mockwebserver.Dispatcher;
 import com.google.mockwebserver.MockResponse;
 import com.google.mockwebserver.RecordedRequest;
 
 public class SeleniumIT
-    extends AbstractIT
+    extends AbstractSeleniumIT
 {
-    private WebDriver driver;
-
-    @Before
-    public void init()
-    {
-        // Create a new instance of the Firefox driver
-        // Notice that the remainder of the code relies on the interface,
-        // not the implementation.
-        driver = new FirefoxDriver();
-    }
-
-    @After
-    public void quit()
-    {
-        // Close the browser
-        driver.quit();
-    }
-
     /**
      * A little test doing a search and then consulting a repository. The test is ignored for now because it won't work
      * on jenkins.
      */
-    @Ignore
     @Test
     public void test()
         throws IOException, InterruptedException

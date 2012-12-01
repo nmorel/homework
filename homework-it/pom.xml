@@ -54,6 +54,10 @@
       <groupId>com.opera</groupId>
       <artifactId>operadriver</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.saucelabs</groupId>
+      <artifactId>sauce_junit</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
