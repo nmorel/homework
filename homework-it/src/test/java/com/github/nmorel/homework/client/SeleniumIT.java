@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -25,6 +26,7 @@ public class SeleniumIT
      * A little test doing a search and then consulting a repository. The test is ignored for now because it won't work
      * on jenkins.
      */
+    @Ignore
     @Test
     public void test()
         throws IOException, InterruptedException

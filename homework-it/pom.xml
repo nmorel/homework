@@ -48,15 +48,11 @@
     <!-- Selenium dependencies -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
+      <artifactId>selenium-firefox-driver</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.opera</groupId>
-      <artifactId>operadriver</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.saucelabs</groupId>
-      <artifactId>sauce_junit</artifactId>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-support</artifactId>
     </dependency>
   </dependencies>
 
