@@ -28,8 +28,6 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
@@ -74,13 +72,10 @@ public class MainViewImpl
     TextBox keyword;
 
     @UiField
-    SimpleLayoutPanel container;
+    SimplePanel container;
 
     @UiField
     SimplePanel loginPanel;
-
-    @UiField
-    Panel recentReposContainer;
 
     @UiField( provided = true )
     CellList<RecentRepository> recentReposList;
@@ -183,13 +178,8 @@ public class MainViewImpl
     @Override
     public void updateRecentRepos( JsArray<RecentRepository> recentReposArray )
     {
-        if ( null == recentReposArray || recentReposArray.length() == 0 )
+        if ( null != recentReposArray && recentReposArray.length() > 0 )
         {
-            recentReposContainer.setVisible( false );
-        }
-        else
-        {
-            recentReposContainer.setVisible( true );
             recentReposListProvider.getList().clear();
             for ( int i = 0; i < recentReposArray.length(); i++ )
             {

@@ -2,50 +2,36 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
   xmlns:c="urn:import:com.google.gwt.user.cellview.client" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
   xmlns:h="urn:import:com.github.nmorel.homework.client.ui">
-  <ui:style>
-    
-  </ui:style>
 
   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
-  <g:DockLayoutPanel unit='PX'>
+  <g:HTMLPanel addStyleNames='{res.style.contentInnerContainer}'>
 
-    <!-- Filter/Sort panel -->
-    <g:east size="180">
-      <g:HTMLPanel>
-        <!-- Empty -->
+    <!-- TODO get rid off this HeaderPanel. The easiest way would be to fix the height of the form container. -->
+    <g:HeaderPanel addStyleNames='{res.style.searchContainer}' ui:field='searchContainer'>
+
+      <g:HTMLPanel ui:field='searchPanel' addStyleNames='{res.style.searchFormContainer}'>
+        <h4>
+          <ui:text from='{mess.searchTitle}' />
+        </h4>
+        <div class='input-append'>
+          <b:TextBox ui:field='keyword' debugId='searchKeyword' />
+          <b:Button ui:field='search' debugId='searchButton' icon='SEARCH' />
+        </div>
       </g:HTMLPanel>
-    </g:east>
 
-    <g:center>
+      <g:DeckLayoutPanel ui:field='resultContainer' width='100%' height='100%'>
+        <h:LoadingWidget loadingText='{mess.searchLoading}' debugId='searchLoading' />
+        <b:Heading size='5' text='{mess.searchNoResult}' addStyleNames='{res.style.searchNoResult}' />
+        <b:Heading size='5' text='{mess.searchError}' addStyleNames='{res.style.searchError}' />
+        <g:ScrollPanel>
+          <c:CellList ui:field='resultList' debugId='searchResultList' />
+        </g:ScrollPanel>
+      </g:DeckLayoutPanel>
 
-      <!-- Main Panel -->
-      <g:HeaderPanel addStyleNames='{res.style.searchContainer}'>
+    </g:HeaderPanel>
 
-        <g:HTMLPanel ui:field='searchPanel' addStyleNames='{res.style.searchFormContainer}'>
-          <h4>
-            <ui:text from='{mess.searchTitle}' />
-          </h4>
-          <b:InputAddOn addStyleNames='input-append'>
-            <b:TextBox ui:field='keyword' debugId='searchKeyword' />
-            <b:Button ui:field='search' debugId='searchButton' icon='SEARCH' />
-          </b:InputAddOn>
-        </g:HTMLPanel>
-
-        <g:DeckLayoutPanel ui:field='resultContainer' width='100%' height='100%'>
-          <h:LoadingWidget loadingText='{mess.searchLoading}' debugId='searchLoading' />
-          <b:Heading size='5' text='{mess.searchNoResult}' addStyleNames='{res.style.searchNoResult}' />
-          <b:Heading size='5' text='{mess.searchError}' addStyleNames='{res.style.searchError}' />
-          <g:ScrollPanel>
-            <c:CellList ui:field='resultList' debugId='searchResultList' />
-          </g:ScrollPanel>
-        </g:DeckLayoutPanel>
-
-      </g:HeaderPanel>
-
-    </g:center>
-
-  </g:DockLayoutPanel>
+  </g:HTMLPanel>
 
 </ui:UiBinder>

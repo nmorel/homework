@@ -7,70 +7,58 @@
   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
-  <g:DockLayoutPanel unit='PX'>
+  <g:HTMLPanel addStyleNames='{res.style.contentInnerContainer}'>
 
-    <g:east size="180">
-      <g:HeaderPanel addStyleNames='{res.style.repoCollaboratorsContainer}' ui:field='collaboratorsPanel'>
-        <g:HTMLPanel addStyleNames='{res.style.repoCollaboratorsTitleContainer}'>
-          <h6 class='{res.style.repoCollaboratorsTitle}'>
-            <ui:text from='{mess.repoCollaborators}' />
-          </h6>
+    <g:HeaderPanel addStyleNames='{res.style.repoCollaboratorsContainer}' ui:field='collaboratorsPanel'>
+      <g:HTMLPanel addStyleNames='{res.style.repoCollaboratorsTitleContainer}'>
+        <h6 class='{res.style.repoCollaboratorsTitle}'>
+          <ui:text from='{mess.repoCollaborators}' />
+        </h6>
+      </g:HTMLPanel>
+      <g:ScrollPanel addStyleNames='{res.style.repoCollaboratorsScroll}'>
+        <c:CellList ui:field='collaboratorsList' debugId='repoCollaboratorsList' />
+      </g:ScrollPanel>
+    </g:HeaderPanel>
+
+    <div class='{res.style.repoContainer}'>
+
+      <h:LoadingWidget loadingText='Loading...' center='true' ui:field='loading' debugId='repoLoading' />
+
+      <g:HeaderPanel ui:field='content' addStyleNames='{res.style.repoInnerContainer}'>
+
+        <g:HTMLPanel addStyleNames='{res.style.repoTitleContainer}' ui:field='titleContainer' debugId='repoTitleContainer'>
+          <g:HorizontalPanel width='100%' verticalAlignment='MIDDLE'>
+            <g:cell width='100%'>
+              <b:Heading size='4' ui:field='title' />
+            </g:cell>
+            <g:cell horizontalAligment='RIGHT'>
+              <g:HTMLPanel ui:field='buttonBar' />
+            </g:cell>
+          </g:HorizontalPanel>
+          <g:Label ui:field='description' />
+          <g:Anchor ui:field='homepage' target='_blank' />
         </g:HTMLPanel>
-        <g:ScrollPanel addStyleNames='{res.style.repoCollaboratorsScroll}'>
-          <c:CellList ui:field='collaboratorsList' debugId='repoCollaboratorsList' />
-        </g:ScrollPanel>
+
+        <g:TabLayoutPanel barUnit='PX' barHeight='38' ui:field='tabPanel' width='100%' height='100%'>
+          <g:tab>
+            <g:header>
+              <ui:text from='{mess.repoCommitsTab}' />
+            </g:header>
+            <t:CommitsTimeline ui:field='commitsTimeline' debugId='repoCommitsTimeline' />
+          </g:tab>
+          <g:tab>
+            <g:header>
+              <ui:text from='{mess.repoCollabImpactTab}' />
+            </g:header>
+            <collaborators:CollaboratorsImpactChart ui:field='collaboratorsImpactChart'
+              debugId='repoCollaboratorsImpactChart' />
+          </g:tab>
+        </g:TabLayoutPanel>
+
       </g:HeaderPanel>
-    </g:east>
 
-    <g:center>
+    </div>
 
-      <g:LayoutPanel addStyleNames='{res.style.repoContainer}' ui:field='container'>
-
-        <g:layer left='0' right='0' top='0' bottom='0'>
-          <h:LoadingWidget loadingText='Loading...' center='true' ui:field='loading' debugId='repoLoading' />
-        </g:layer>
-
-        <g:layer left='5px' right='5px' top='0' bottom='0'>
-
-          <g:HeaderPanel ui:field='content'>
-
-            <g:HTMLPanel addStyleNames='{res.style.repoTitleContainer}' ui:field='titleContainer' debugId='repoTitleContainer'>
-              <g:HorizontalPanel width='100%' verticalAlignment='MIDDLE'>
-                <g:cell width='100%'>
-                  <b:Heading size='4' ui:field='title' />
-                </g:cell>
-                <g:cell horizontalAligment='RIGHT'>
-                  <g:HTMLPanel ui:field='buttonBar' />
-                </g:cell>
-              </g:HorizontalPanel>
-              <g:Label ui:field='description' />
-              <g:Anchor ui:field='homepage' target='_blank' />
-            </g:HTMLPanel>
-
-            <g:TabLayoutPanel barUnit='PX' barHeight='38' ui:field='tabPanel' width='100%' height='100%'>
-              <g:tab>
-                <g:header>
-                  <ui:text from='{mess.repoCommitsTab}' />
-                </g:header>
-                <t:CommitsTimeline ui:field='commitsTimeline' debugId='repoCommitsTimeline' />
-              </g:tab>
-              <g:tab>
-                <g:header>
-                  <ui:text from='{mess.repoCollabImpactTab}' />
-                </g:header>
-                <collaborators:CollaboratorsImpactChart ui:field='collaboratorsImpactChart'
-                  debugId='repoCollaboratorsImpactChart' />
-              </g:tab>
-            </g:TabLayoutPanel>
-
-          </g:HeaderPanel>
-
-        </g:layer>
-
-      </g:LayoutPanel>
-
-    </g:center>
-
-  </g:DockLayoutPanel>
+  </g:HTMLPanel>
 
 </ui:UiBinder>

@@ -10,11 +10,21 @@ public interface ResourcesBundle
     public interface Style
         extends CssResource
     {
+        String rootContainer();
+        
         String headerContainer();
 
-        String headerInnerContainer();
-
         String headerTitle();
+        
+        String headerSearchContainer();
+        
+        String headerSearchKeyword();
+        
+        String headerSearchButton();
+        
+        String headerLoginContainer();
+        
+        String headerFlagsContainer();
 
         String recentReposContainer();
 
@@ -25,6 +35,8 @@ public interface ResourcesBundle
         String recentReposScroll();
 
         String contentContainer();
+        
+        String contentInnerContainer();
 
         String searchContainer();
 
@@ -33,8 +45,6 @@ public interface ResourcesBundle
         String searchNoResult();
 
         String searchError();
-
-        String repoContainer();
 
         String repoCollaboratorsContainer();
 
@@ -47,6 +57,10 @@ public interface ResourcesBundle
         String repoCollaboratorCell();
 
         String repoCollaboratorAvatar();
+
+        String repoContainer();
+
+        String repoInnerContainer();
 
         String repoTitleContainer();
 

@@ -16,16 +16,18 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HeaderPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
@@ -33,7 +35,7 @@ import com.google.inject.Inject;
 
 public class RepoViewImpl
     extends AbstractView
-    implements RepoView
+    implements RepoView, ResizeHandler
 {
     interface ListResources
         extends CellList.Resources
@@ -69,9 +71,6 @@ public class RepoViewImpl
     CellList<User> collaboratorsList;
 
     private ListDataProvider<User> collaboratorsListProvider;
-
-    @UiField
-    LayoutPanel container;
 
     @UiField
     LoadingWidget loading;
@@ -124,6 +123,9 @@ public class RepoViewImpl
     @Override
     protected Widget initWidget()
     {
+        // FIXME remove this once we got rid off the HeaderPanel
+        Window.addResizeHandler( this );
+        
         collaboratorsList = new CellList<User>( new CollaboratorCell(), listResources );
         // doesn't need pagination
         collaboratorsList.setPageSize( Integer.MAX_VALUE );
@@ -134,6 +136,12 @@ public class RepoViewImpl
         collaboratorsImpactChart.init();
 
         Widget widget = uiBinder.createAndBindUi( this );
+
+        // we removed the default style to be able to change them via css
+        collaboratorsPanel.getElement().getStyle().clearOverflow();
+        collaboratorsPanel.getElement().getStyle().clearPosition();
+        content.getElement().getStyle().clearOverflow();
+        content.getElement().getStyle().clearPosition();
 
         tabPanel.addSelectionHandler( new SelectionHandler<Integer>() {
 
@@ -323,9 +331,18 @@ public class RepoViewImpl
     private void updateLoadingState()
     {
         boolean isLoading = titleLoading || commitsLoading;
-        container.setWidgetVisible( loading, isLoading );
-        container.setWidgetVisible( content, !isLoading );
-        container.forceLayout();
-        container.onResize();
+        loading.setVisible( isLoading );
+        content.setVisible( !isLoading );
+        if ( !isLoading )
+        {
+            content.onResize();
+        }
+    }
+
+    @Override
+    public void onResize( ResizeEvent event )
+    {
+        collaboratorsPanel.onResize();
+        content.onResize();
     }
 }

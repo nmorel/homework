@@ -6,50 +6,25 @@
   <ui:with type="com.github.nmorel.homework.client.resources.messages.Messages" field="mess" />
   <ui:with type="com.github.nmorel.homework.client.resources.ResourcesBundle" field="res" />
 
-  <g:DockLayoutPanel unit="PX" width='100%' height='100%'>
-    <g:north size="40">
-      <g:HTMLPanel addStyleNames='{res.style.headerContainer}'>
-        <div class='{res.style.headerInnerContainer}'>
-          <table style='width: 100%; height: 100%;'>
-            <tbody>
-              <tr>
-                <td valign='middle' style='width: 150px'>
-                  <h3 class='{res.style.headerTitle}'>
-                    <ui:text from='{mess.headerTitle}' />
-                  </h3>
-                </td>
-                <td valign='middle'>
-                  <div class='input-append' style='margin-bottom:0px;'>
-                    <b:InputAddOn>
-                      <b:TextBox ui:field='keyword' debugId='headerSearchKeyword' />
-                      <b:Button ui:field='search' debugId='headerSearchButton' icon='SEARCH' />
-                    </b:InputAddOn>
-                  </div>
-                </td>
-                <td align='right'>
-                  <table>
-                    <tr>
-                      <td>
-                        <div style='margin-right: 20px'>
-                          <h:FlagWidget flag='{res.flagEn}' locale='' tooltip='{mess.switchLocaleEn}' ui:field='flagEn' />
-                          <h:FlagWidget flag='{res.flagFr}' locale='fr' tooltip='{mess.switchLocaleFr}' ui:field='flagFr' />
-                        </div>
-                      </td>
-                      <td>
-                        <g:SimplePanel ui:field='loginPanel' />
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </g:HTMLPanel>
-    </g:north>
+  <g:HTMLPanel addStyleNames='{res.style.rootContainer}'>
 
-    <g:west size="180">
-      <g:HeaderPanel addStyleNames='{res.style.recentReposContainer}' ui:field='recentReposContainer'>
+    <div class='{res.style.headerContainer}'>
+      <h3 class='{res.style.headerTitle}'>
+        <ui:text from='{mess.headerTitle}' />
+      </h3>
+      <div class="input-append {res.style.headerSearchContainer}">
+        <b:TextBox ui:field='keyword' debugId='headerSearchKeyword' addStyleNames='{res.style.headerSearchKeyword}' />
+        <b:Button ui:field='search' debugId='headerSearchButton' icon='SEARCH' addStyleNames='{res.style.headerSearchButton}' />
+      </div>
+      <g:SimplePanel ui:field='loginPanel' addStyleNames='{res.style.headerLoginContainer}' />
+      <div class="{res.style.headerFlagsContainer}">
+        <h:FlagWidget flag='{res.flagEn}' locale='' tooltip='{mess.switchLocaleEn}' ui:field='flagEn' />
+        <h:FlagWidget flag='{res.flagFr}' locale='fr' tooltip='{mess.switchLocaleFr}' ui:field='flagFr' />
+      </div>
+    </div>
+
+    <div class='{res.style.recentReposContainer}'>
+      <g:HTMLPanel ui:field='recentReposContainer'>
         <g:HTMLPanel addStyleNames='{res.style.recentReposTitleContainer}'>
           <h6 class='{res.style.recentReposTitle}'>
             <ui:text from='{mess.recentRepos}' />
@@ -58,12 +33,10 @@
         <g:ScrollPanel addStyleNames='{res.style.recentReposScroll}'>
           <c:CellList ui:field='recentReposList' />
         </g:ScrollPanel>
-      </g:HeaderPanel>
-    </g:west>
+      </g:HTMLPanel>
+    </div>
 
-    <g:center>
-      <g:SimpleLayoutPanel addStyleNames='{res.style.contentContainer}' ui:field='container' />
-    </g:center>
+    <g:SimplePanel addStyleNames='{res.style.contentContainer}' ui:field='container' />
 
-  </g:DockLayoutPanel>
+  </g:HTMLPanel>
 </ui:UiBinder>
