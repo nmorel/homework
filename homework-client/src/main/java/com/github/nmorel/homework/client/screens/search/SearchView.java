@@ -24,5 +24,7 @@ public interface SearchView
     void setKeyword( String keyword );
 
     void setState( State state );
+    
+    String getCurrentResultKeyword();
 
 }

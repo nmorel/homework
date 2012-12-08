@@ -14,8 +14,10 @@ public class SearchPlace
     private static final String PARAM_KEYWORD = "keyword";
     
     private String keyword;
+    
+    private boolean refresh;
 
-    public SearchPlace()
+    SearchPlace()
     {
     }
 
@@ -24,9 +26,20 @@ public class SearchPlace
         this.keyword = keyword;
     }
 
+    public SearchPlace( String keyword, boolean refresh )
+    {
+        this.keyword = keyword;
+        this.refresh = refresh;
+    }
+
     public String getKeyword()
     {
         return keyword;
+    }
+
+    public boolean isRefresh()
+    {
+        return refresh;
     }
 
     @Override

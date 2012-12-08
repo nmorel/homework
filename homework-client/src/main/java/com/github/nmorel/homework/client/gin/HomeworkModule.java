@@ -3,7 +3,7 @@ package com.github.nmorel.homework.client.gin;
 import com.github.nmorel.homework.client.model.User;
 import com.github.nmorel.homework.client.mvp.AppActivityMapper;
 import com.github.nmorel.homework.client.mvp.AppPlaceHistoryMapper;
-import com.github.nmorel.homework.client.place.SearchPlace;
+import com.github.nmorel.homework.client.place.TokenEnum;
 import com.github.nmorel.homework.client.resources.ResourcesBundle;
 import com.github.nmorel.homework.client.resources.messages.Messages;
 import com.github.nmorel.homework.client.screens.error.ErrorActivity;
@@ -73,7 +73,7 @@ public class HomeworkModule
                                                       ActivityManager activityManager, ResourcesBundle resourcesBundle )
     {
         PlaceHistoryHandler historyHandler = new PlaceHistoryHandler( historyMapper );
-        historyHandler.register( placeController, eventBus, new SearchPlace() );
+        historyHandler.register( placeController, eventBus, TokenEnum.SEARCH.createNewPlace() );
         return historyHandler;
     }
 

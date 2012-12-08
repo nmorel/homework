@@ -57,7 +57,7 @@ public class MainPresenterImpl
     @Override
     public void onSearch( String keyword )
     {
-        placeController.goTo( new SearchPlace( keyword ) );
+        placeController.goTo( new SearchPlace( keyword, true ) );
     }
 
     @Override

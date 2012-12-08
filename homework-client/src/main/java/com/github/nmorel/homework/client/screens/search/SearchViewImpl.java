@@ -87,6 +87,8 @@ public class SearchViewImpl
     @Inject
     private Provider<RepositoryCell> repositoryCellProvider;
 
+    private String currentResultKeyword;
+
     @Override
     public void setPresenter( Presenter presenter )
     {
@@ -159,6 +161,7 @@ public class SearchViewImpl
     @Override
     public void clear()
     {
+        currentResultKeyword = null;
         keyword.setValue( null );
         resultDataProvider.getList().clear();
     }
@@ -167,6 +170,7 @@ public class SearchViewImpl
     public void setState( State state )
     {
         logger.fine( "Updating state to " + state );
+        currentResultKeyword = null;
         switch ( state )
         {
             case DEFAULT:
@@ -192,6 +196,7 @@ public class SearchViewImpl
                 }
                 else
                 {
+                    currentResultKeyword = keyword.getValue();
                     resultContainer.showWidget( 3 );
                     setFocusOnList();
                 }
@@ -229,6 +234,12 @@ public class SearchViewImpl
                 resultList.setFocus( true );
             }
         } );
+    }
+
+    @Override
+    public String getCurrentResultKeyword()
+    {
+        return currentResultKeyword;
     }
 
 }

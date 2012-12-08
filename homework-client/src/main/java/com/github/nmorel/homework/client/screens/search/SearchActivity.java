@@ -49,7 +49,13 @@ public class SearchActivity
     @Override
     protected void start( AcceptsOneWidget panel, EventBus eventBus )
     {
-        view.init();
+        boolean refresh =
+            currentPlace.isRefresh() || null == view.getCurrentResultKeyword() || null == currentPlace.getKeyword()
+                || !view.getCurrentResultKeyword().equals( currentPlace.getKeyword() );
+        if ( refresh )
+        {
+            view.init();
+        }
         view.setPresenter( this );
 
         view.setKeyword( currentPlace.getKeyword() );
@@ -61,7 +67,7 @@ public class SearchActivity
             logger.fine( "No keyword => we just show an empty form" );
             view.setState( State.DEFAULT );
         }
-        else
+        else if ( refresh )
         {
             logger.fine( "Keyword present => looking for repos with keyword " + currentPlace.getKeyword() );
             searchRequest.get().fire( currentPlace.getKeyword(), new RestCallback<Repositories>() {
@@ -73,7 +79,7 @@ public class SearchActivity
                     view.showResults( result.getRepositories() );
                     view.setState( State.LOADED );
                 }
-                
+
                 @Override
                 protected void onError( Throwable throwable )
                 {
@@ -84,12 +90,16 @@ public class SearchActivity
             } );
             view.setState( State.LOADING );
         }
+        else
+        {
+            view.setState( State.LOADED );
+        }
     }
 
     @Override
     public void onSearch( String keyword )
     {
-        placeController.goTo( new SearchPlace( keyword ) );
+        placeController.goTo( new SearchPlace( keyword, true ) );
     }
 
     @Override
