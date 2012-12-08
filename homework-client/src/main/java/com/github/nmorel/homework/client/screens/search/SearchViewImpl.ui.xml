@@ -8,10 +8,16 @@
 
   <g:HTMLPanel addStyleNames='{res.style.contentInnerContainer}'>
 
-    <!-- TODO get rid off this HeaderPanel. The easiest way would be to fix the height of the form container. -->
-    <g:HeaderPanel addStyleNames='{res.style.searchContainer}' ui:field='searchContainer'>
+    <!-- Filters -->
+    <div class='{res.style.searchFiltersContainer}'>
+      <!-- TODO add criteria some day -->
+    </div>
 
-      <g:HTMLPanel ui:field='searchPanel' addStyleNames='{res.style.searchFormContainer}'>
+    <!-- Search Main -->
+    <div class='{res.style.searchContainer}'>
+
+      <!-- Form -->
+      <div class='{res.style.searchFormContainer}'>
         <h4>
           <ui:text from='{mess.searchTitle}' />
         </h4>
@@ -19,18 +25,19 @@
           <b:TextBox ui:field='keyword' debugId='searchKeyword' />
           <b:Button ui:field='search' debugId='searchButton' icon='SEARCH' />
         </div>
-      </g:HTMLPanel>
+      </div>
 
-      <g:DeckLayoutPanel ui:field='resultContainer' width='100%' height='100%'>
+      <!-- Result -->
+      <g:DeckPanel ui:field='resultContainer' addStyleNames='{res.style.searchResultContainer}'>
         <h:LoadingWidget loadingText='{mess.searchLoading}' debugId='searchLoading' />
         <b:Heading size='5' text='{mess.searchNoResult}' addStyleNames='{res.style.searchNoResult}' />
         <b:Heading size='5' text='{mess.searchError}' addStyleNames='{res.style.searchError}' />
         <g:ScrollPanel>
           <c:CellList ui:field='resultList' debugId='searchResultList' />
         </g:ScrollPanel>
-      </g:DeckLayoutPanel>
+      </g:DeckPanel>
 
-    </g:HeaderPanel>
+    </div>
 
   </g:HTMLPanel>
 

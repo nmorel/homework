@@ -37,10 +37,14 @@ public interface ResourcesBundle
         String contentContainer();
         
         String contentInnerContainer();
+        
+        String searchFiltersContainer();
 
         String searchContainer();
 
         String searchFormContainer();
+        
+        String searchResultContainer();
 
         String searchNoResult();
 
@@ -51,8 +55,6 @@ public interface ResourcesBundle
         String repoCollaboratorsTitleContainer();
 
         String repoCollaboratorsTitle();
-
-        String repoCollaboratorsScroll();
 
         String repoCollaboratorCell();
 

@@ -8,34 +8,44 @@
 
   <g:HTMLPanel addStyleNames='{res.style.rootContainer}'>
 
+    <!-- Header -->
     <div class='{res.style.headerContainer}'>
+
+      <!-- Header Title -->
       <h3 class='{res.style.headerTitle}'>
         <ui:text from='{mess.headerTitle}' />
       </h3>
+
+      <!-- Header Search -->
       <div class="input-append {res.style.headerSearchContainer}">
         <b:TextBox ui:field='keyword' debugId='headerSearchKeyword' addStyleNames='{res.style.headerSearchKeyword}' />
         <b:Button ui:field='search' debugId='headerSearchButton' icon='SEARCH' addStyleNames='{res.style.headerSearchButton}' />
       </div>
+
+      <!-- Header Login -->
       <g:SimplePanel ui:field='loginPanel' addStyleNames='{res.style.headerLoginContainer}' />
+
+      <!-- Header Languages -->
       <div class="{res.style.headerFlagsContainer}">
-        <h:FlagWidget flag='{res.flagEn}' locale='' tooltip='{mess.switchLocaleEn}' ui:field='flagEn' />
-        <h:FlagWidget flag='{res.flagFr}' locale='fr' tooltip='{mess.switchLocaleFr}' ui:field='flagFr' />
+        <h:FlagWidget flag='{res.flagEn}' locale='' tooltip='{mess.switchLocaleEn}' ui:field='flagEn'
+          debugId='flagEn' />
+        <h:FlagWidget flag='{res.flagFr}' locale='fr' tooltip='{mess.switchLocaleFr}' ui:field='flagFr'
+          debugId='flagFr' />
       </div>
+
     </div>
 
+    <!-- Repositories recently consulted -->
     <div class='{res.style.recentReposContainer}'>
-      <g:HTMLPanel ui:field='recentReposContainer'>
-        <g:HTMLPanel addStyleNames='{res.style.recentReposTitleContainer}'>
-          <h6 class='{res.style.recentReposTitle}'>
-            <ui:text from='{mess.recentRepos}' />
-          </h6>
-        </g:HTMLPanel>
-        <g:ScrollPanel addStyleNames='{res.style.recentReposScroll}'>
-          <c:CellList ui:field='recentReposList' />
-        </g:ScrollPanel>
-      </g:HTMLPanel>
+      <div class='{res.style.recentReposTitleContainer}'>
+        <h6 class='{res.style.recentReposTitle}'>
+          <ui:text from='{mess.recentRepos}' />
+        </h6>
+      </div>
+      <c:CellList ui:field='recentReposList' debugId='recentReposList' />
     </div>
 
+    <!-- Container for Activities -->
     <g:SimplePanel addStyleNames='{res.style.contentContainer}' ui:field='container' />
 
   </g:HTMLPanel>

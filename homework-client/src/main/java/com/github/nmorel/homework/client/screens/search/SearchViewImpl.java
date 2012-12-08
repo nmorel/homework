@@ -21,8 +21,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
-import com.google.gwt.user.client.ui.DeckLayoutPanel;
-import com.google.gwt.user.client.ui.HeaderPanel;
+import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.ListDataProvider;
@@ -70,9 +69,6 @@ public class SearchViewImpl
     private static final Binder uiBinder = GWT.create( Binder.class );
 
     private Presenter presenter;
-    
-    @UiField
-    HeaderPanel searchContainer;
 
     @UiField
     TextBox keyword;
@@ -81,7 +77,7 @@ public class SearchViewImpl
     Button search;
 
     @UiField
-    DeckLayoutPanel resultContainer;
+    DeckPanel resultContainer;
 
     @UiField( provided = true )
     CellList<Repository> resultList;
@@ -122,11 +118,10 @@ public class SearchViewImpl
             DefaultSelectionEventManager.createCustomManager( new KeyboardEventTranslator<Repository>() ) );
 
         Widget result = uiBinder.createAndBindUi( this );
-        
+
         // we removed the default style to be able to change them via css
-        searchContainer.getElement().getStyle().clearOverflow();
-        searchContainer.getElement().getStyle().clearPosition();
-        
+        resultContainer.getElement().getStyle().clearPosition();
+
         return result;
     }
 

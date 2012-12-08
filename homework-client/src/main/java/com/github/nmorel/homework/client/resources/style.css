@@ -108,8 +108,28 @@ h3 {
 	box-shadow: 0px 0px 5px 2px #656565;
 }
 
+.searchFiltersContainer {
+	position: absolute;
+	width: 180px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+}
+
 .searchFormContainer {
-	margin-left: 10px;
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	top: 0px;
+	height: 80px;
+}
+
+.searchResultContainer {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 80px;
+	bottom: 0px;
 }
 
 .searchNoResult {
@@ -127,6 +147,7 @@ h3 {
 	right: 0px;
 	top: 0px;
 	bottom: 0px;
+	overflow: auto;
 }
 
 .repoCollaboratorsTitleContainer {
@@ -138,10 +159,6 @@ h3 {
 .repoCollaboratorsTitle {
 	margin: 0px;
 	line-height: 16px;
-}
-
-.repoCollaboratorsScroll {
-	height: 100%;
 }
 
 .repoCollaboratorCell {
@@ -166,7 +183,7 @@ h3 {
 .repoInnerContainer {
 	position: absolute;
 	top: 0px;
-	bottom: 0px;
+	bottom: 5px;
 	left: 5px;
 	right: 5px;
 }

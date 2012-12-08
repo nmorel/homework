@@ -16,6 +16,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -65,7 +67,7 @@ public class RepoViewImpl
     private static Binder uiBinder = GWT.create( Binder.class );
 
     @UiField
-    HeaderPanel collaboratorsPanel;
+    DivElement collaboratorsPanel;
 
     @UiField( provided = true )
     CellList<User> collaboratorsList;
@@ -138,8 +140,6 @@ public class RepoViewImpl
         Widget widget = uiBinder.createAndBindUi( this );
 
         // we removed the default style to be able to change them via css
-        collaboratorsPanel.getElement().getStyle().clearOverflow();
-        collaboratorsPanel.getElement().getStyle().clearPosition();
         content.getElement().getStyle().clearOverflow();
         content.getElement().getStyle().clearPosition();
 
@@ -312,17 +312,16 @@ public class RepoViewImpl
             case DEFAULT:
             case LOADING:
             case ERROR:
-                collaboratorsPanel.setVisible( false );
+                collaboratorsPanel.getStyle().setDisplay( Display.NONE );
                 break;
             case LOADED:
                 if ( collaboratorsListProvider.getList().isEmpty() )
                 {
-                    collaboratorsPanel.setVisible( false );
+                    collaboratorsPanel.getStyle().setDisplay( Display.NONE );
                 }
                 else
                 {
-                    collaboratorsPanel.setVisible( true );
-                    collaboratorsPanel.onResize();
+                    collaboratorsPanel.getStyle().clearDisplay();
                 }
                 break;
         }
@@ -342,7 +341,6 @@ public class RepoViewImpl
     @Override
     public void onResize( ResizeEvent event )
     {
-        collaboratorsPanel.onResize();
         content.onResize();
     }
 }

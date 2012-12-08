@@ -21,7 +21,7 @@ public class MainPresenterImpl
 {
     private static final String RECENT_REPO_KEY = "recentlySeenRepos";
 
-    private static final int MAX_RECENT_REPO = 40;
+    private static final int MAX_RECENT_REPO = 20;
 
     private MainView view;
 

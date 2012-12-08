@@ -43,7 +43,7 @@
       </g:HorizontalPanel>
     </g:north>
     <g:center>
-      <g:ScrollPanel ui:field='timelineContainer' />
+      <g:SimpleLayoutPanel ui:field='timelineContainer' />
     </g:center>
   </g:DockLayoutPanel>
 

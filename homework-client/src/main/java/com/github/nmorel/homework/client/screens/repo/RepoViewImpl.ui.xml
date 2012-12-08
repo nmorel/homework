@@ -9,23 +9,24 @@
 
   <g:HTMLPanel addStyleNames='{res.style.contentInnerContainer}'>
 
-    <g:HeaderPanel addStyleNames='{res.style.repoCollaboratorsContainer}' ui:field='collaboratorsPanel'>
-      <g:HTMLPanel addStyleNames='{res.style.repoCollaboratorsTitleContainer}'>
+    <!-- Collaborators -->
+    <div class='{res.style.repoCollaboratorsContainer}' ui:field='collaboratorsPanel'>
+      <div class='{res.style.repoCollaboratorsTitleContainer}'>
         <h6 class='{res.style.repoCollaboratorsTitle}'>
           <ui:text from='{mess.repoCollaborators}' />
         </h6>
-      </g:HTMLPanel>
-      <g:ScrollPanel addStyleNames='{res.style.repoCollaboratorsScroll}'>
-        <c:CellList ui:field='collaboratorsList' debugId='repoCollaboratorsList' />
-      </g:ScrollPanel>
-    </g:HeaderPanel>
+      </div>
+      <c:CellList ui:field='collaboratorsList' debugId='repoCollaboratorsList' />
+    </div>
 
+    <!-- Main -->
     <div class='{res.style.repoContainer}'>
 
       <h:LoadingWidget loadingText='Loading...' center='true' ui:field='loading' debugId='repoLoading' />
 
       <g:HeaderPanel ui:field='content' addStyleNames='{res.style.repoInnerContainer}'>
 
+        <!-- Title and description -->
         <g:HTMLPanel addStyleNames='{res.style.repoTitleContainer}' ui:field='titleContainer' debugId='repoTitleContainer'>
           <g:HorizontalPanel width='100%' verticalAlignment='MIDDLE'>
             <g:cell width='100%'>
@@ -40,12 +41,15 @@
         </g:HTMLPanel>
 
         <g:TabLayoutPanel barUnit='PX' barHeight='38' ui:field='tabPanel' width='100%' height='100%'>
+          <!-- Commits Timeline -->
           <g:tab>
             <g:header>
               <ui:text from='{mess.repoCommitsTab}' />
             </g:header>
             <t:CommitsTimeline ui:field='commitsTimeline' debugId='repoCommitsTimeline' />
           </g:tab>
+          
+          <!-- Collaborators' impact -->
           <g:tab>
             <g:header>
               <ui:text from='{mess.repoCollabImpactTab}' />
