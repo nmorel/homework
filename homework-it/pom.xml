@@ -105,7 +105,7 @@
           <webapps>
             <webapp>
               <groupId>${project.groupId}</groupId>
-              <artifactId>homework-api</artifactId>
+              <artifactId>homework-gwt-server</artifactId>
               <version>${project.version}</version>
               <type>war</type>
               <asWebapp>true</asWebapp>
